@@ -1,0 +1,48 @@
+<div class="flex-row d-flex justify-content-between align-items-center bg-light">
+	<h1 class="ms-5">BStorm : Angular</h1>
+	<nav class="me-5 navbar navbar-expand-lg navbar-light bg-light">
+		<button class="m-1 btn btn-primary" routerLink="{{ NAV_HOME }}">🏠Home</button>
+		<div class="dropdown m-1">
+			<button class="btn btn-info dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				📚Theorie
+			</button>
+			<ul class="dropdown-menu">
+				@for (chapter of chapterOrder; track $index) {
+					@if (chapter.has.includes(ChapterTDE.theory)) {
+						<li>
+							<a class="dropdown-item" routerLink="/{{ NAV_THEORY }}/{{ $index }}">{{ chapter.name }}</a>
+						</li>
+					}
+				}
+			</ul>
+		</div>
+		<div class="dropdown m-1">
+			<button class="btn btn-warning dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				🎮Demo
+			</button>
+			<ul class="dropdown-menu">
+				@for (chapter of chapterOrder; track $index) {
+					@if (chapter.has.includes(ChapterTDE.demo)) {
+						<li>
+							<a class="dropdown-item" routerLink="/{{ NAV_DEMO }}/{{ $index }}">{{ chapter.name }}</a>
+						</li>
+					}
+				}
+			</ul>
+		</div>
+		<div class="dropdown m-1">
+			<button class="btn btn-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				🏋Exercices
+			</button>
+			<ul class="dropdown-menu">
+				@for (chapter of chapterOrder; track $index) {
+					@if (chapter.has.includes(ChapterTDE.exercise)) {
+						<li>
+							<a class="dropdown-item" routerLink="/{{ NAV_EXERCISE }}/{{ $index }}">{{ chapter.name }}</a>
+						</li>
+					}
+				}
+			</ul>
+		</div>
+	</nav>
+</div>
