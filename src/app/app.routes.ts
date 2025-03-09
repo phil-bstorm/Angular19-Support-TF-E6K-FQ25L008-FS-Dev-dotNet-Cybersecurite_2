@@ -6,4 +6,9 @@ export const routes: Routes = [
 		path: "",
 		component: HomeComponent,
 	},
+	{
+		path: "theory",
+		loadChildren: () =>
+			import("./features/theory/theory.routes").then(r => r.routes),
+	},
 ];

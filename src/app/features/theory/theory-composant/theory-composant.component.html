@@ -1,0 +1,188 @@
+<div class="card-header">
+	<h1>Théorie - Composant</h1>
+	<chapter-navigation />
+</div>
+<section class="card-body">
+	<p>
+		Un composant est un élément fondamental d'une application Angular. Il est responsable de l'affichage d'une partie de l'interface
+		utilisateur et de la gestion des interactions avec l'utilisateur.
+	</p>
+	<p>Tout est composant dans Angular. Une application Angular est une hiérarchie de composants imbriqués les uns dans les autres.</p>
+	<p>
+		Si on analyse rapidement la structure de ce projet, on peut constater que le projet est séparé en fonctionalité
+		(<code>theory</code>,
+		<code>demo</code>,...), chaque fonctionalité est encore découper en composant (<code>theory-binding</code>,
+		<code>theory-composant</code>, <code>theory-cycle-de-vie</code>,...) et composant qui peut encore être découper selon son
+		fonctionnement.
+	</p>
+	<p>Un composant est un regroupement de 3 fichiers:</p>
+	<ul>
+		<li>Un fichier TypeScript (.ts) qui contient la logique du composant.</li>
+		<li>Un fichier HTML (.html) qui contient le template du composant.</li>
+		<li>Un fichier CSS (.css) qui contient les styles du composant.</li>
+	</ul>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>App component</h2>
+		</div>
+		<div class="card-body">
+			<img [src]="imageUrlAppComponentFiles" alt="app-component-files" style="margin-top: 10px" />
+			<p>
+				🔍 Lorsque l'on crée un projet Angular, un composant racine nommé
+				<code>app-component</code> est automatiquement généré. Ce composant est le premier composant chargé au lancement de
+				l'application.
+			</p>
+			<p>Analiysons les fichiers du composant <code>app-component</code>.</p>
+		</div>
+		<div class="card-header">
+			<h3><code>app.component.ts</code></h3>
+		</div>
+		<div class="card-body">
+			<p>
+				Le fichier <code>app.component.ts</code> contient la logique du composant. Il définit la classe du composant et contient les
+				propriétés et méthodes nécessaires à son fonctionnement.
+			</p>
+			<p>Voici un exemple de code du fichier <code>app.component.ts</code> :</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent {
+  title = 'demo-angular';
+}
+      </textarea
+			>
+			<p>Le fichier est composé de 3 parties :</p>
+			<ul>
+				<li>Les imports : les dépendances nécessaires au composant.</li>
+				<li>
+					Le décorateur <code>&#64;Component</code> : les métadonnées du composant.
+					<ul>
+						<li>
+							<code>selector</code> : le sélecteur du composant (le nom de la balise HTML qui sera utilisée pour afficher le
+							composant).
+						</li>
+						<li><code>templateUrl</code> : le chemin vers le template HTML du composant.</li>
+						<li><code>styleUrl</code> : le chemin vers le fichier de styles du composant.</li>
+					</ul>
+				</li>
+				<li>La classe du composant : la définition du composant avec sa logique.</li>
+			</ul>
+		</div>
+		<div class="card-header">
+			<h3><code>app.component.html</code></h3>
+		</div>
+		<div class="card-body">
+			<p>
+				Le fichier <code>app.component.html</code> contient le template HTML du composant. Il définit la structure visuelle du
+				composant.
+			</p>
+			<p>
+				Dasn ce fichier générer automatiquement, on retrouvera le code HTML qui donnera l'affichage ci-dessous.<br />
+				<i>On notera que le code le fichier <code>app.component.html</code> mélange HTML et CSS, ce qui n'est pas recommandé.</i>
+			</p>
+		</div>
+		<div class="card-header">
+			<h3><code>app.component.css</code></h3>
+		</div>
+		<div class="card-body">
+			<p>
+				Le fichier <code>app.component.css</code> contient les styles CSS du composant. Il définit l'apparence visuelle du
+				composant.<br />
+				<i>Actuellement vide car le css se trouve dans le fichier html...</i>
+			</p>
+		</div>
+	</article>
+	<article class="card">
+		<div class="card-header">
+			<h2>Composant custom</h2>
+		</div>
+		<div class="card-header">
+			<h3>Comment créer un composant?</h3>
+		</div>
+		<div class="card-body">
+			<p>
+				Pour créer un composant, il suffit de lancer la commande suivante :<br />
+				<code>ng generate component nom-du-composant</code> <br />
+				Ou en version courte : <br />
+				<code>ng g c nom-du-composant</code>
+			</p>
+			<p>
+				⚠️ Le composant se crée à l'endroit où vous vous trouvez dans le terminal.<br />
+				Il est donc préférable de:
+			</p>
+			<ul>
+				<li>
+					soit se déplacer dans le dossier du projet (avec la commande
+					<kbd>cd src/app</kbd>) avant de lancer la commande de création de composant.
+				</li>
+				<li>
+					soit de renseigné le chemin où on veut créer le composant.<br />
+					<i>⚠️ même si vous préciser le chemin, ce chemin démarre quand-même d'où vous vous trouvez dans le terminal</i><br />
+					Par exemple pour créer un composant login dans le dossier
+					<code>src/app/auth</code>: <br />
+					<code>ng g c auth/login</code>
+				</li>
+			</ul>
+			<p>
+				<strong>Astuce:</strong> pour éviter d'avoir des problèmes avec la création de composant, il est recommandé de se déplacer
+				avec <code>cd</code> dans le dossier <code>src/app</code> (<kbd>cd src/app</kbd>).<br />
+				Ainsi, vous pourrez créer vos composants en précisant le chemin à partir de <code>src/app</code> et en bénéficiant de
+				l'autocomplétion (<kbd>TAB</kbd>).
+			</p>
+			<p>Ce qui aura pour effet de <strong>créer un dossier</strong> contenant les fichiers suivants :</p>
+			<ul>
+				<li><code>nom-du-composant.component.html</code> : le template HTML du composant.</li>
+				<li><code>nom-du-composant.component.ts</code> : la logique du composant.</li>
+				<li><code>nom-du-composant.component.scss</code> : le fichier de styles du composant.</li>
+			</ul>
+			<p>
+				<strong>🔎️Note:</strong>
+				si un dossier avec le nom du composant existe déjà, les fichiers seront simplement rajotuer au dossier.
+			</p>
+			<p>Comme résultat de la commande dans le terminal, celui-ci nous indeque que 3 fichiers ont été créés (.html, .ts, .scss).</p>
+		</div>
+		<div class="card-header">
+			<h3>Afficher et utiliser notre composant</h3>
+		</div>
+		<div class="card-body">
+			<p>
+				Pour afficher notre composant, il suffit de l'ajouter dans le template du composant parent.<br />
+				en utilisant la balise
+				<code>&lt;app-nom-du-composant&gt;&lt;/app-nom-du-composant&gt;</code> ou <code>&lt;app-nom-du-composant /&gt;</code> (la
+				valeur renseignée dans le <code>selector</code> du composant.ts).
+			</p>
+		</div>
+		<div class="card-header">
+			<h3>Afficher et utiliser notre composant dans un autre composant</h3>
+		</div>
+		<div class="card-body">
+			<p>
+				Dans le fichier Ts du composant parent, il suffit d'importer le composant que l'on souhaite utiliser et de l'ajouter dans le
+				tableau <code>imports</code>.
+			</p>
+			<p>
+				Exemple: pour importer le composant <code>ChapterNavigationComponent</code>
+				<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Component} from "@angular/core";
+import {ChapterNavigationComponent} from "@shared/componenents/chapter-navigation/chapter-navigation.component"; // 1. import du composant
+
+@Component({
+	selector: "theory-composant",
+	imports: [ChapterNavigationComponent], // 2. ajout du composant dans le tableau imports
+	templateUrl: "./theory-composant.component.html",
+	styleUrl: "./theory-composant.component.scss",
+})
+export class TheoryComposantComponent {
+}
+				</textarea
+				>
+			</p>
+		</div>
+	</article>
+</section>

@@ -38,10 +38,6 @@ export class Courses {
 			has: [ChapterTDE.theory],
 		},
 		{
-			name: ChapterName.Infrastructure,
-			has: [ChapterTDE.theory],
-		},
-		{
 			name: ChapterName.Composant,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
@@ -56,6 +52,10 @@ export class Courses {
 		{
 			name: ChapterName.Navigation,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
+		},
+		{
+			name: ChapterName.Infrastructure,
+			has: [ChapterTDE.theory],
 		},
 		{
 			name: ChapterName.Binding,
