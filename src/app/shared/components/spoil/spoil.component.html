@@ -1,0 +1,6 @@
+<button class="btn m-1 btn-info" (click)="toggle()">
+	{{ isSpoiled ? "cacher" : "afficher" }}</button
+><br />
+@if (isSpoiled) {
+	<ng-content></ng-content>
+}

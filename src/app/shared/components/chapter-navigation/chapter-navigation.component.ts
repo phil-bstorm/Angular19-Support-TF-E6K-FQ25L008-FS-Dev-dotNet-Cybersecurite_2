@@ -1,5 +1,5 @@
 import {Component, effect, inject, OnInit} from "@angular/core";
-import {ChapterNavigationService} from "@shared/componenents/chapter-navigation/services/chapter-navigation.service";
+import {ChapterNavigationService} from "@shared/components/chapter-navigation/services/chapter-navigation.service";
 import {NgClass} from "@angular/common";
 import {ChapterTDE, CoursesInstance} from "@core/constants/chapters.constants";
 import {RouterLink} from "@angular/router";
