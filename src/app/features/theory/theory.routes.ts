@@ -23,4 +23,13 @@ export const routes: Routes = [
 				c => c.TheoryBaseRoutingComponent,
 			),
 	},
+	{
+		path: CoursesInstance.getChapterId(
+			ChapterName.BaseNavigation,
+		).toString(),
+		loadComponent: () =>
+			import(
+				"./theory-base-navigation/theory-base-navigation.component"
+			).then(c => c.TheoryBaseNavigationComponent),
+	},
 ];

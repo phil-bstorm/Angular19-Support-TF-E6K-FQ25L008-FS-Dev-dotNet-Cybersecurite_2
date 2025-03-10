@@ -1,0 +1,63 @@
+<div class="card-header">
+	<h1>Théorie - La base de la navigation</h1>
+	<chapter-navigation />
+</div>
+<section class="card-body">
+	<p>
+		Précédemment, nous avons vu comment préparer le system de navigation de notre application mais nous n'avons pas encore utiliser les
+		routes pour naviguer entre les différentes pages de notre application en SPA (Single Page Application).<br />
+		Nous devions passer par la barre d'adresse pour naviguer entre les pages de notre application.
+	</p>
+	<article class="card">
+		<div class="card-header">
+			<h2>RouterLink</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				En HTML, pour naviguer entre les différentes pages d'un site web, nous utilisons les balises
+				<code>&lt;a href=""&gt;</code>.<br />
+				Sauf que l'utilisation de <code>href</code> recharge la page à chaque fois que l'on clique sur un lien.<br />
+				Exemple: <a href="/theory/2">Chapitre 2 via href</a>
+			</p>
+			<p>
+				Pour naviguer entre les différentes pages de notre application sans recharger l'application, nous allons remplacer href par
+				<code>routerLink</code>. <br />
+				Exemple: <a routerLink="/theory/2">Chapitre 2 via routerLink</a>
+			</p>
+			<p>
+				<code>routerLink</code> est une directive qui permet de naviguer entre les différentes pages de notre application sans
+				recharger l'application.<br />
+				<i>⏱️les directives seront abordées plus tard</i>
+			</p>
+
+			<p>
+				Par exemple pour se rendre sur la page de théorie actuelle, nous avons le code suivant:
+				<textarea highlight-js [options]="{}" [lang]="'html'">
+<a routerLink="/theory/2">Chapitre 2 via routerLink</a>
+        </textarea
+				>
+				<a routerLink="/theory/2">Chapitre 2 via routerLink</a>
+			</p>
+			<p>
+				<i>
+					⚠️ pour utiliser la directive routerLink, il ne faut pas oublié de l'importer dans le composant.
+					<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Component} from "@angular/core";
+import {ChapterNavigationComponent} from "@shared/components/chapter-navigation/chapter-navigation.component";
+import {RouterLink} from "@angular/router"; // 1. ajouter l'import de RouterLink
+
+@Component({
+	selector: "theory-base-navigation",
+	imports: [ChapterNavigationComponent, RouterLink], // 2. ajouter "RouterLink" dans les imports
+	templateUrl: "./theory-base-navigation.component.html",
+	styleUrl: "./theory-base-navigation.component.scss",
+})
+export class TheoryBaseNavigationComponent {}
+
+        </textarea
+					>
+				</i>
+			</p>
+		</div>
+	</article>
+</section>
