@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {ChapterNavigationComponent} from "@shared/componenents/chapter-navigation/chapter-navigation.component";
+import {ChapterNavigationComponent} from "@shared/components/chapter-navigation/chapter-navigation.component";
 
 @Component({
 	selector: "theory-intro",
