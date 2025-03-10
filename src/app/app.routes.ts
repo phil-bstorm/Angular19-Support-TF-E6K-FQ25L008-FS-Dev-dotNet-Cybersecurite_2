@@ -11,4 +11,9 @@ export const routes: Routes = [
 		loadChildren: () =>
 			import("./features/theory/theory.routes").then(r => r.routes),
 	},
+	{
+		path: "demo",
+		loadChildren: () =>
+			import("./features/demo/demo.routes").then(r => r.routes),
+	},
 ];

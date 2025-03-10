@@ -1,0 +1,67 @@
+<div class="card-header">
+	<h1>Démo - Composant</h1>
+	<chapter-navigation />
+</div>
+<section class="card-body">
+	<article class="card">
+		<div class="card-header">
+			<h2>Premier composant</h2>
+		</div>
+		<div class="card-body">
+			<div class="card">
+				<div class="card-header">
+					<h3>Création</h3>
+				</div>
+				<div class="card-body">
+					<p>
+						Si on souhaite créer un composant dans ce dossier de démo, il suffit de lancer la commande suivante :<br />
+
+						<code>ng g c features/demo/demo-composant/helloWorld</code>
+					</p>
+					<p>
+						Ce qui donnera la structure de dossier suivante :<br />
+						<img [src]="imgUrlPremierComposant" alt="Premier Composant" />
+					</p>
+				</div>
+				<div class="card-header">
+					<h3>Customization</h3>
+				</div>
+				<div class="card-body">
+					<p>
+						Le composant créé est un composant simple qui affiche un titre.<br />
+						Pour le personnaliser, il suffit de modifier le fichier <code>hello-world.component.html</code>.
+					</p>
+					<p>
+						Dans le fichier <code>hello-world.component.html</code> :
+						<textarea highlight-js [options]="{}" [lang]="'html'">
+<h1>Hello World</h1>
+<p>
+  Ce composant affiche un simple titre <code>Hello World</code>.
+</p>
+						</textarea
+						>
+					</p>
+				</div>
+				<div class="card-header">
+					<h3>Utilisation</h3>
+				</div>
+				<div class="card-body">
+					<p>
+						Pour utiliser ce composant, il suffit de ajouter le <code>selector</code> (du fichier
+						<code>src/app/features/demo/demo-composant/hello-world/hello-world.component.ts</code>) dans le template du
+						composant parent.
+					</p>
+					<p>
+						Dans le fichier <code>demo-composant.component.html</code> :
+						<textarea highlight-js [options]="{}" [lang]="'html'">
+<hello-world />
+						</textarea
+						>
+						Ce qui donnera :
+						<hello-world />
+					</p>
+				</div>
+			</div>
+		</div>
+	</article>
+</section>
