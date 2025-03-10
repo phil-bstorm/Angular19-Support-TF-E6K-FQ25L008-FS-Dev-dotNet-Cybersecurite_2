@@ -16,4 +16,11 @@ export const routes: Routes = [
 				c => c.TheoryComposantComponent,
 			),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.BaseRouting).toString(),
+		loadComponent: () =>
+			import("./theory-base-routing/theory-base-routing.component").then(
+				c => c.TheoryBaseRoutingComponent,
+			),
+	},
 ];
