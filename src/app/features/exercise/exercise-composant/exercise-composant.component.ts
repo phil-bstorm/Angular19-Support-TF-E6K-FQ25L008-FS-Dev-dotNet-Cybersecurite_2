@@ -16,5 +16,7 @@ import {HighlightJsDirective} from "ngx-highlight-js";
 	styleUrl: "./exercise-composant.component.scss",
 })
 export class ExerciseComposantComponent {
-	imgUrlAnimalerie = "";
+	imgUrlAnimalerie = "assets/exercise/composant/animalerie.png";
+	imgUrlAnimalerieStructure =
+		"assets/exercise/composant/animalerie-structure.png";
 }
