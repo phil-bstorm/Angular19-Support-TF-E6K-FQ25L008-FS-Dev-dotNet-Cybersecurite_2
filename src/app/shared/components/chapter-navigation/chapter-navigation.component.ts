@@ -15,7 +15,7 @@ import {
 	templateUrl: "./chapter-navigation.component.html",
 	styleUrl: "./chapter-navigation.component.scss",
 })
-export class ChapterNavigationComponent {
+export class ChapterNavigationComponent implements OnInit {
 	protected readonly ChapterTDE = ChapterTDE;
 
 	private readonly _chapterNav: ChapterNavigationService = inject(
@@ -37,7 +37,7 @@ export class ChapterNavigationComponent {
 	nextChapter = this._chapterNav.nextChapter;
 	nextChapterName = this._chapterNav.nextChapterName;
 
-	constructor() {
+	ngOnInit() {
 		let currIndex = this._chapterNav.currentIndex();
 		if (currIndex != null) {
 			this.hasTheory = CoursesInstance.doesChapterIdHas(currIndex, [
