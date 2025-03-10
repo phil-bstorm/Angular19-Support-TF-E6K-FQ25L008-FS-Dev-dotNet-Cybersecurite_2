@@ -9,4 +9,13 @@ export const routes: Routes = [
 				c => c.DemoComposantComponent,
 			),
 	},
+	{
+		path: CoursesInstance.getChapterId(
+			ChapterName.BaseNavigation,
+		).toString(),
+		loadChildren: () =>
+			import(
+				"@app/features/demo/demo-base-routing-navigation/demo-base-routing-navigation.routes"
+			).then(r => r.routes),
+	},
 ];

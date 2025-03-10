@@ -15,7 +15,7 @@ export enum ChapterName {
 	Composant = "Composant",
 	CycleDeVie = "Cycle de vie",
 	BaseRouting = "Base Routing",
-	Navigation = "Navigation",
+	BaseNavigation = "Base Navigation",
 	Binding = "Binding",
 	Pipe = "Pipe",
 	Directive = "Directive",
@@ -23,6 +23,7 @@ export enum ChapterName {
 	ServiceInjection = "Service & Injection",
 	Formulaire = "Formulaire",
 	Routing = "Routing",
+	Navigation = "Navigation",
 	GuardResolver = "Guard & Resolver",
 	Storage = "Storage",
 	Observable = "Observable",
@@ -42,15 +43,11 @@ export class Courses {
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 		{
-			name: ChapterName.CycleDeVie,
-			has: [ChapterTDE.theory, ChapterTDE.demo],
-		},
-		{
 			name: ChapterName.BaseRouting,
 			has: [ChapterTDE.theory],
 		},
 		{
-			name: ChapterName.Navigation,
+			name: ChapterName.BaseNavigation,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 		{
@@ -64,6 +61,10 @@ export class Courses {
 		{
 			name: ChapterName.Signal,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
+		},
+		{
+			name: ChapterName.CycleDeVie,
+			has: [ChapterTDE.theory, ChapterTDE.demo],
 		},
 		{
 			name: ChapterName.Pipe,
@@ -87,6 +88,10 @@ export class Courses {
 		},
 		{
 			name: ChapterName.Routing,
+			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
+		},
+		{
+			name: ChapterName.Navigation,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 		{
