@@ -1,0 +1,86 @@
+<div class="card-header">
+	<h1>Démo - Composant</h1>
+	<chapter-navigation />
+</div>
+<section class="card-body">
+	<article class="card">
+		<div class="card-header">
+			<h2>Animalerie</h2>
+		</div>
+		<div class="card-body">
+			<p>Le but de cet exercice est de créer une animalerie.</p>
+			<ul>
+				<li>
+					Dans le composant animalerie créer un dossier <code>components</code>
+					<i></i>
+				</li>
+				<li>
+					Dans le dossier <code>components</code> créer:
+					<ul>
+						<li>un composant <code>chat</code> et customisé son contenu</li>
+						<li>un composant <code>chien</code> et customisé son contenu</li>
+					</ul>
+				</li>
+				<li>Afficher les composants <code>chat</code> et <code>chien</code> dans le composant <code>animalerie</code></li>
+			</ul>
+
+			<p>
+				Résultat attendu:<br />
+				<img [src]="imgUrlAnimalerie" alt="Animalerie" />
+			</p>
+		</div>
+		<div class="card-header">
+			<h2>Indices</h2>
+		</div>
+		<div class="card-body">
+			<ul>
+				<li>
+					Création composant chat:
+					<spoil>
+						<p>ng g c /features/exercise/exercise-composant/animalerie/chat</p>
+					</spoil>
+				</li>
+				<li>
+					Préparation utilisation:
+					<spoil>
+						<p>
+							Modifier le fichier <code>animalerie.component.ts</code> pour rajouter les animaux dans le tableau d'
+							<code>imports</code> <br />
+							<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import { Component } from '@angular/core';
+import { ChatComponent } from './components/chat/chat.component';
+
+@Component({
+  selector: 'animalerie',
+  imports: [ChatComponent],
+  templateUrl: './animalerie.component.html',
+  styleUrl: './animalerie.component.scss'
+})
+export class AnimalerieComponent {
+
+}
+							</textarea
+							>
+						</p>
+					</spoil>
+				</li>
+				<li>
+					Affichage composant chat:
+					<spoil>
+						<p>
+							Dans le fichier <code>animalerie.component.html</code> ajouter les balises
+							<code>&lt;app-chat&gt;&lt;/app-chat&gt;</code>
+							<br />
+							<textarea highlight-js [options]="{}" [lang]="'html'">
+&lt;chat&gt;&lt;/chat&gt;
+							</textarea
+							>
+						</p>
+					</spoil>
+				</li>
+			</ul>
+		</div>
+	</article>
+
+	<animalerie />
+</section>

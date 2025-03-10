@@ -16,4 +16,9 @@ export const routes: Routes = [
 		loadChildren: () =>
 			import("./features/demo/demo.routes").then(r => r.routes),
 	},
+	{
+		path: "exercise",
+		loadChildren: () =>
+			import("./features/exercise/exercise.routes").then(r => r.routes),
+	},
 ];
