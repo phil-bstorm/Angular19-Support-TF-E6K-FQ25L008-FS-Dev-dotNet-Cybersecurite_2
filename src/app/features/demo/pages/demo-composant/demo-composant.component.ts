@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {ChapterNavigationComponent} from "@shared/components/chapter-navigation/chapter-navigation.component";
 import {HighlightJsDirective} from "ngx-highlight-js";
-import {HelloWorldComponent} from "@app/features/demo/demo-composant/hello-world/hello-world.component";
+import {HelloWorldComponent} from "@app/features/demo/pages/demo-composant/hello-world/hello-world.component";
 
 @Component({
 	selector: "demo-composant",

@@ -5,9 +5,9 @@ export const routes: Routes = [
 	{
 		path: CoursesInstance.getChapterId(ChapterName.Composant).toString(),
 		loadComponent: () =>
-			import("./demo-composant/demo-composant.component").then(
-				c => c.DemoComposantComponent,
-			),
+			import(
+				"@app/features/demo/pages/demo-composant/demo-composant.component"
+			).then(c => c.DemoComposantComponent),
 	},
 	{
 		path: CoursesInstance.getChapterId(
@@ -15,7 +15,7 @@ export const routes: Routes = [
 		).toString(),
 		loadChildren: () =>
 			import(
-				"@app/features/demo/demo-base-routing-navigation/demo-base-routing-navigation.routes"
+				"@app/features/demo/pages/demo-base-routing-navigation/demo-base-routing-navigation.routes"
 			).then(r => r.routes),
 	},
 ];
