@@ -9,4 +9,13 @@ export const routes: Routes = [
 				c => c.ExerciseComposantComponent,
 			),
 	},
+	{
+		path: CoursesInstance.getChapterId(
+			ChapterName.BaseNavigation,
+		).toString(),
+		loadChildren: () =>
+			import(
+				"./exercise-base-routing-navigation/exercise-base-routing-navigation.routes"
+			).then(r => r.routes),
+	},
 ];

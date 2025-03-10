@@ -1,0 +1,153 @@
+<div class="card-header">
+	<h1>Exercice - Navigation</h1>
+	<chapter-navigation />
+</div>
+<section class="card-body">
+	<p>Utilise tout ce que tu as appris dans le chapitre du routing et de la navigation pour créer un mini labyrinthe!</p>
+	<article class="card">
+		<div class="card-header">
+			<h2>Objectif</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Pratiquer la création de module, la création de composant, la mise en place du routing et l'utilisation du
+				<code>routerLink</code>.
+			</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Mini labyrinthe</h2>
+		</div>
+		<div class="card-body">
+			<p style="color: red">
+				<strong>⚠️ ATTENTION A BIEN TRAVAILLER DANS LE DOSSIER: <code>src/app/features/exercise/exercise-navigation</code></strong>
+			</p>
+			<p>Créer un mini labyrinthe avec 4 étages:</p>
+			<ul>
+				<li>Étage 1</li>
+				<li>Étage 2</li>
+				<li>Victoire</li>
+				<li>Piège</li>
+			</ul>
+			<p>
+				L'idée est que l'utilisateur commence le jeu à l'URL
+				<a [routerLink]="labyrintheUrl">http://localhost:4200/exercise/{{ currentIndex() }}/labyrinthe</a> et vois un petit text de
+				bienvenue.<br />
+				Ensuite, il doit cliquer sur un bouton pour passer à l'étage 1. À chaque étage, il doit cliquer sur un lien pour passer à
+				l'étage suivant.<br />
+				Illustration:
+				<img [src]="imgUrlLabyrinthe" alt="Labyrinthe" class="img-fluid" />
+			</p>
+			<h3>Indices:</h3>
+			<ol>
+				<li>
+					Structure de dossier
+					<spoil>
+						<img [src]="imgUrlFolderStructure" alt="Folder structure" />
+					</spoil>
+				</li>
+				<li>
+					Structure complete
+					<spoil>
+						<img [src]="imgUrlCompleteStructure" alt="Complete structure" />
+					</spoil>
+				</li>
+				<li>
+					Marche à suivre
+					<spoil>
+						<ol>
+							<li>
+								crée le dossier <code>labyrinthe</code> dans
+								<code>src/app/features/exercise/exercise-base-routing-navigation</code>
+							</li>
+							<li>
+								crée la première page <code>index</code> avec le message de bienvenue:<br />
+								Commande:
+								<spoil>
+									<code>ng g c /features/exercise/exercise-base-routing-navigation/labyrinthe/pages/index</code>
+								</spoil>
+							</li>
+							<li>crée les pages <code>etage1</code>, <code>etage2</code>, <code>victoire</code> et <code>piege</code></li>
+							<li>
+								crée le fichier de routing <code>labyrinthe.routes.ts</code> dans le dossier
+								<code>labyrinthe</code> Contenant le code: <br />
+								<i class="mini-text">(Sorry, je n'ai pas su le cacher car c'est un texte un peu spécial...)</i>
+								<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Routes} from "@angular/router";
+
+export const routes: Routes = [
+  {
+    path: "",
+    loadComponent: () =>
+      import("./pages/index/index.component").then(c => c.IndexComponent),
+  },
+  {
+    path: "etage1",
+    loadComponent: () =>
+      import("./pages/etage1/etage1.component").then(
+        c => c.Etage1Component,
+      ),
+  },
+  {
+    path: "etage2",
+    loadComponent: () =>
+      import("./pages/etage2/etage2.component").then(
+        c => c.Etage2Component,
+      ),
+  },
+  {
+    path: "piege",
+    loadComponent: () =>
+      import("./pages/piege/piege.component").then(c => c.PiegeComponent),
+  },
+  {
+    path: "victoire",
+    loadComponent: () =>
+      import("./pages/victoire/victoire.component").then(
+        c => c.VictoireComponent,
+      ),
+  },
+];
+								</textarea
+								>
+							</li>
+							<li>
+								Faire le routing entre <code>exercise-base-routing-navigation.routes.ts</code> et
+								<code>labyrinthe.routes.ts</code>
+								<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Routes} from "@angular/router";
+
+export const routes: Routes = [
+  {
+    path: "",
+    loadComponent: () =>
+      import("./exercise-base-routing-navigation.component").then(
+        m => m.ExerciseBaseRoutingNavigationComponent,
+      ),
+  },
+
+  // Ajouter le routing pour le labyrinthe
+  {
+    path: "labyrinthe",
+    loadChildren: () =>
+      import("./labyrinthe/labyrinthe.routes.ts").then(
+        r => r.routes,
+      ),
+  }
+];
+								</textarea
+								>
+							</li>
+							<li>
+								Ajouter les liens entre les étages dans les composants respectifs (sans oublié d'importer la directive
+								<code>routerLink</code>) dans le componenent.ts.
+							</li>
+						</ol>
+					</spoil>
+				</li>
+			</ol>
+		</div>
+	</article>
+</section>
