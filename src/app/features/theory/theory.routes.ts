@@ -32,4 +32,13 @@ export const routes: Routes = [
 				"@app/features/theory/pages/theory-base-navigation/theory-base-navigation.component"
 			).then(c => c.TheoryBaseNavigationComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(
+			ChapterName.Infrastructure,
+		).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/theory/pages/theory-infrastructure/theory-infrastructure.component"
+			).then(c => c.TheoryInfrastructureComponent),
+	},
 ];

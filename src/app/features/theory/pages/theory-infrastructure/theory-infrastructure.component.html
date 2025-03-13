@@ -1,0 +1,27 @@
+<div class="card-header">
+	<h1>Théorie - Infrastructure</h1>
+	<chapter-navigation />
+</div>
+<section class="card-body">
+	<p>Dans ce chapitre, nous allons voir comment fonctionne l'infrastructure d'une application Angular.</p>
+	<article class="card">
+		<div class="card-header">
+			<h2>Introduction</h2>
+		</div>
+		<div class="card-body">
+			<p>Tout d'abord, il exist plusieurs type de structure de dossier.</p>
+			<p>
+				La structure de dossier que nous allons voir dans ce chapitre est la structure de dossie qui fonctionne par fonctionnalité.
+			</p>
+		</div>
+		<div class="card-header">
+			<h2>Analyse</h2>
+		</div>
+		<div class="card-body d-flex justify-content-between">
+			<folder-structure class="w-50" [folderStructure]="folderStructure" (interactWith)="onElementOfFolderClick($event)" />
+			<div class="w-50 border-start container">
+				<p>Explication de {{ interactingWith() }}</p>
+			</div>
+		</div>
+	</article>
+</section>
