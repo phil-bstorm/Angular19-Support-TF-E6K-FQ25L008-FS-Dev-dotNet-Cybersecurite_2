@@ -19,6 +19,7 @@ export enum ChapterName {
 	Binding = "Binding",
 	Pipe = "Pipe",
 	Directive = "Directive",
+	NgTemplate = "NgTemplate",
 	InputOutput = "Input & Output",
 	ServiceInjection = "Service & Injection",
 	Formulaire = "Formulaire",
@@ -39,6 +40,10 @@ export class Courses {
 			has: [ChapterTDE.theory],
 		},
 		{
+			name: ChapterName.Infrastructure,
+			has: [ChapterTDE.theory],
+		},
+		{
 			name: ChapterName.Composant,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
@@ -49,10 +54,6 @@ export class Courses {
 		{
 			name: ChapterName.BaseNavigation,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
-		},
-		{
-			name: ChapterName.Infrastructure,
-			has: [ChapterTDE.theory],
 		},
 		{
 			name: ChapterName.Binding,
@@ -72,6 +73,10 @@ export class Courses {
 		},
 		{
 			name: ChapterName.Directive,
+			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
+		},
+		{
+			name: ChapterName.NgTemplate,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 		{
