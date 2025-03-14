@@ -7,6 +7,17 @@ import {
 	findWithPath,
 } from "@shared/components/folder-structure/utils/folder-structure.utils";
 import {SrcDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/src-description/src-description.component";
+import {CoreDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-description/core-description.component";
+import {CoreModelsDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-models-description/core-models-description.component";
+import {CoreModelsUserDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-models-user-description/core-models-user-description.component";
+import {CoreConstantsDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-constants-description/core-constants-description.component";
+import {CoreConstantsApiDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-constants-api-description/core-constants-api-description.component";
+import {CoreInterceptorsDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-interceptors-description/core-interceptors-description.component";
+import {CoreInterceptorsJwtDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-interceptors-jwt-description/core-interceptors-jwt-description.component";
+import {CoreGuardsDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-guards-description/core-guards-description.component";
+import {CoreGuardsConnectedDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-guards-connected-description/core-guards-connected-description.component";
+import {CoreServicesDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-services-description/core-services-description.component";
+import {CoreServicesUserDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-services-user-description/core-services-user-description.component";
 
 @Component({
 	selector: "theory-infrastructure",
@@ -14,6 +25,17 @@ import {SrcDescriptionComponent} from "@app/features/theory/pages/theory-infrast
 		ChapterNavigationComponent,
 		FolderStructureComponent,
 		SrcDescriptionComponent,
+		CoreDescriptionComponent,
+		CoreModelsDescriptionComponent,
+		CoreModelsUserDescriptionComponent,
+		CoreConstantsDescriptionComponent,
+		CoreConstantsApiDescriptionComponent,
+		CoreInterceptorsDescriptionComponent,
+		CoreInterceptorsJwtDescriptionComponent,
+		CoreGuardsDescriptionComponent,
+		CoreGuardsConnectedDescriptionComponent,
+		CoreServicesDescriptionComponent,
+		CoreServicesUserDescriptionComponent,
 	],
 	templateUrl: "./theory-infrastructure.component.html",
 	styleUrl: "./theory-infrastructure.component.scss",
@@ -49,6 +71,9 @@ export class TheoryInfrastructureComponent {
 												"src/app/core/models/user.model.ts",
 											),
 									},
+									{
+										name: "book.model.ts",
+									},
 								],
 							},
 							{
@@ -59,27 +84,59 @@ export class TheoryInfrastructureComponent {
 									),
 								files: [
 									{
-										name: "api.contants.ts",
+										name: "api.constants.ts",
 										interaction: () =>
 											this.onElementOfFolderClick(
-												"src/app/core/constants/api.contants.ts",
+												"src/app/core/constants/api.constants.ts",
 											),
 									},
 								],
 							},
 							{
 								name: "interceptors",
+								interaction: () =>
+									this.onElementOfFolderClick(
+										"src/app/core/interceptors",
+									),
 								files: [
 									{
 										name: "jwt.interceptor.ts",
+										interaction: () =>
+											this.onElementOfFolderClick(
+												"src/app/core/interceptors/jwt.interceptor.ts",
+											),
+									},
+								],
+							},
+							{
+								name: "guards",
+								interaction: () =>
+									this.onElementOfFolderClick(
+										"src/app/core/guards",
+									),
+								files: [
+									{
+										name: "connected.guard.ts",
+										interaction: () =>
+											this.onElementOfFolderClick(
+												"src/app/core/guards/connected.guard.ts",
+											),
 									},
 								],
 							},
 							{
 								name: "services",
+								interaction: () =>
+									this.onElementOfFolderClick(
+										"src/app/core/services",
+									),
 								files: [
 									{
 										name: "user.service.ts",
+										interaction: () =>
+											this.onElementOfFolderClick(
+												"src/app/core/services/user.service.ts",
+											),
 									},
 								],
 								children: [
@@ -109,6 +166,7 @@ export class TheoryInfrastructureComponent {
 									},
 								],
 							},
+							{name: "utils", files: [{name: "truc.utils.ts"}]},
 						],
 					},
 					{
@@ -175,6 +233,8 @@ export class TheoryInfrastructureComponent {
 	});
 
 	interactingWith = signal<string>("");
+
+	imgUrlHuh = "assets/memes/Cat-Huh.gif";
 
 	onElementOfFolderClick(elementPath: string) {
 		console.log(`TheoryInfrastructureComponent -> ${elementPath}`);
