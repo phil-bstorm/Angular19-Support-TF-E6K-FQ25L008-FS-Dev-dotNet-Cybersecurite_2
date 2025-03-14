@@ -45,7 +45,9 @@ export class ChapterNavigationService {
 				);
 
 				const prevChap = this.checkPreviousChapter();
-				this.previousChapter.set(prevChap?.index || null);
+				this.previousChapter.set(
+					prevChap?.index != null ? prevChap.index : null,
+				);
 				this.previousChapterName.set(prevChap?.chap.name || null);
 
 				const nextChap = this.checkNextChapter();
