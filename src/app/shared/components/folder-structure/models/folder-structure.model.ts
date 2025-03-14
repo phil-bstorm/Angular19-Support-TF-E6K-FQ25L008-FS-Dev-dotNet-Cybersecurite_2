@@ -1,9 +1,11 @@
-export interface FolderStructureModel {
+export interface FolderOrFile {
 	name: string;
 	bootstrapIcon?: string;
-	files: {
-		name: string;
-		bootstrapIcon?: string;
-	}[];
+	interaction?: () => void;
+	isSelected?: boolean;
+}
+
+export interface FolderStructureModel extends FolderOrFile {
+	files: FolderOrFile[];
 	children?: FolderStructureModel[];
 }

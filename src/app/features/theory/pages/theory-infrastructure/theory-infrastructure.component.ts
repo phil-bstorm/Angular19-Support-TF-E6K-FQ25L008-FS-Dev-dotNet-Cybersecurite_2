@@ -2,35 +2,68 @@ import {Component, signal} from "@angular/core";
 import {ChapterNavigationComponent} from "@shared/components/chapter-navigation/chapter-navigation.component";
 import {FolderStructureComponent} from "@shared/components/folder-structure/folder-structure.component";
 import {FolderStructureModel} from "@shared/components/folder-structure/models/folder-structure.model";
+import {
+	deselectAll,
+	findWithPath,
+} from "@shared/components/folder-structure/utils/folder-structure.utils";
+import {SrcDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/src-description/src-description.component";
 
 @Component({
 	selector: "theory-infrastructure",
-	imports: [ChapterNavigationComponent, FolderStructureComponent],
+	imports: [
+		ChapterNavigationComponent,
+		FolderStructureComponent,
+		SrcDescriptionComponent,
+	],
 	templateUrl: "./theory-infrastructure.component.html",
 	styleUrl: "./theory-infrastructure.component.scss",
 })
 export class TheoryInfrastructureComponent {
-	folderStructure: FolderStructureModel = {
+	folderStructure = signal<FolderStructureModel>({
 		name: "src",
+		interaction: () => this.onElementOfFolderClick("src"),
 		files: [],
 		children: [
 			{
 				name: "app",
+				interaction: () => this.onElementOfFolderClick("src/app"),
 				files: [],
 				children: [
 					{
 						name: "core",
+						interaction: () =>
+							this.onElementOfFolderClick("src/app/core"),
 						files: [],
 						children: [
 							{
 								name: "models",
-								files: [{name: "user.model.ts"}],
+								interaction: () =>
+									this.onElementOfFolderClick(
+										"src/app/core/models",
+									),
+								files: [
+									{
+										name: "user.model.ts",
+										interaction: () =>
+											this.onElementOfFolderClick(
+												"src/app/core/models/user.model.ts",
+											),
+									},
+								],
 							},
 							{
 								name: "constants",
+								interaction: () =>
+									this.onElementOfFolderClick(
+										"src/app/core/constants",
+									),
 								files: [
 									{
 										name: "api.contants.ts",
+										interaction: () =>
+											this.onElementOfFolderClick(
+												"src/app/core/constants/api.contants.ts",
+											),
 									},
 								],
 							},
@@ -139,12 +172,22 @@ export class TheoryInfrastructureComponent {
 				],
 			},
 		],
-	};
+	});
 
 	interactingWith = signal<string>("");
 
-	onElementOfFolderClick(element: string) {
-		console.log(`TheoryInfrastructureComponent -> ${element}`);
-		this.interactingWith.set(element);
+	onElementOfFolderClick(elementPath: string) {
+		console.log(`TheoryInfrastructureComponent -> ${elementPath}`);
+		this.interactingWith.set(elementPath);
+		let fs = this.folderStructure();
+		fs = deselectAll(fs);
+
+		console.log(fs);
+
+		const ff = findWithPath(fs, elementPath);
+		ff.isSelected = true;
+
+		console.log(fs);
+		this.folderStructure.set({...fs});
 	}
 }
