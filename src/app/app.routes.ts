@@ -7,6 +7,13 @@ export const routes: Routes = [
 		component: HomeComponent,
 	},
 	{
+		path: "installation",
+		loadComponent: () =>
+			import(
+				"./features/home/pages/installation/installation.component"
+			).then(c => c.InstallationComponent),
+	},
+	{
 		path: "theory",
 		loadChildren: () =>
 			import("./features/theory/theory.routes").then(r => r.routes),

@@ -1,0 +1,17 @@
+#advantage li {
+	list-style-type: none;
+}
+
+#advantage li::before {
+	content: "✅";
+	margin-right: 8px;
+}
+
+#inconvenience li {
+	list-style-type: none;
+}
+
+#inconvenience li::before {
+	content: "❌";
+	margin-right: 8px;
+}

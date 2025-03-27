@@ -4,6 +4,7 @@ import {
 	NAV_DEMO,
 	NAV_EXERCISE,
 	NAV_HOME,
+	NAV_INSTALLATION,
 	NAV_THEORY,
 } from "@core/constants/navigation.constants";
 import {ChapterTDE, CoursesInstance} from "@core/constants/chapters.constants";
@@ -16,6 +17,7 @@ import {ChapterTDE, CoursesInstance} from "@core/constants/chapters.constants";
 })
 export class AppHeaderComponent {
 	protected readonly NAV_HOME = NAV_HOME;
+	protected readonly NAV_INSTALLATION = NAV_INSTALLATION;
 	chapterOrder = CoursesInstance.chapterOrder;
 	protected readonly ChapterTDE = ChapterTDE;
 	protected readonly NAV_THEORY = NAV_THEORY;

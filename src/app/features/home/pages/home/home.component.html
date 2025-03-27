@@ -2,8 +2,81 @@
 	<h2>Bienvenue</h2>
 </div>
 <div class="card-body">
-	<p>
-		Bienvenue dans ce projet pour apprendre Angular Standalone. Ce projet est un support de cours pour apprendre Angular de manière
-		autonome.
-	</p>
+	<p>Bienvenue dans ce projet pour apprendre Angular Standalone. Ce projet est un support de cours pour apprendre Angular 🎉</p>
+
+	<div class="card">
+		<div class="card-header"><h2>Angular ? C’est quoi ?</h2></div>
+		<div class="card-body">
+			<p>
+				Angular est un framework de développement front-end mis en place par Google et basé sur Javascript (au travers de NodeJS et
+				Typescript)
+			</p>
+			<p>
+				Il permet de mettre en place des SPA (Single Page Application). Autrement dit : la navigation entre les “pages” semble
+				invisible pour l’utilisateur. Il a l’impression de rester constamment sur la même page puisqu’il n’y a pas de rechargement
+				de l’intégralité du site d’une page à l’autre.
+			</p>
+			<p>
+				La première version du framework date de 2016 et se met à jour régulièrement pour répondre aux attentes du monde
+				professionnel.
+			</p>
+
+			<!--	TODO illustrer une SPA vs non SPA pour montrer le rechargement de la page		-->
+		</div>
+
+		<div class="card-header"><h2>Avantages / Inconvénients</h2></div>
+		<div class="card-body d-flex justify-content-between">
+			<div id="advantage" class="w-50">
+				<h3>Avantages:</h3>
+				<ul>
+					<li>Framework complet pour le front</li>
+					<li>Compilation rapide</li>
+					<li>Documentation complète et simple</li>
+					<li>Évolue constamment</li>
+					<li>Modèle proche du MVVM (modèle-vue-vue modèle)</li>
+					<li>Avantage du Typescript</li>
+					<li>Injection de dépendances</li>
+				</ul>
+			</div>
+			<div id="inconvenience" class="w-50">
+				<h3>Inconvénient:</h3>
+				<ul>
+					<li>Lourdeur de la syntaxe</li>
+					<li>Migration d’une version à l’autre problématique (les librairies mettent du temps à suivre)</li>
+					<li>Courbe d’apprentissage énorme</li>
+					<li>Pas d’accès direct à une DB</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="card-header"><h2>NodeJS</h2></div>
+		<div class="card-body">
+			<!--	TODO Ajouter NodeJS logo		-->
+			<p>
+				En quelques mots : NodeJS est un environnement back-end développé en Javascript sur base de la machine virtuelle V8, moteur
+				d’exécution JS (qui se cache dans Chrome).
+			</p>
+			<p>
+				Il permet de manière très légère, de mettre en place des APIs (grâce à Express) et permet l'exécution du Javascript côté
+				serveur.
+			</p>
+			<p>
+				Il est associé à un gestionnaire de paquet - NPM - qui fonctionne via un terminal et permet d’ajouter des dépendances tel
+				que Angular, à un projet.
+			</p>
+		</div>
+
+		<div class="card-header"><h2>Typescript</h2></div>
+		<div class="card-body">
+			<!--	TODO Ajouter TS logo		-->
+			<p>Il s’agit d’un langage développé par Microsoft pour faciliter et “sécuriser” la production de code Javascript.</p>
+			<p>Typescript est en réalité une surcouche du JS. Ce qui signifie que tout code JS est un code Typescript valide.</p>
+			<p>
+				Il apporte les notions de programmation orienté objet et de typage statique des variables qui font cruellement défaut à
+				Javascript pour en faire un langage beaucoup plus structuré et facile d’accès
+			</p>
+		</div>
+	</div>
+
+	<a [routerLink]="NAV_INSTALLATION" class="btn btn-primary m-2">Installation d'Angular</a>
 </div>
