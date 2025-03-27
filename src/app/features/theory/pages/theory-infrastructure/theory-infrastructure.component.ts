@@ -1,5 +1,4 @@
 import {Component, signal} from "@angular/core";
-import {ChapterNavigationComponent} from "@shared/components/chapter-navigation/chapter-navigation.component";
 import {FolderStructureComponent} from "@shared/components/folder-structure/folder-structure.component";
 import {FolderStructureModel} from "@shared/components/folder-structure/models/folder-structure.model";
 import {
@@ -18,11 +17,11 @@ import {CoreGuardsDescriptionComponent} from "@app/features/theory/pages/theory-
 import {CoreGuardsConnectedDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-guards-connected-description/core-guards-connected-description.component";
 import {CoreServicesDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-services-description/core-services-description.component";
 import {CoreServicesAuthDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-services-auth-description/core-services-auth-description.component";
+import {TheoryHeaderComponent} from "@app/features/theory/components/layout/theory-header/theory-header.component";
 
 @Component({
 	selector: "theory-infrastructure",
 	imports: [
-		ChapterNavigationComponent,
 		FolderStructureComponent,
 		SrcDescriptionComponent,
 		CoreDescriptionComponent,
@@ -36,6 +35,7 @@ import {CoreServicesAuthDescriptionComponent} from "@app/features/theory/pages/t
 		CoreGuardsConnectedDescriptionComponent,
 		CoreServicesDescriptionComponent,
 		CoreServicesAuthDescriptionComponent,
+		TheoryHeaderComponent,
 	],
 	templateUrl: "./theory-infrastructure.component.html",
 	styleUrl: "./theory-infrastructure.component.scss",

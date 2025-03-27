@@ -1,10 +1,10 @@
 import {Component} from "@angular/core";
-import {ChapterNavigationComponent} from "@shared/components/chapter-navigation/chapter-navigation.component";
 import {HighlightJsDirective} from "ngx-highlight-js";
+import {TheoryHeaderComponent} from "@app/features/theory/components/layout/theory-header/theory-header.component";
 
 @Component({
 	selector: "demo-base-routing-navigation",
-	imports: [ChapterNavigationComponent, HighlightJsDirective],
+	imports: [HighlightJsDirective, TheoryHeaderComponent],
 	templateUrl: "./theory-base-routing.component.html",
 	styleUrl: "./theory-base-routing.component.scss",
 })

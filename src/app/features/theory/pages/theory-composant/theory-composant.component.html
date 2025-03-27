@@ -1,7 +1,4 @@
-<div class="card-header">
-	<h1>Théorie - Composant</h1>
-	<chapter-navigation />
-</div>
+<theory-header chapterName="Composant" />
 <section class="card-body">
 	<p>
 		Un composant est un élément fondamental d'une application Angular. Il est responsable de l'affichage d'une partie de l'interface
@@ -187,6 +184,85 @@ export class TheoryComposantComponent {
 				</textarea
 				>
 			</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2><code>selector</code></h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Le <code>selector</code> est une propriété du décorateur <code>&#64;Component</code> qui permet de définir le nom de la
+				balise HTML qui sera utilisée pour afficher le composant.
+			</p>
+			<p>
+				Par défaut, le <code>selector</code> est le nom de la classe du composant en <strong>kebab-case</strong>
+				(séparé par des tirets).
+			</p>
+			<p>Par exemple, si le composant s'appelle <code>hello</code>, le <code>selector</code> sera <code>app-hello</code>.</p>
+			<p>
+				Le <code>selector</code> peut être utilisé de différentes manières pour afficher le composant dans le template du composant
+				parent.
+			</p>
+			<p>
+				Par exemple, pour afficher le composant <code>Hello</code> dans le template du composant parent, on peut utiliser les
+				syntaxes suivantes :
+			</p>
+			<h3>Balise</h3>
+			<p>Si j'utilise <code>selector: 'app-hello'</code></p>
+			<textarea highlight-js [options]="{}" [lang]="'html'">
+<app-hello></app-hello>
+			</textarea
+			>
+
+			<h3>Class CSS</h3>
+			<p>Si j'utilise <code>selector: '.appHello'</code></p>
+			<textarea highlight-js [options]="{}" [lang]="'html'">
+<div class="appHello"></div>
+			</textarea
+			>
+
+			<h3>Attribut</h3>
+			<p>Si j'utilise <code>selector: '[appHello]'</code></p>
+			<textarea highlight-js [options]="{}" [lang]="'html'">
+<div appHello></div>
+			</textarea
+			>
+
+			<h3>Combinaison</h3>
+			<p>
+				Il est possible d'utiliser plusieurs sélecteurs pour un même composant. Par exemple, si on souhaite afficher le composant
+				<code>Hello</code> avec les sélecteurs <code>app-hello</code>, <code>.appHello</code> et <code>[appHello]</code>, on peut
+				définir le <code>selector</code> comme suit :<br />
+				<code> selector: 'app-hello,.appHello,[appHello]' </code>
+			</p>
+			<i>🔎 chaque sélecteur est séparé par une virgule</i>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>View encapsulation</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Par défaut, l'encapsulation est définie sur « Emulated ». Ça signifie que le style défini dans un composant ne pourra pas
+				modifier celui de ses parents. Si l'on souhaite changer ce comportement, il faut modifier la propriété encapsulation.
+			</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Component, ViewEncapsulation} from "@angular/core";
+
+@Component({
+  selector: 'app-non-encapsulated',
+  standalone: true,
+  template: `<p class="some-class">Ce composant enfant n'est pas encapsulé</p>`,
+  styles: `.some-class { text-decoration: line-through; }`,
+  encapsulation: ViewEncapsulation.None,
+})
+class NonEncapsulatedComponent {}
+			</textarea
+			>
 		</div>
 	</article>
 </section>
