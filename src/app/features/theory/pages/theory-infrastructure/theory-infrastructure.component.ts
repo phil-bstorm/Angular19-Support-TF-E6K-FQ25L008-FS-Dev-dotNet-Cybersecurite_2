@@ -17,7 +17,7 @@ import {CoreInterceptorsJwtDescriptionComponent} from "@app/features/theory/page
 import {CoreGuardsDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-guards-description/core-guards-description.component";
 import {CoreGuardsConnectedDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-guards-connected-description/core-guards-connected-description.component";
 import {CoreServicesDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-services-description/core-services-description.component";
-import {CoreServicesUserDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-services-user-description/core-services-user-description.component";
+import {CoreServicesAuthDescriptionComponent} from "@app/features/theory/pages/theory-infrastructure/components/core-services-auth-description/core-services-auth-description.component";
 
 @Component({
 	selector: "theory-infrastructure",
@@ -35,7 +35,7 @@ import {CoreServicesUserDescriptionComponent} from "@app/features/theory/pages/t
 		CoreGuardsDescriptionComponent,
 		CoreGuardsConnectedDescriptionComponent,
 		CoreServicesDescriptionComponent,
-		CoreServicesUserDescriptionComponent,
+		CoreServicesAuthDescriptionComponent,
 	],
 	templateUrl: "./theory-infrastructure.component.html",
 	styleUrl: "./theory-infrastructure.component.scss",
@@ -126,25 +126,18 @@ export class TheoryInfrastructureComponent {
 							},
 							{
 								name: "services",
-								interaction: () =>
-									this.onElementOfFolderClick(
-										"src/app/core/services",
-									),
-								files: [
-									{
-										name: "user.service.ts",
-										interaction: () =>
-											this.onElementOfFolderClick(
-												"src/app/core/services/user.service.ts",
-											),
-									},
-								],
+								files: [],
 								children: [
 									{
 										name: "auth",
 										files: [
 											{
 												name: "auth.service.ts",
+												interaction: () => {
+													this.onElementOfFolderClick(
+														"src/app/core/services/auth/auth.service.ts",
+													);
+												},
 											},
 										],
 										children: [
