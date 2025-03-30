@@ -1,12 +1,11 @@
 import {Component, inject} from "@angular/core";
-import {ChapterNavigationComponent} from "@shared/components/chapter-navigation/chapter-navigation.component";
 import {ChapterNavigationService} from "@shared/components/chapter-navigation/services/chapter-navigation.service";
 import {HighlightJsDirective} from "ngx-highlight-js";
-import {RouterLink} from "@angular/router";
+import {DemoHeaderComponent} from "@app/features/demo/components/layout/demo-header/demo-header.component";
 
 @Component({
 	selector: "demo-base-routing-navigation",
-	imports: [ChapterNavigationComponent, HighlightJsDirective],
+	imports: [HighlightJsDirective, DemoHeaderComponent],
 	templateUrl: "./demo-base-routing-navigation.component.html",
 	styleUrl: "./demo-base-routing-navigation.component.scss",
 })

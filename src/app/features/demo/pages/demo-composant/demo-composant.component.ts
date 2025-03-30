@@ -1,15 +1,11 @@
 import {Component} from "@angular/core";
-import {ChapterNavigationComponent} from "@shared/components/chapter-navigation/chapter-navigation.component";
 import {HighlightJsDirective} from "ngx-highlight-js";
 import {HelloWorldComponent} from "@app/features/demo/pages/demo-composant/hello-world/hello-world.component";
+import {DemoHeaderComponent} from "@app/features/demo/components/layout/demo-header/demo-header.component";
 
 @Component({
 	selector: "demo-composant",
-	imports: [
-		ChapterNavigationComponent,
-		HighlightJsDirective,
-		HelloWorldComponent,
-	],
+	imports: [HighlightJsDirective, HelloWorldComponent, DemoHeaderComponent],
 	templateUrl: "./demo-composant.component.html",
 	styleUrl: "./demo-composant.component.scss",
 })
