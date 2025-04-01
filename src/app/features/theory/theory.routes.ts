@@ -113,4 +113,11 @@ export const routes: Routes = [
 				"@app/features/theory/pages/theory-routing/theory-routing.component"
 			).then(c => c.TheoryRoutingComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Navigation).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/theory/pages/theory-navigation/theory-navigation.component"
+			).then(c => c.TheoryNavigationComponent),
+	},
 ];

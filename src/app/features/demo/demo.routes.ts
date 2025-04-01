@@ -90,4 +90,11 @@ export const routes: Routes = [
 				"@app/features/demo/pages/demo-routing/demo-routing.component"
 			).then(c => c.DemoRoutingComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Navigation).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/demo/pages/demo-navigation/demo-navigation.component"
+			).then(c => c.DemoNavigationComponent),
+	},
 ];

@@ -83,4 +83,11 @@ export const routes: Routes = [
 				"@app/features/exercise/pages/exercise-routing/exercise-routing.component"
 			).then(c => c.ExerciseRoutingComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Navigation).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/exercise/pages/exercise-navigation/exercise-navigation.component"
+			).then(c => c.ExerciseNavigationComponent),
+	},
 ];
