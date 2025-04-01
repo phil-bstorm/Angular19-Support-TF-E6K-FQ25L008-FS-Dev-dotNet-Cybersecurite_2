@@ -1,1 +1,167 @@
 <theory-header chapterName="Directive" />
+<section class="card-body">
+	<article class="card">
+		<div class="card-header">
+			<h2>Contexte:</h2>
+		</div>
+		<div class="card-body">
+			Les directives sont des éléments fondamentaux d'Angular, permettant de manipuler le DOM et d'ajouter des comportements
+			personnalisés à vos composants.
+		</div>
+	</article>
+	<article class="card">
+		<div class="card-header">
+			<h2>Objectif:</h2>
+		</div>
+		<div class="card-body">
+			Comprendre comment utiliser les directives pour améliorer l'interaction avec l'utilisateur et dynamiser votre application
+			Angular.
+		</div>
+	</article>
+	<article class="card">
+		<div class="card-header">
+			<h2>Qu'est-ce qu'une directive ?</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Une directive en Angular est une classe qui modifie le comportement ou l'apparence d'un élément DOM. Il existe trois types
+				de directives :
+			</p>
+			<ul>
+				<li>
+					<strong>Directives structurelles</strong>: Modifient la structure du DOM en ajoutant ou supprimant des éléments. Exemple
+					: <code>*ngIf</code> ou <code>&#64;if</code>, <code>*ngFor</code> ou <code>&#64;for</code>.
+				</li>
+				<li>
+					<strong>Directives d'attribut</strong>: Changent l'apparence ou le comportement d'un élément DOM existant. Exemple :
+					<code>ngClass</code>, <code>ngStyle</code>.
+				</li>
+				<li>
+					<strong>Directives personnalisées</strong> : Permettent de créer des directives propres à votre application pour
+					encapsuler des comportements spécifiques.
+				</li>
+			</ul>
+		</div>
+	</article>
+	<article class="card">
+		<div class="card-header">
+			<h2>Directive structurelle</h2>
+		</div>
+		<div class="card-header">
+			<h3><code>*ngIf</code> ou <code>&#64;if</code></h3>
+		</div>
+		<div class="card-body">
+			<p>
+				(Ancienne version) Utilisation de la directive <code>*ngIf</code> pour afficher ou masquer un élément en fonction d'une
+				condition :
+			</p>
+			<textarea highlight-js [options]="{}" [lang]="'html'">
+				<div *ngIf="isVisible">Ceci est visible</div>
+			</textarea
+			>
+			<p>
+				(Nouvelle version) Utilisation de la directive <code>&#64;if</code> pour afficher ou masquer un élément en fonction d'une
+				condition :
+			</p>
+			<textarea highlight-js [options]="{}" [lang]="'html'">
+@if(isVisible){
+    <div>Ceci est visible</div>
+}
+			</textarea
+			>
+
+			<p>
+				<strong>Résultat :</strong>
+				<button class="btn btn-primary" (click)="isVisible = !isVisible">
+					{{ isVisible ? "Cacher" : "Afficher" }}
+					le message
+				</button>
+				@if (isVisible) {
+					<div class="alert alert-info">Ceci est visible</div>
+				}
+			</p>
+		</div>
+
+		<div class="card-header">
+			<h3><code>*ngFor</code> ou <code>&#64;for</code></h3>
+		</div>
+		<div class="card-body">
+			<p>(Ancienne version) Utilisation de la directive <code>*ngFor</code> pour itérer sur une liste d'éléments :</p>
+			<textarea highlight-js [options]="{}" [lang]="'html'">
+<ul>
+    <li *ngFor="let item of items">&#123;&#123; item &#125;&#125;</li>
+</ul>
+			</textarea
+			>
+
+			<p>(Nouvelle version) Utilisation de la directive <code>&#64;for</code> pour itérer sur une liste d'éléments :</p>
+			<textarea highlight-js [options]="{}" [lang]="'html'">
+@for(item of items; track $index){
+    <li>&#123;&#123; item &#125;&#125;</li>
+}@empty {
+    <li>There are no items.</li>
+}
+			</textarea
+			>
+
+			<p>
+				<strong>Résultat :</strong>
+			</p>
+			<ul>
+				@for (item of items; track $index) {
+					<li>{{ item }}</li>
+				} @empty {
+					<li>There are no items.</li>
+				}
+			</ul>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Exemple : Directive d'attribut <code>ngClass</code></h2>
+		</div>
+		<div class="card-body">
+			<p>Utilisation de la directive <code>ngClass</code> pour appliquer des classes CSS conditionnellement :</p>
+			<textarea highlight-js [options]="{}" [lang]="'html'">
+<button
+    class="btn"
+    (click)="isDanger = !isDanger" // met à jour la variable isDanger
+    [ngClass]="{'btn-danger': isDanger, 'btn-info': !isDanger}" // applique la classe btn-danger si isDanger est vrai, sinon applique la classe btn-info
+>
+    Click me
+</button>
+			</textarea
+			>
+			<p>
+				<strong>Résultat :</strong>
+			</p>
+			<button class="btn" [ngClass]="{'btn-danger': isDanger, 'btn-info': !isDanger}" (click)="isDanger = !isDanger">Click me</button>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Exemple : Directive personnalisée</h2>
+		</div>
+		<div class="card-body">
+			<p>1. Générer la directive : <code>ng generate directive custom</code></p>
+			<p>2. Analyse</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Directive, ElementRef, Renderer2} from "@angular/core";
+
+@Directive({
+  selector: "[custom]", // sélecteur de la directive
+})
+export class customDirective {
+  constructor(
+    // parametres utilisés pour la directive
+  ) {
+    // traitement de la directive
+  }
+}
+			</textarea
+			>
+		</div>
+	</article>
+</section>

@@ -1,1 +1,147 @@
 <demo-header chapterName="Directive" />
+<section class="card">
+	<article class="card">
+		<div class="card-header">
+			<h2>Directives Structurelles</h2>
+		</div>
+		<div class="card-body">
+			<h3>&#64;if:</h3>
+			<button class="btn btn-primary" (click)="shallPass = !shallPass">Appliquer</button>
+			@if (shallPass) {
+				<p>Hu? Never mind, you can pass</p>
+			} @else {
+				<p>You shall not pass!</p>
+			}
+
+			<hr />
+
+			<h3>&#64;for:</h3>
+			<ul>
+				@for (item of items; track $index) {
+					<li>{{ item }}</li>
+				} @empty {
+					<li>There are no items.</li>
+				}
+			</ul>
+
+			<hr />
+
+			<h3>&#64;switch:</h3>
+			<select class="form-select" [(ngModel)]="replique">
+				<option value="1">Replique 1</option>
+				<option value="2">Replique 2</option>
+				<option value="3">Replique 3</option>
+			</select>
+			@switch (replique) {
+				@case ("1") {
+					<p>Luke, je suis ton père!</p>
+				}
+				@case ("2") {
+					<p>Merci d'avoir joué à mon jeu.</p>
+				}
+				@case ("3") {
+					<p>君の名前は？ Quel est ton nom ?</p>
+				}
+				@default {
+					<p>Sélectionne une réplique!</p>
+				}
+			}
+		</div>
+	</article>
+	<article class="card">
+		<div class="card-header">
+			<h2>Directives Attributs</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Choose a color:
+				<select class="form-select" [(ngModel)]="color">
+					<option value="black">Black</option>
+					<option value="red">Red</option>
+					<option value="green">Green</option>
+					<option value="blue">Blue</option>
+				</select>
+			</p>
+
+			<h3>&#64;ngClass:</h3>
+			<p>Dynamic classes with ngClass</p>
+			<p [ngClass]="{color}">This is an active paragraph</p>
+
+			<hr />
+
+			<h3>&#64;style:</h3>
+			<p>Bind a style to a value</p>
+			<p [style.color]="color">This is a colored paragraph</p>
+
+			<hr />
+
+			<h3>&#64;ngStyle:</h3>
+			<p>Dynamic styles with ngStyle</p>
+			<p [ngStyle]="{color: color}">This is a colored paragraph</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Directives Personnalisées</h2>
+		</div>
+		<div class="card-body">
+			<div class="card-header">
+				<h3>Création</h3>
+			</div>
+			<div class="card-body">
+				<p>Pour créer une directive personnalisée, utilisez la commande suivante :</p>
+				<code>ng generate directive features/demo/pages/demo-directive/directives/HighlightDirective</code>
+			</div>
+
+			<div class="card-header">
+				<h3>Implémentation</h3>
+			</div>
+			<div class="card-body">
+				<p>On édite le fichier qui vient d'être créer</p>
+				<textarea highlight-js [options]="{}" [lang]="'typescript'">
+// Importation des modules nécessaires depuis Angular
+import {Directive, ElementRef, Renderer2} from "@angular/core";
+
+// Définition de la directive avec le sélecteur "highlightDirective"
+@Directive({
+  selector: "[highlightDirective]",
+})
+export class HighlightDirectiveDirective {
+  // Constructeur de la directive, injectant ElementRef et Renderer2 pour manipuler le DOM
+  constructor(
+    private el: ElementRef,
+    private renderer: Renderer2,
+  ) {
+    // Application d'un style de fond jaune à l'élément hôte
+    this.renderer.setStyle(
+      this.el.nativeElement,
+      "backgroundColor",
+      "yellow",
+    );
+  }
+}
+				</textarea
+				>
+			</div>
+
+			<div class="card-header">
+				<h3>Utilisation</h3>
+			</div>
+			<div class="card-body">
+				<p>On applique la directive à une balise</p>
+				<textarea highlight-js [options]="{}" [lang]="'html'">
+<p highlightDirective>Ce paragraphe est en lumière!</p>
+				</textarea
+				>
+			</div>
+
+			<div class="card-header">
+				<h3>Résultat:</h3>
+			</div>
+			<div class="card-body">
+				<p highlightDirective>Ce paragraphe est en lumière!</p>
+			</div>
+		</div>
+	</article>
+</section>

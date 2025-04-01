@@ -139,4 +139,11 @@ export const routes: Routes = [
 				"@app/features/demo/pages/demo-resolver/demo-resolver.component"
 			).then(c => c.DemoResolverComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.NgContent).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/demo/pages/demo-ng-content/demo-ng-content.component"
+			).then(c => c.DemoNgContentComponent),
+	},
 ];
