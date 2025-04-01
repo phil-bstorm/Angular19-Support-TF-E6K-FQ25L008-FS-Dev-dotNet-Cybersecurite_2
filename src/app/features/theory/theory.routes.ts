@@ -90,4 +90,13 @@ export const routes: Routes = [
 				"@app/features/theory/pages/theory-input-output/theory-input-output.component"
 			).then(c => c.TheoryInputOutputComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(
+			ChapterName.ServiceInjection,
+		).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/theory/pages/theory-service-injection/theory-service-injection.component"
+			).then(c => c.TheoryServiceInjectionComponent),
+	},
 ];

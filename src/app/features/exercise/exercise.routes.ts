@@ -60,4 +60,13 @@ export const routes: Routes = [
 				"@app/features/exercise/pages/exercise-input-output/exercise-input-output.component"
 			).then(c => c.ExerciseInputOutputComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(
+			ChapterName.ServiceInjection,
+		).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/exercise/pages/exercise-service-injection/exercise-service-injection.component"
+			).then(c => c.ExerciseServiceInjectionComponent),
+	},
 ];
