@@ -39,4 +39,11 @@ export const routes: Routes = [
 				"@app/features/exercise/pages/exercise-pipe/exercise-pipe.component"
 			).then(c => c.ExercisePipeComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Directive).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/exercise/pages/exercise-directive/exercise-directive.component"
+			).then(c => c.ExerciseDirectiveComponent),
+	},
 ];

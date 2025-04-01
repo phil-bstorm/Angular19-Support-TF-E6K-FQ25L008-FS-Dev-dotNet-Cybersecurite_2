@@ -69,4 +69,11 @@ export const routes: Routes = [
 				"@app/features/theory/pages/theory-pipe/theory-pipe.component"
 			).then(c => c.TheoryPipeComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Directive).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/theory/pages/theory-directive/theory-directive.component"
+			).then(c => c.TheoryDirectiveComponent),
+	},
 ];

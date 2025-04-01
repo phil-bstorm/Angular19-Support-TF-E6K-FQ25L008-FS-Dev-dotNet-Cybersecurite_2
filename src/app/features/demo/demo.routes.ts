@@ -46,4 +46,11 @@ export const routes: Routes = [
 				"@app/features/demo/pages/demo-pipe/demo-pipe.component"
 			).then(c => c.DemoPipeComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Directive).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/demo/pages/demo-directive/demo-directive.component"
+			).then(c => c.DemoDirectiveComponent),
+	},
 ];
