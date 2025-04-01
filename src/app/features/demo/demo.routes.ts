@@ -97,4 +97,46 @@ export const routes: Routes = [
 				"@app/features/demo/pages/demo-navigation/demo-navigation.component"
 			).then(c => c.DemoNavigationComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Guard).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/demo/pages/demo-guard/demo-guard.component"
+			).then(c => c.DemoGuardComponent),
+	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Storage).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/demo/pages/demo-storage/demo-storage.component"
+			).then(c => c.DemoStorageComponent),
+	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Observable).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/demo/pages/demo-observable/demo-observable.component"
+			).then(c => c.DemoObservableComponent),
+	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.HttpClient).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/demo/pages/demo-http-client/demo-http-client.component"
+			).then(c => c.DemoHttpClientComponent),
+	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Interceptor).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/demo/pages/demo-interceptor/demo-interceptor.component"
+			).then(c => c.DemoInterceptorComponent),
+	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Resolver).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/demo/pages/demo-resolver/demo-resolver.component"
+			).then(c => c.DemoResolverComponent),
+	},
 ];

@@ -25,7 +25,8 @@ export enum ChapterName {
 	Formulaire = "Formulaire",
 	Routing = "Routing",
 	Navigation = "Navigation",
-	GuardResolver = "Guard & Resolver",
+	Guard = "Guard",
+	Resolver = "Resolver",
 	Storage = "Storage",
 	Observable = "Observable",
 	HttpClient = "HttpClient",
@@ -100,7 +101,7 @@ export class Courses {
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 		{
-			name: ChapterName.GuardResolver,
+			name: ChapterName.Guard,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 		{
@@ -117,6 +118,10 @@ export class Courses {
 		},
 		{
 			name: ChapterName.Interceptor,
+			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
+		},
+		{
+			name: ChapterName.Resolver,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 	];

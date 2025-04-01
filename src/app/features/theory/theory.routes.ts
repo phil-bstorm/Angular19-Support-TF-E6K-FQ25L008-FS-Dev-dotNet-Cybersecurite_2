@@ -120,4 +120,46 @@ export const routes: Routes = [
 				"@app/features/theory/pages/theory-navigation/theory-navigation.component"
 			).then(c => c.TheoryNavigationComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Guard).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/theory/pages/theory-guard/theory-guard.component"
+			).then(c => c.TheoryGuardComponent),
+	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Storage).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/theory/pages/theory-storage/theory-storage.component"
+			).then(c => c.TheoryStorageComponent),
+	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Observable).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/theory/pages/theory-observable/theory-observable.component"
+			).then(c => c.TheoryObservableComponent),
+	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.HttpClient).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/theory/pages/theory-http-client/theory-http-client.component"
+			).then(c => c.TheoryHttpClientComponent),
+	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Interceptor).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/theory/pages/theory-interceptor/theory-interceptor.component"
+			).then(c => c.TheoryInterceptorComponent),
+	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Resolver).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/theory/pages/theory-resolver/theory-resolver.component"
+			).then(c => c.TheoryResolverComponent),
+	},
 ];

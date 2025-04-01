@@ -90,4 +90,46 @@ export const routes: Routes = [
 				"@app/features/exercise/pages/exercise-navigation/exercise-navigation.component"
 			).then(c => c.ExerciseNavigationComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Guard).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/exercise/pages/exercise-guard/exercise-guard.component"
+			).then(c => c.ExerciseGuardComponent),
+	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Storage).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/exercise/pages/exercise-storage/exercise-storage.component"
+			).then(c => c.ExerciseStorageComponent),
+	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Observable).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/exercise/pages/exercise-observable/exercise-observable.component"
+			).then(c => c.ExerciseObservableComponent),
+	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.HttpClient).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/exercise/pages/exercise-http-client/exercise-http-client.component"
+			).then(c => c.ExerciseHttpClientComponent),
+	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Interceptor).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/exercise/pages/exercise-interceptor/exercise-interceptor.component"
+			).then(c => c.ExerciseInterceptorComponent),
+	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Resolver).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/exercise/pages/exercise-resolver/exercise-resolver.component"
+			).then(c => c.ExerciseResolverComponent),
+	},
 ];
