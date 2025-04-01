@@ -1,0 +1,26 @@
+<div class="card-header">
+	<h2>Property binding</h2>
+	<i>Fichiers: <code>src/app/features/demo/pages/demo-bindings/demo-property-binding/</code></i>
+</div>
+<div class="card-body">
+	<p>
+		Le property binding permet de lier une propriété HTML à une variable TypeScript. Cela permet de modifier dynamiquement les
+		propriétés des éléments HTML.
+	</p>
+	<h3>Exemples:</h3>
+	<ul>
+		<li>
+			Lié la propriété <code>disabled</code> d'un bouton à une variable <code>isDisabled</code> (<code>[disabled]="isDisabled"</code>)
+			:<br />
+			<button [disabled]="isDisabled">Clique-moi !</button>
+		</li>
+		<li>
+			Lier la propriété <code>src</code> d'une image à une variable <code>imageUrl</code> (<code>[src]="imageUrl"</code>) :<br />
+			<img [src]="imageUrlCat" alt="cat image" style="width: 400px" />
+		</li>
+		<li>
+			Lier la propriété <code>href</code> d'un lien à une variable <code>url</code> (<code>[href]="url"</code>) :<br />
+			<a [href]="url" target="_blank">Vers Google</a>
+		</li>
+	</ul>
+</div>

@@ -18,4 +18,11 @@ export const routes: Routes = [
 				"./pages/exercise-base-routing-navigation/exercise-base-routing-navigation.routes"
 			).then(r => r.routes),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Binding).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/exercise/pages/exercise-bindings/exercise-bindings.component"
+			).then(c => c.ExerciseBindingsComponent),
+	},
 ];

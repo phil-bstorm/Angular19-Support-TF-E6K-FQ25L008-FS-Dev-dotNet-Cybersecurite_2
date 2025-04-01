@@ -41,4 +41,11 @@ export const routes: Routes = [
 				"@app/features/theory/pages/theory-infrastructure/theory-infrastructure.component"
 			).then(c => c.TheoryInfrastructureComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Binding).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/theory/pages/theory-binding/theory-binding.component"
+			).then(c => c.TheoryBindingComponent),
+	},
 ];

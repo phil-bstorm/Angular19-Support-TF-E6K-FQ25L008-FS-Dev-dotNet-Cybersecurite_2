@@ -1,0 +1,65 @@
+<div class="card-header">
+	<h2>Event binding</h2>
+	<i>Fichiers: <code>src/app/features/demo/pages/demo-bindings/demo-event-binding</code></i>
+</div>
+<div class="card-body">
+	<p>Utilisation de l'event binding pour réagir aux événements utilisateur :</p>
+	<h3>Exemples</h3>
+	<ul>
+		<li>
+			Réagir à un clic sur un bouton (<code>(click)="handleClick()"</code>) :<br />
+			<button class="btn m-1 btn-info" (click)="handleClick()">Clique-moi !</button>
+		</li>
+		<li>
+			Réagir au survol d'un bouton (<code>(mouseover)="handleMouseOver()"</code>) :<br />
+			<button class="btn m-1 btn-{{ btnOverState }}" (mouseover)="handleMouseOver()">Je change de couleur une fois!</button>
+		</li>
+
+		<li>
+			Réagir au survol d'un bouton (<code>(mouseenter)="handleMouseEnter()" (mouseleave)="handleMouseLeave()"</code>) :<br />
+			<button class="btn m-1 btn-{{ btnEnterLeaveState }}" (mouseenter)="handleMouseEnter()" (mouseleave)="handleMouseLeave()">
+				Je change de couleur quand on me survole fois!
+			</button>
+		</li>
+		Et bien d'autres:
+		<spoil>
+			<li>click = au clic de la souris</li>
+
+			<li>dblclick = au double clic de la souris</li>
+
+			<li>submit = à l'envoi du formulaire</li>
+
+			<li>blur = perte du focus de l'élément (form)</li>
+
+			<li>focus = au focus de l'élément</li>
+
+			<li>scroll = lors du scroll de l'élément</li>
+
+			<li>cut = lors du CTRL + X</li>
+
+			<li>copy = lors du CTRL + C</li>
+
+			<li>paste = lors du CTRL + V</li>
+
+			<li>keyup = lors du relâchement de la touche du clavier</li>
+
+			<li>keypress = lors de l'appui (maintenu) de la touche du clavier</li>
+
+			<li>keydown = lors de l'appui de la touche du clavier</li>
+
+			<li>mouseup = lors du relâchement du bouton de la souris (sur l'élément)</li>
+
+			<li>mousedown = lors de l'appui du bouton de la souris (sur l'élément)</li>
+
+			<li>mouseenter = lors de l'entrée de la souris dans l'élément</li>
+
+			<li>mouseleave = lors de la sortie de la souris dans l'élément</li>
+
+			<li>drag = lors de la sélection de l'élément pour le déplacer</li>
+
+			<li>drop = lors du relâchement de l'élément</li>
+
+			<li>dragover = lors du déplacement de cet élément (toutes les 100ms)</li>
+		</spoil>
+	</ul>
+</div>

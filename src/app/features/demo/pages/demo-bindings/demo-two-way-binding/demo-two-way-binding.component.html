@@ -1,0 +1,28 @@
+<div class="card-header">
+	<h2>Two-way binding</h2>
+	<i>Fichiers: <code>src/app/features/demo/pages/demo-bindings/demo-two-way-binding/</code></i>
+</div>
+<div class="card-body">
+	<p>Le two-way binding permet de synchroniser automatiquement les données entre le modèle et la vue.</p>
+	<p><strong style="color: red">⚠️Importer le FormsModule !</strong></p>
+	<h3>Chaîne de caractères :</h3>
+
+	<p><strong>Valeur :</strong> {{ maVariable1 }}</p>
+	<p>Lors de l'écriture :</p>
+	<p><input type="text" [(ngModel)]="maVariable1" /></p>
+
+	<p>Lors du relâchement du clavier :</p>
+	<p><input type="text" [value]="maVariable1" (keyup)="changeValue($event)" /></p>
+
+	<h3>Nombre :</h3>
+
+	<p>Valeur : {{ maVariable2 }}</p>
+	<input type="number" [(ngModel)]="maVariable2" />
+
+	<h3>Booléen :</h3>
+
+	<p>Valeur : <input class="form-check-input" type="checkbox" [(ngModel)]="maVariable3" /> {{ maVariable3 }}</p>
+	<h3>Range:</h3>
+	<p>Valeur: {{ rangeValue }}</p>
+	<input type="range" [max]="rangeMax" [min]="rangeMin" [(ngModel)]="rangeValue" /> [{{ rangeMin }} - {{ rangeMax }}]
+</div>

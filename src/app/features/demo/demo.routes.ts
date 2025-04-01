@@ -18,4 +18,11 @@ export const routes: Routes = [
 				"@app/features/demo/pages/demo-base-routing-navigation/demo-base-routing-navigation.routes"
 			).then(r => r.routes),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Binding).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/demo/pages/demo-bindings/demo-bindings.component"
+			).then(c => c.DemoBindingsComponent),
+	},
 ];

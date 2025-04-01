@@ -1,0 +1,29 @@
+<div class="card-header">
+	<h2>Interpolation</h2>
+	<i>Fichiers: <code>src/app/features/demo/pages/demo-bindings/demo-interpolation-binding</code></i>
+</div>
+<div class="card-body">
+	<ul>
+		<p>Affichage de différent type de variable:</p>
+		<li><strong>String</strong>: {{ chaineDeCaracteres }}</li>
+		<li><strong>Number</strong>: {{ nombre }}</li>
+		<li><strong>Date</strong>: {{ date }}</li>
+		<li><strong>Array</strong>: {{ tableau }}</li>
+		<li><strong>Boolean</strong>: {{ booleen }} et {{ !booleen }}</li>
+		<li>
+			<strong>Null</strong>: {{ unNull }}<br />
+			<i>🔎Rien ne s'affiche</i>
+		</li>
+		<li>
+			<strong>Undefined</strong>: {{ unUndefined }}<br />
+			<i>🔎Rien ne s'affiche</i>
+		</li>
+		<li>
+			<strong>Objet</strong>: {{ objet }}<br />
+			<i>Si vous souhaite afficher un objet, il faut utiliser une <strong>pipe</strong>:</i> <br />
+			{{ objet | json }}
+			<i>🔎Ne t'en fais pas, il y a un chapitre consacré aux pipes</i>
+		</li>
+		<li><strong>Propriété d'un objet</strong>: {{ objet.prenom }}</li>
+	</ul>
+</div>

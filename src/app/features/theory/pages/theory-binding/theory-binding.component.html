@@ -1,0 +1,160 @@
+<theory-header chapterName="Binding" />
+<section class="card-body">
+	<article class="card">
+		<div class="card-header">
+			<h2>Contexte:</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Nous n'avons, pour le moment, utilisé que la partie HTML et CSS de nos composants Angular. Voyons maintenant, à travers
+				différents moyens, comment utiliser la partie TypeScript pour nous aider dans le développement de notre application !
+			</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Objectif:</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Utiliser le binding pour intégrer du TypeScript dans la partie HTML de nos composants et automatiser certaines tâches tout
+				en optimisant la gestion de l'interface utilisateur.
+			</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Le binding:</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Le binding (liaison) en Angular fait référence à la synchronisation des données entre le modèle (TypeScript) et la vue
+				(HTML). Il existe différents types de binding :
+			</p>
+			<ul>
+				<li>
+					<strong>Interpolation</strong>: Elle permet d'insérer des expressions TypeScript directement dans le HTML en utilisant
+					les doubles accolades <code>&#123;&#123;</code> et <code>&#125;&#125;</code>.
+				</li>
+				<li>
+					<strong>Property Binding</strong>: Il lie les propriétés du DOM aux propriétés des composants TypeScript à l'aide de
+					crochets <code>[]</code>.
+				</li>
+				<li>
+					<strong>Event Binding</strong>: Il permet de lier des événements utilisateur (comme un clic) à des méthodes TypeScript
+					en utilisant des parenthèses <code>()</code>.
+				</li>
+				<li>
+					<strong>Two-way Binding</strong>: Il combine les deux et permet une synchronisation bidirectionnelle entre le modèle et
+					la vue via <code>[(ngModel)]</code>.
+				</li>
+			</ul>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Rappel - le DOM</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Le DOM (Document Object Model) est une représentation en mémoire de la structure d'une page web. Il permet à JavaScript (ou
+				TypeScript) d'interagir avec les éléments HTML et de les manipuler dynamiquement.
+			</p>
+			<p>
+				En Angular, le DOM est souvent modifié à travers le binding, où les changements de données dans les composants peuvent
+				automatiquement se refléter dans l'interface utilisateur sans qu'il soit nécessaire de recharger la page.
+			</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Exemple - Interpolation (one-way binding)</h2>
+			<p>Afficher une variable dans l'HTML</p>
+		</div>
+		<div class="card-body">
+			<p>
+				Dans le fichier TypeScript: <br />
+				<code>title = "Bienvenue sur Angular";</code>
+			</p>
+			<p>
+				Dans le fichier HTML: <br />
+				<code>&#123;&#123;</code> <code> hello </code>
+				<code>&#125;&#125;</code>
+			</p>
+			<p><strong>Résultat : </strong>{{ title }}</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Exemple - Property Binding</h2>
+			<p>Lier un attribut HTML au TS</p>
+		</div>
+		<div class="card-body">
+			<p>
+				Utilisation du property binding pour lier une propriété HTML à une variable TypeScript : <br />
+				<code>estDesactive = true;</code>
+			</p>
+			<p>
+				Dans le fichier HTML: <br />
+				<code>&lt;button <strong>[disabled]="estDesactive"</strong>>je suis désactivé&lt;/button&gt;</code>
+			</p>
+			<p>
+				<strong>Résultat : </strong>
+				<button class="btn m-1 btn-info" [disabled]="estDesactive">je suis désactivé!</button>
+			</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Exemple - Event Binding</h2>
+			<p>Lier un évenement à une méthode TS</p>
+		</div>
+		<div class="card-body">
+			<p>
+				Dans le fichier TypeScript : <br />
+				<code>handleClick() &#123; alert("Button clicked!"); &#125;</code>
+			</p>
+			<p>
+				Utilisation de l'event binding pour réagir aux événements utilisateur : <br />
+				<code>
+					&lt;button
+					<strong>(click)="handleClick()"</strong>>Clique-moi !&lt;/button&gt;
+				</code>
+			</p>
+			<p>
+				<strong>Résultat : </strong>
+				<button class="btn m-1 btn-info" (click)="handleClick()">Clique-moi !</button>
+			</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Exemple - Two-way Data Binding</h2>
+			<p>Récupérer & Mettre à jour une valeur TS depuis l'HTML</p>
+		</div>
+		<div class="card-body">
+			<p>Synchronisation bidirectionnelle entre l'input utilisateur et le modèle :</p>
+			<p>
+				Dans le fichier TypeScript <br />
+				<code>username = "John Doe";</code>
+			</p>
+			<p>
+				Dans le fichier HTML: <br />
+				<code>&lt;input <strong>[(ngModel)]="username"</strong> /&gt;</code>
+			</p>
+			<p>⚠️ il est faut importer <strong>FormsModule</strong> dans votre module pour pouvoir utiliser ce type de binding !</p>
+			<p>
+				<strong>Résultat : </strong>
+				<input [(ngModel)]="username" /><br />
+				<strong>=></strong> {{ username }}
+			</p>
+		</div>
+	</article>
+</section>
