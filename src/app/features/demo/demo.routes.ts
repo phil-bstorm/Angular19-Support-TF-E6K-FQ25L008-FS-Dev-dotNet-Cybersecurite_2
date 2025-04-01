@@ -25,4 +25,11 @@ export const routes: Routes = [
 				"@app/features/demo/pages/demo-bindings/demo-bindings.component"
 			).then(c => c.DemoBindingsComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Signal).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/demo/pages/demo-signal/demo-signal.component"
+			).then(c => c.DemoSignalComponent),
+	},
 ];

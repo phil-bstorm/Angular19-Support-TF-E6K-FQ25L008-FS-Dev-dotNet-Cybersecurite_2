@@ -48,4 +48,11 @@ export const routes: Routes = [
 				"@app/features/theory/pages/theory-binding/theory-binding.component"
 			).then(c => c.TheoryBindingComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Signal).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/theory/pages/theory-signal/theory-signal.component"
+			).then(c => c.TheorySignalComponent),
+	},
 ];
