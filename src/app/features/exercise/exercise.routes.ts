@@ -46,4 +46,11 @@ export const routes: Routes = [
 				"@app/features/exercise/pages/exercise-directive/exercise-directive.component"
 			).then(c => c.ExerciseDirectiveComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.NgTemplate).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/exercise/pages/exercise-ng-template/exercise-ng-template.component"
+			).then(c => c.ExerciseNgTemplateComponent),
+	},
 ];
