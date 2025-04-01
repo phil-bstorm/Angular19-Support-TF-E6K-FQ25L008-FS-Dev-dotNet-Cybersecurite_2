@@ -83,4 +83,11 @@ export const routes: Routes = [
 				"@app/features/theory/pages/theory-ng-template/theory-ng-template.component"
 			).then(c => c.TheoryNgTemplateComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.InputOutput).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/theory/pages/theory-input-output/theory-input-output.component"
+			).then(c => c.TheoryInputOutputComponent),
+	},
 ];

@@ -53,4 +53,11 @@ export const routes: Routes = [
 				"@app/features/exercise/pages/exercise-ng-template/exercise-ng-template.component"
 			).then(c => c.ExerciseNgTemplateComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.InputOutput).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/exercise/pages/exercise-input-output/exercise-input-output.component"
+			).then(c => c.ExerciseInputOutputComponent),
+	},
 ];

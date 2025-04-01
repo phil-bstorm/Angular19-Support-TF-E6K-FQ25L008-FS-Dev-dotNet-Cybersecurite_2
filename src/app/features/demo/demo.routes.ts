@@ -53,12 +53,18 @@ export const routes: Routes = [
 				"@app/features/demo/pages/demo-directive/demo-directive.component"
 			).then(c => c.DemoDirectiveComponent),
 	},
-
 	{
 		path: CoursesInstance.getChapterId(ChapterName.NgTemplate).toString(),
 		loadComponent: () =>
 			import(
 				"@app/features/demo/pages/demo-ng-template/demo-ng-template.component"
 			).then(c => c.DemoNgTemplateComponent),
+	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.InputOutput).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/demo/pages/demo-input-output/demo-input-output.component"
+			).then(c => c.DemoInputOutputComponent),
 	},
 ];
