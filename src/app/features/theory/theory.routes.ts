@@ -106,4 +106,11 @@ export const routes: Routes = [
 				"@app/features/theory/pages/theory-formulaire/theory-formulaire.component"
 			).then(c => c.TheoryFormulaireComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Routing).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/theory/pages/theory-routing/theory-routing.component"
+			).then(c => c.TheoryRoutingComponent),
+	},
 ];
