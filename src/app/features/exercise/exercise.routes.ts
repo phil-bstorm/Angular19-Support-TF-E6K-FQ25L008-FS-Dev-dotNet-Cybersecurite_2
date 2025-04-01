@@ -32,4 +32,11 @@ export const routes: Routes = [
 				"@app/features/exercise/pages/exercise-signal/exercise-signal.component"
 			).then(c => c.ExerciseSignalComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Pipe).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/exercise/pages/exercise-pipe/exercise-pipe.component"
+			).then(c => c.ExercisePipeComponent),
+	},
 ];

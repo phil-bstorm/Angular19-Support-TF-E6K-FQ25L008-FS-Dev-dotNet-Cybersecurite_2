@@ -62,4 +62,11 @@ export const routes: Routes = [
 				"@app/features/theory/pages/theory-cycle-de-vie/theory-cycle-de-vie.component"
 			).then(c => c.TheoryCycleDeVieComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Pipe).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/theory/pages/theory-pipe/theory-pipe.component"
+			).then(c => c.TheoryPipeComponent),
+	},
 ];

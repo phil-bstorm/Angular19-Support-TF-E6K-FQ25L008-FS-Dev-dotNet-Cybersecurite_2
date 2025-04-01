@@ -39,4 +39,11 @@ export const routes: Routes = [
 				"@app/features/demo/pages/demo-cycle-de-vie/demo-cycle-de-vie.component"
 			).then(c => c.DemoCycleDeVieComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Pipe).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/demo/pages/demo-pipe/demo-pipe.component"
+			).then(c => c.DemoPipeComponent),
+	},
 ];
