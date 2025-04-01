@@ -60,10 +60,6 @@ export class Courses {
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 		{
-			name: ChapterName.Signal,
-			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
-		},
-		{
 			name: ChapterName.CycleDeVie,
 			has: [ChapterTDE.theory, ChapterTDE.demo],
 		},
@@ -85,6 +81,10 @@ export class Courses {
 		},
 		{
 			name: ChapterName.ServiceInjection,
+			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
+		},
+		{
+			name: ChapterName.Signal,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 		{
