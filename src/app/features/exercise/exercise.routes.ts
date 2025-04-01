@@ -69,4 +69,11 @@ export const routes: Routes = [
 				"@app/features/exercise/pages/exercise-service-injection/exercise-service-injection.component"
 			).then(c => c.ExerciseServiceInjectionComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Formulaire).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/exercise/pages/exercise-formulaire/exercise-formulaire.component"
+			).then(c => c.ExerciseFormulaireComponent),
+	},
 ];

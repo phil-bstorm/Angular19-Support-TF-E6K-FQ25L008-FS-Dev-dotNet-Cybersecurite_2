@@ -76,4 +76,11 @@ export const routes: Routes = [
 				"@app/features/demo/pages/demo-service-injection/demo-service-injection.component"
 			).then(c => c.DemoServiceInjectionComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.Formulaire).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/demo/pages/demo-formulaire/demo-formulaire.component"
+			).then(c => c.DemoFormulaireComponent),
+	},
 ];
