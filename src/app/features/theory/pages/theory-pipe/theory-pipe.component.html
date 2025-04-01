@@ -1,1 +1,91 @@
 <theory-header chapterName="Pipe" />
+<section class="card-body">
+	<article class="card">
+		<div class="card-header">
+			<h2>Qu'est-ce qu'un pipe ?</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Un pipe en Angular permet de transformer les données avant de les afficher dans la vue. Ils facilitent le formatage des
+				données sans modifier le modèle d'origine.
+			</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Utilisations</h2>
+		</div>
+		<div class="card-header">
+			<h2>Utilisation sans paramètre</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Pour utiliser un pipe, il suffit de le placer dans une expression entre doubles accolades
+				<code>&#123;&#123;</code>
+				<code>&#125;&#125;</code> suivis de <code>|</code> dans le HTML. Par exemple, pour afficher une date formatée, on peut
+				utiliser le pipe <code>date</code> :<br />
+				<code>&#123;&#123;</code><code> maVariableDate | date &#125;&#125; </code> => {{ maVariableDate | date }} <br />
+				<i>Sans pipe: {{ maVariableDate }} </i>
+			</p>
+		</div>
+		<div class="card-header">
+			<h2>Utilisation avec paramètre</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Certains pipes acceptent des paramètres pour personnaliser leur comportement. Pour cela, on ajoute un
+				<code>:</code> suivi du paramètre souhaité. Par exemple, pour afficher une date en français, on peut utiliser le pipe
+				<code>date</code> avec le paramètre <code>'shortDate'</code> :<br />
+				<code>&#123;&#123;</code><code> maVariableDate | date:'shortDate' &#125;&#125; </code> =>
+				{{ maVariableDate | date: "shortDate" }} <br />
+				<i>Sans pipe: {{ maVariableDate }} </i>
+			</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Pipes personnalisés</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Il est possible de créer ses propres pipes pour répondre à des besoins spécifiques. Pour cela, il suffit de créer une classe
+				TypeScript avec le décorateur <code>&#64;Pipe</code> et d'implémenter l'interface <code>PipeTransform</code>. Ensuite, il
+				faut définir la méthode <code>transform</code> qui prend en paramètre la valeur à transformer et les paramètres optionnels.
+				Enfin, il faut l'ajouter dans le module de l'application pour pouvoir l'utiliser.
+			</p>
+			<ol>
+				<li>
+					<strong>Générer un pipe</strong> : Utilisez Angular CLI pour générer un pipe.<br />
+					<code>ng generate pipe customPipeName</code>
+				</li>
+				<li>
+					<strong>Analyse</strong>
+					<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'customPipeName',
+  standalone: false
+})
+export class CustomPipeName implements PipeTransform {
+  transform(value: unknown, ...args: unknown[]): unknown {
+    /* Logique de transformation */
+    return null;
+  }
+}
+          </textarea
+					>
+					<ul>
+						<li><code>name</code> : Nom du pipe utilisé dans le template.</li>
+						<li><code>transform</code> : Méthode de transformation.</li>
+						<li><code>value</code> : Valeur à transformer.</li>
+						<li><code>args</code> : Paramètres optionnels.</li>
+					</ul>
+				</li>
+				<li><strong>Implémentation</strong> : Écrivez la logique de transformation dans le pipe.</li>
+			</ol>
+		</div>
+	</article>
+</section>
