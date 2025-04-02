@@ -21,6 +21,7 @@ export enum ChapterName {
 	Directive = "Directive",
 	NgTemplate = "NgTemplate",
 	InputOutput = "Input & Output",
+	NgContent = "NgContent",
 	ServiceInjection = "Service & Injection",
 	Formulaire = "Formulaire",
 	Routing = "Routing",
@@ -78,6 +79,10 @@ export class Courses {
 		},
 		{
 			name: ChapterName.InputOutput,
+			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
+		},
+		{
+			name: ChapterName.NgContent,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 		{

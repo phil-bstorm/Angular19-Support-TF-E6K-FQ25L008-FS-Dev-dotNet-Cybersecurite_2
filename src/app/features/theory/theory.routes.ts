@@ -162,4 +162,11 @@ export const routes: Routes = [
 				"@app/features/theory/pages/theory-resolver/theory-resolver.component"
 			).then(c => c.TheoryResolverComponent),
 	},
+	{
+		path: CoursesInstance.getChapterId(ChapterName.NgContent).toString(),
+		loadComponent: () =>
+			import(
+				"@app/features/theory/pages/theory-ng-content/theory-ng-content.component"
+			).then(c => c.TheoryNgContentComponent),
+	},
 ];
