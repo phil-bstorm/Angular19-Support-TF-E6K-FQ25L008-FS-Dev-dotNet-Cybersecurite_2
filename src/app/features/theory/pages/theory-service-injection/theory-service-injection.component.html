@@ -1,1 +1,104 @@
 <theory-header chapterName="Service et Injection de dépendance" />
+<section class="card">
+	<article class="card">
+		<div class="card-header">
+			<h2>Qu'est-ce qu'un Service en Angular ?</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Un <strong>service</strong> en Angular est une classe qui contient des méthodes réutilisables que plusieurs composants
+				peuvent appeler. Un service permet de <strong>centraliser la logique métier</strong> (tâches telles que les appels HTTP, la
+				gestion de données, etc.) en dehors des composants pour respecter le principe de
+				<strong>séparation des responsabilité</strong>.
+			</p>
+			<p>
+				<strong>Par exemple</strong>: au lieu de répéter dans plusieurs composants le même appel à une API, on peut créer un
+				<code>UserService</code> qui s’en charge. Chaque composant peut alors utiliser ce service pour accéder ou modifier les
+				données utilisateurs.
+			</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Pourquoi utiliser des Services ?</h2>
+		</div>
+		<div class="card-body">
+			<p>Les services offrent de nombreux avantages :</p>
+			<ul>
+				<li>
+					<strong>Réutilisation</strong> du code : Un service permet d'éviter la duplication du code dans plusieurs composants.
+				</li>
+				<li>
+					<strong>Organisation</strong> : La logique métier est séparée des composants, facilitant ainsi la maintenance et la
+					lisibilité du code.
+				</li>
+				<li>
+					<strong>Centralisation des données</strong> : Un service peut contenir et gérer des informations partagées par plusieurs
+					composants.
+				</li>
+			</ul>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>L'injection de dépendance</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				L'<strong>Injection de Dépendances</strong> est un <strong>design pattern</strong> qui consiste à fournir une dépendance
+				(comme un service) à une classe plutôt que de la laisser créer elle-même cette dépendance.
+			</p>
+			<p>
+				Angular a un <strong>système intégré d'injection de dépendances</strong>, qui permet de fournir automatiquement les services
+				dont les composants ou d'autres services ont besoin.
+			</p>
+			<p>Par exemple, au lieu qu'un composant crée une instance d'un service lui-même, Angular l'injecte automatiquement :</p>
+			<ul>
+				<li>
+					<p>Via constructeur:</p>
+					<textarea highlight-js [options]="{}" [lang]="'ts'">
+constructor(private _userService: UserService) {}
+					</textarea
+					>
+				</li>
+				<li>
+					<p>Avec inject <i>(sans oublié l'import de celui-ci)</i></p>
+					<textarea highlight-js [options]="{}" [lang]="'ts'">
+private readonly _userService = inject(UserService);
+					</textarea
+					>
+				</li>
+			</ul>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header"><h2>Créer un service</h2></div>
+		<div class="card-body">
+			<h3>Création du service</h3>
+			<p>
+				Pour créer un service, Angular CLI offre une commande simple :<br />
+				<code>ng generate service nom-du-service </code>
+			</p>
+			<p>
+				Cela crée une classe TypeScript marquée par le décorateur <code>&#64;Injectable()</code>. Ce décorateur informe Angular que
+				cette classe peut être injectée dans d'autres classes.
+			</p>
+			<textarea highlight-js [options]="{}" [lang]="'ts'">
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UserService {
+  constructor() { }
+}
+			</textarea
+			>
+
+			<h3>Analyse</h3>
+		</div>
+	</article>
+</section>
