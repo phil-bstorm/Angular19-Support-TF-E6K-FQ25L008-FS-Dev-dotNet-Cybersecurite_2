@@ -1,1 +1,21 @@
 <demo-header chapterName="NgContent" />
+<div class="card-body">
+	<h3>Base:</h3>
+	<demo-enfant-ng-content>
+		<p>Hello world du parent!</p>
+	</demo-enfant-ng-content>
+
+	<hr />
+
+	<h3>Plusieurs contents:</h3>
+	<demo-enfant-multiple-ng-content>
+		<p class="content1">Ceci est le contenu 1</p>
+		<p class="content2">Ceci est le contenu 2</p>
+	</demo-enfant-multiple-ng-content>
+
+	<hr />
+	<h3>Contenu par défaut</h3>
+	<demo-enfant-default-ng-content>
+		<!-- Rien pour afficher le contenu par défaut -->
+	</demo-enfant-default-ng-content>
+</div>
