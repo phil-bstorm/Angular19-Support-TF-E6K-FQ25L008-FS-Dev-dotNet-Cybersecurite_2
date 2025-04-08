@@ -1,1 +1,135 @@
 <theory-header chapterName="Input/Ouput" />
+<section>
+	<article class="card">
+		<div class="card-header">
+			<h2>Introduction :</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				En Angular, la communication entre composants est essentielle et se fait principalement grâce aux propriétés
+				<code>input()</code> et <code>output()</code> qui permettent de passer des données du parent vers l'enfant (Input) et de
+				l'enfant vers le parent (Output).
+			</p>
+			<p>Anciennement, <code>&#64;Input</code> et <code>&#64;Output</code>.</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Input :</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				<code>input()</code> permet de recevoir des données d'un composant parent. Il est utilisé pour définir une propriété dans le
+				composant enfant qui peut être liée à une valeur dans le composant parent.
+			</p>
+			<p>
+				Cette liaison se fait généralement via la syntaxe de liaison de propriété, en utilisant des crochets autour du nom de la
+				propriété.
+			</p>
+			<p>Exemple :</p>
+
+			<h3>Typescript de l'enfant:</h3>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Component, input} from "@angular/core"; // importation de input
+
+@Component({
+  selector: "enfant-input",
+  imports: [],
+  templateUrl: "./enfant-input.component.html",
+  styleUrl: "./enfant-input.component.scss",
+})
+export class EnfantInputComponent {
+  // cette variable n'est pas requise lors de l'usage du composant
+  valeurOptionnelTransmiseParLeParent = input<string>("");
+
+  // cette variable est requise lors de l'usage du composant
+  valeurRequiseTransmiseParLeParent = input.required<string>();
+}
+			</textarea
+			>
+			<h3>Html de l'enfant</h3>
+			<textarea highlight-js [options]="{}" [lang]="'html'">
+<p>Texte optionnel: &#123;&#123; valeurOptionnelTransmiseParLeParent() &#125;&#125;</p>
+<p>Text requis: &#123;&#123; valeurRequiseTransmiseParLeParent() &#125;&#125;</p>
+			</textarea
+			>
+			<i
+				>🔎 Lorsqu'on utilise input, celui nous donne un Signal (que l'on verra en détail plus tard) et pour afficher la valeur d'un
+				signal, il faut rajouter des parenthèses lorsque l'on utilise la variable: <br />
+				<code>valeurOptionnelTransmiseParLeParent()</code></i
+			>
+
+			<h3>Usage dans l'html du parent</h3>
+			<textarea highlight-js [options]="{}" [lang]="'html'">
+				<enfant-input [valeurRequiseTransmiseParLeParent]="maVariable" [valeurOptionnelTransmiseParLeParent]="maVariable" />
+			</textarea
+			>
+			<i>🔎 tu trouveras plus d'exemple d'utilisation dans la démo sur les inputs!</i>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h3>Ouput</h3>
+		</div>
+		<div class="card-body">
+			<p>
+				<code>ouput()</code> permet à un composant enfant d'émettre des événements vers son composant parent.
+				<br />
+				Cela se fait via un EventEmitter.
+			</p>
+			<p>Exemple:</p>
+			<h3>Typescript de l'enfant:</h3>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Component, output} from "@angular/core"; // 1. import output
+
+@Component({
+  selector: "enfant-output",
+  imports: [],
+  templateUrl: "./enfant-output.component.html",
+  styleUrl: "./enfant-output.component.scss",
+})
+export class EnfantOutputComponent {
+  envoyerMessage = output<string>(); // 2. déclaration de l'output
+
+  triggerMessage() {
+    this.envoyerMessage.emit("J'ai faim."); // 3. Emission du message
+  }
+}
+			</textarea
+			>
+
+			<h3>Typescript du parent</h3>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Component} from "@angular/core";
+import {DemoHeaderComponent} from "@app/features/demo/components/layout/demo-header/demo-header.component";
+import {EnfantOutputComponent} from "@app/features/demo/pages/demo-input-output/enfant-output/enfant-output.component";
+
+@Component({
+  selector: "demo-input-output",
+  imports: [DemoHeaderComponent, EnfantInputComponent, EnfantOutputComponent],
+  templateUrl: "./demo-input-output.component.html",
+  styleUrl: "./demo-input-output.component.scss",
+})
+export class DemoInputOutputComponent {
+  notify(message: string) { // 4. fonction qui va être appelée lors de l'émission du message
+    alert("Message de l'enfant : " + message);
+  }
+}
+			</textarea
+			>
+
+			<h3>HTML du parent</h3>
+			<p>Liaison entre la méthode <code>notify</code> du parent et <code>OutputEmitter</code></p>
+			<textarea highlight-js [options]="{}" [lang]="'html'">
+				<enfant-output (envoyerMessage)="notify($event)" />
+			</textarea
+			>
+			<p>
+				Lorsque l'on veut récupérer la valeur de l'output, on doit utiliser <code>$event</code> lors de l'appel de la fonction dans
+				l'HTML du parent.
+			</p>
+		</div>
+	</article>
+</section>
