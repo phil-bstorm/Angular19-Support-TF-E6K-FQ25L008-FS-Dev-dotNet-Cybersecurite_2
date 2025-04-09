@@ -1,1 +1,106 @@
 <theory-header chapterName="Navigation" />
+<section class="card-body">
+	<p>
+		Jusque maintenant, pour se déplacer de page en page, nous utilisons <code>routerLink</code> dans une balise <code>&lt;a&gt;</code>.
+	</p>
+	<article class="card">
+		<div class="card-header">
+			<h2>Redirection depuis le code</h2>
+		</div>
+		<div class="card-body">
+			<i>Mais comment puis-je rediriger l'utilisateur vers une autre page sans lui demander de cliquer?</i>
+			<p>Nous pouvons utiliser le service <code>Router</code> pour rediriger l'utilisateur vers une autre page.</p>
+			<p>Pour cela, nous devons d'abord l'injecter dans notre composant.</p>
+			<p>Ensuite, nous pouvons appeler la méthode <code>navigate()</code> du service <code>Router</code>.</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+			this._router.navigate(['/', 'path']);
+			</textarea
+			>
+			<p>Cela redirigera l'utilisateur vers la page spécifiée dans le tableau de chaînes de caractères.</p>
+			<i>🔎 l'utilisateur sera rediriger vers l'url : <code>http://localhost:4200/path</code></i>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Navigation avec paramètre</h2>
+		</div>
+		<div class="card-body">
+			<p>La navigation avec paramètre permet de passer des informations "simple" à la page cible.</p>
+			<h3>Routing</h3>
+			<p>
+				Par exemple: <code>http://localhost:4200/book/14</code>, le "14" est un paramètre simple qui signifie que l'on souhaite
+				obtenir les détails du livre avec l'id 14. <br />
+				pour ne pas devoir créer une route: <code>/book/14</code>, <code>/book/15</code>, <code>/book/16</code>... si on a 100
+				livres, on peut créer une route avec une navigation paramétrée.
+			</p>
+			<p>Dans le fichier de routing, on notera par exemple:</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+{
+  path: "book/:id",
+  loadComponent: () => import("./features/book/pages/book-detail/book-detail.component").then(c => c.BookDetailComponent),
+},
+			</textarea
+			>
+			<p>Le fait de mettre <code>:</code> dans la route indique que le morceau qui suit est une paramètre qui sera variable.</p>
+			<h3>Composant</h3>
+			<p>Pour récupérer le paramètre, nous utilisons le serivce <code>ActivatedRoute</code>:</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Component, inject} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+
+@Component({
+  selector: 'app-book-detail',
+  templateUrl: './book-detail.component.html',
+  styleUrl: './book-detail.component.scss',
+})
+export class BookDetailComponent {
+  private readonly _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+
+  constructor() {
+    let id = this._activatedRoute.snapshot.params['id']; // params['id'] doit correspondre au nom du paramètre dans la route
+    console.log("Id du livre: ", id);
+  }
+}
+			</textarea
+			>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Paramètre dans l'url</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Si nous souhaitons obtenir des informations sur la route actuelle, nous pouvons utiliser le service
+				<code>ActivatedRoute</code>.
+			</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Évenements</h2>
+		</div>
+		<div class="card-body">
+			<!--
+NavigationStart
+RoutesRecognized
+GuardsCheckStart
+ChildActivationStart
+ActivationStart
+GuardsCheckEnd
+ResolveStart
+ResolveEnd
+ActivationEnd
+ChildActivationEnd
+ActivationEnd
+ChildActivationEnd
+NavigationEnd
+Scroll
+-->
+			<p>TODO</p>
+		</div>
+	</article>
+</section>

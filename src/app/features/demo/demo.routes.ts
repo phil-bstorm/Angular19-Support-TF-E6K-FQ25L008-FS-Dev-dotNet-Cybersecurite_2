@@ -98,6 +98,15 @@ export const routes: Routes = [
 			).then(c => c.DemoNavigationComponent),
 	},
 	{
+		path:
+			CoursesInstance.getChapterId(ChapterName.Navigation).toString() +
+			"/:text",
+		loadComponent: () =>
+			import(
+				"@app/features/demo/pages/demo-navigation/demo-navigation.component"
+			).then(c => c.DemoNavigationComponent),
+	},
+	{
 		path: CoursesInstance.getChapterId(ChapterName.Guard).toString(),
 		loadComponent: () =>
 			import(
