@@ -2,9 +2,9 @@ import {Component} from "@angular/core";
 import {TheoryHeaderComponent} from "@app/features/theory/components/layout/theory-header/theory-header.component";
 
 @Component({
-	selector: "theory-routing",
+	selector: "theory-router-outlet",
 	imports: [TheoryHeaderComponent],
-	templateUrl: "./theory-routing.component.html",
-	styleUrl: "./theory-routing.component.scss",
+	templateUrl: "./theory-router-outlet.component.html",
+	styleUrl: "./theory-router-outlet.component.scss",
 })
-export class TheoryRoutingComponent {}
+export class TheoryRouterOutletComponent {}

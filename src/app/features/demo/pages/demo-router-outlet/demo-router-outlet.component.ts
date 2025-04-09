@@ -2,9 +2,9 @@ import {Component} from "@angular/core";
 import {DemoHeaderComponent} from "@app/features/demo/components/layout/demo-header/demo-header.component";
 
 @Component({
-	selector: "demo-routing",
+	selector: "demo-router-outlet",
 	imports: [DemoHeaderComponent],
-	templateUrl: "./demo-routing.component.html",
-	styleUrl: "./demo-routing.component.scss",
+	templateUrl: "./demo-router-outlet.component.html",
+	styleUrl: "./demo-router-outlet.component.scss",
 })
-export class DemoRoutingComponent {}
+export class DemoRouterOutletComponent {}

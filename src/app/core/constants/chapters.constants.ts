@@ -24,7 +24,7 @@ export enum ChapterName {
 	NgContent = "NgContent",
 	ServiceInjection = "Service & Injection",
 	Formulaire = "Formulaire",
-	Routing = "Routing",
+	RouterOutlet = "RouterOutlet",
 	Navigation = "Navigation",
 	Guard = "Guard",
 	Resolver = "Resolver",
@@ -94,10 +94,6 @@ export class Courses {
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 		{
-			name: ChapterName.Routing,
-			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
-		},
-		{
 			name: ChapterName.Navigation,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
@@ -128,6 +124,10 @@ export class Courses {
 		{
 			name: ChapterName.Resolver,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
+		},
+		{
+			name: ChapterName.RouterOutlet,
+			has: [ChapterTDE.theory, ChapterTDE.demo],
 		},
 	];
 

@@ -77,11 +77,11 @@ export const routes: Routes = [
 			).then(c => c.ExerciseFormulaireComponent),
 	},
 	{
-		path: CoursesInstance.getChapterId(ChapterName.Routing).toString(),
+		path: CoursesInstance.getChapterId(ChapterName.RouterOutlet).toString(),
 		loadComponent: () =>
 			import(
-				"@app/features/exercise/pages/exercise-routing/exercise-routing.component"
-			).then(c => c.ExerciseRoutingComponent),
+				"@app/features/exercise/pages/exercise-router-outlet/exercise-router-outlet.component"
+			).then(c => c.ExerciseRouterOutletComponent),
 	},
 	{
 		path: CoursesInstance.getChapterId(ChapterName.Navigation).toString(),

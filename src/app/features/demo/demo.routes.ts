@@ -84,11 +84,11 @@ export const routes: Routes = [
 			).then(c => c.DemoFormulaireComponent),
 	},
 	{
-		path: CoursesInstance.getChapterId(ChapterName.Routing).toString(),
+		path: CoursesInstance.getChapterId(ChapterName.RouterOutlet).toString(),
 		loadComponent: () =>
 			import(
-				"@app/features/demo/pages/demo-routing/demo-routing.component"
-			).then(c => c.DemoRoutingComponent),
+				"@app/features/demo/pages/demo-router-outlet/demo-router-outlet.component"
+			).then(c => c.DemoRouterOutletComponent),
 	},
 	{
 		path: CoursesInstance.getChapterId(ChapterName.Navigation).toString(),

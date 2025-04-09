@@ -107,11 +107,11 @@ export const routes: Routes = [
 			).then(c => c.TheoryFormulaireComponent),
 	},
 	{
-		path: CoursesInstance.getChapterId(ChapterName.Routing).toString(),
+		path: CoursesInstance.getChapterId(ChapterName.RouterOutlet).toString(),
 		loadComponent: () =>
 			import(
-				"@app/features/theory/pages/theory-routing/theory-routing.component"
-			).then(c => c.TheoryRoutingComponent),
+				"@app/features/theory/pages/theory-router-outlet/theory-router-outlet.component"
+			).then(c => c.TheoryRouterOutletComponent),
 	},
 	{
 		path: CoursesInstance.getChapterId(ChapterName.Navigation).toString(),
