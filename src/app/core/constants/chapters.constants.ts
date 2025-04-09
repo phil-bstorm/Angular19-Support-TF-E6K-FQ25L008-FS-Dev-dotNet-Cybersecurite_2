@@ -83,7 +83,7 @@ export class Courses {
 		},
 		{
 			name: ChapterName.NgContent,
-			has: [ChapterTDE.theory, ChapterTDE.demo],
+			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 		{
 			name: ChapterName.ServiceInjection,

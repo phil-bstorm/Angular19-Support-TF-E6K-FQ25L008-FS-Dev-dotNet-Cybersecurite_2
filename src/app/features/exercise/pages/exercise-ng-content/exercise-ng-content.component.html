@@ -1,0 +1,46 @@
+<exercise-header chapterName="NgContent" />
+<section class="card-body">
+	<article class="card">
+		<div class="card-header">
+			<h2>Cadre photo</h2>
+			<i>Dossier de travail: <code>src/app/features/exercise/pages/exercise-ng-content/cadre-photo/</code></i>
+		</div>
+		<div class="card-body">
+			<p>Réalise un composant qui sert de cadre photo!</p>
+			<p>Ce composant utilise <code>ng-content</code> et prend 2 enfants:</p>
+			<ul>
+				<li>Une balise comprenant l'image à afficher</li>
+				<li>Une balise pour customizé un des coins du cadre</li>
+			</ul>
+			<p>Note:</p>
+			<ul>
+				<li>
+					l'appel du composant est déjà placer dans
+					<abbr title="src/app/features/exercise/pages/exercise-ng-content/exercise-ng-content.component.html">ce fichier</abbr>.
+				</li>
+				<li>Le composant <code>CadrePhoto</code> est déjà créer.</li>
+			</ul>
+			<p>
+				Résultat:
+				<spoil>
+					<img [src]="imgUrlResultat" alt="Résultat" />
+					<i>Merci de ne pas jugé le css. 😅</i>
+				</spoil>
+			</p>
+		</div>
+		<div class="card-header">
+			<h2>Résultat</h2>
+		</div>
+		<div class="card-body">
+			<div class="cadrephoto">
+				<cadre-photo>
+					<img class="photo" [src]="catHuh" alt="Chat qui fait un câlin" />
+					<span class="up-left bi-arrow-through-heart"></span>
+					<!--					<span class="up-right bi-arrow-through-heart"></span>-->
+					<!--					<span class="bottom-left bi-arrow-through-heart"></span>-->
+					<!--					<span class="bottom-right bi-arrow-through-heart"></span>-->
+				</cadre-photo>
+			</div>
+		</div>
+	</article>
+</section>
