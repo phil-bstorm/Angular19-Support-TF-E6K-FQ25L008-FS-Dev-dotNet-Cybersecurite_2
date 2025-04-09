@@ -1,1 +1,28 @@
-<p>demo-formulaire works!</p>
+<demo-header chapterName="Formulaire" />
+<div class="card-body">
+	<h2>Formulaire de contact</h2>
+	<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+		<div>
+			<label for="email">Email</label>
+			<input id="email" type="text" formControlName="email" placeholder="Email" />
+			@if (contactForm.get("email")?.touched && !contactForm.get("email")?.valid) {
+				<p class="error">The email is required!</p>
+			}
+		</div>
+		<div>
+			<label for="firstName">FirstName:</label>
+			<input id="firstName" type="text" formControlName="firstName" placeholder="FirstName" />
+			@if (contactForm.get("firstName")?.touched && !contactForm.get("firstName")?.valid) {
+				<p class="error">The firstName is required!</p>
+			}
+		</div>
+		<div>
+			<label for="lastName">LastName:</label>
+			<input id="lastName" type="text" formControlName="lastName" placeholder="LastName" />
+			@if (contactForm.get("lastName")?.touched && !contactForm.get("lastName")?.valid) {
+				<p class="error">The lastName is required!</p>
+			}
+		</div>
+		<button type="submit" [disabled]="contactForm.invalid">Send</button>
+	</form>
+</div>

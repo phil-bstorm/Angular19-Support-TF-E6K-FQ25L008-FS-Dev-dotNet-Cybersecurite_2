@@ -1,1 +1,306 @@
 <theory-header chapterName="Formulaire" />
+<section class="card-body">
+	<article class="card">
+		<div class="card-header">
+			<h2 class="card-title">Différents formulaires</h2>
+		</div>
+		<div class="card-body">
+			<p>En Angular, il existe 2 types de formulaires:</p>
+			<ul>
+				<li>
+					<p>
+						<strong>Template-driven Forms</strong>: Cest formulaire utilisent le <code>Two-way binding</code> pour les entrées
+						de l'utilisateur. Ils sont plus simples à mettre en place et sont généralement utilisés pour des formulaires
+						simples. <br />
+						Mais ne possèdent pas de validation avancée. <br />
+						<span [ngStyle]="{color: 'red'}"
+							>Rappel: Il est nécessaire d'importer <code>FormsModule</code> dans le composant</span
+						>
+					</p>
+				</li>
+				<li>
+					<p>
+						<strong>Reactive Forms</strong> : Ces formulaires permettent de gérer des groupes de contrôles de manière réactive
+						et de valider les champs de formulaire plus efficacement. <br />
+						<span [ngStyle]="{color: 'red'}">
+							Rappel: Il est nécessaire d'importer <code>ReactiveFormsModule</code> dans le composant
+						</span>
+					</p>
+				</li>
+			</ul>
+			<hr />
+			<p>
+				Dans ce chapitre, nous privilégierons l'utilisation des <strong>Reactive Forms</strong> pour leur flexibilité et leur
+				puissance.
+			</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2 class="card-title">FormBuilder</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				La classe intégrée à Angular, <code>FormBuilder</code>, nous permet de déclarer facilement nos formulaires réactifs. Pour
+				l'utiliser, nous devons l'injecter dans le constructeur de notre composant.
+				<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Component, inject} from "@angular/core";
+import {FormBuilder} from "@angular/forms"; // 1. importer la classe FormBuilder
+
+@Component({
+  selector: "demo-formulaire",
+  imports: [],
+  templateUrl: "./demo-formulaire.component.html",
+  styleUrl: "./demo-formulaire.component.scss",
+})
+export class DemoFormulaireComponent {
+  private readonly _fb = inject(FormBuilder); // 2. injection de FormBuilder
+}
+				</textarea
+				>
+			</p>
+			<p>Une fois que FormBuilder est injecté, nous pouvons créer des FormControl et des FormGroup de manière concise.</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>FormGroup (base)</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Un <code>FormGroup</code> est un groupe de contrôles de formulaire. Il nous permet de gérer plusieurs champs de saisie en
+				même temps. Nous pouvons créer un <code>FormGroup</code> en utilisant la méthode <code>group()</code> de
+				<code>FormBuilder</code>.
+			</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Component, inject} from "@angular/core";
+import {FormBuilder} from "@angular/forms";
+
+@Component({
+  selector: "demo-formulaire",
+  imports: [],
+  templateUrl: "./demo-formulaire.component.html",
+  styleUrl: "./demo-formulaire.component.scss",
+})
+export class DemoFormulaireComponent {
+  private readonly _fb = inject(FormBuilder);
+
+  // Formulaire de contact
+  contactForm = this._fb.group({ // création du formGroup
+    /* on va mettre nos champs ici */
+  });
+}
+			</textarea
+			>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2 class="card-title">FormControl</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Un <code>FormControl</code> représente un champ de formulaire individuel. Il peut être utilisé pour gérer la valeur et
+				l'état de validation d'un champ de saisie.
+			</p>
+			<p>
+				Nous pouvons créer un <code>FormControl</code> en utilisant la méthode <code>control()</code> de <code>FormBuilder</code>.
+				Cette méthode prend en paramètre la valeur initiale du contrôle et un tableau d'options.
+			</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+// Formulaire de contact
+contactForm = this._fb.group({
+  email: new FormControl(""), // synthaxe complete explicite
+  firstName: this._fb.control(""), // synthaxe complete
+  lastName: [""], // synthaxe simplifiée
+});
+			</textarea
+			>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Formulaire HTML</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Le formulaire côté HTML ne change pas mais il faut juste rajouter le <code>[formGroup]</code> dans la balise
+				<code>form</code> et <code>formControlName</code> dans chaque champ de saisie.
+			</p>
+			<p>
+				Cela nous permet de lié le formulaire HTML au formGroup qui se trouve dans notre fichier ts <br />
+				<i
+					>⚠️ la valeur de <code>formControlName</code> doit correspondre avec le nom des propriétés que l'on a écrit dans le
+					<code>formGroup</code> du fichier TS</i
+				>
+			</p>
+			<textarea highlight-js [options]="{}" [lang]="'html'">
+<form [formGroup]="contactForm">  <!-- On rajoute [formGroup] -->
+<div>
+  <label for="email">Email</label>
+  <input id="email" type="text" formControlName="email" placeholder="Email" /> <!-- On rajoute formControlName -->
+</div>
+<div>
+  <label for="firstName">FirstName:</label>
+  <input id="firstName" type="text" formControlName="firstName" placeholder="FirstName" /> <!-- On rajoute formControlName -->
+</div>
+<div>
+  <label for="lastName">LastName:</label>
+  <input id="lastName" type="text" formControlName="lastName" placeholder="LastName" /> <!-- On rajoute formControlName -->
+</div>
+<button type="submit">Envoyer</button>
+</form>
+			</textarea
+			>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2 class="card-title">Validators</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Les <code>Validators</code> sont des fonctions qui permettent de valider les valeurs des contrôles de formulaire. Ils
+				peuvent être utilisés pour vérifier si un champ est requis, si une valeur est valide ou si elle respecte un certain format.
+			</p>
+			<p>Exemples de validateurs:</p>
+			<ul>
+				<li><code>Validators.required</code> : Vérifie que le champ n'est pas vide.</li>
+				<li><code>Validators.email</code> : Vérifie que la valeur est une adresse email valide.</li>
+				<li><code>Validators.minLength</code> : Vérifie que la longueur minimale est respectée.</li>
+				<li><code>Validators.maxLength</code> : Vérifie que la longueur maximale est respectée.</li>
+				<li>Et bien plus dans la <a href="https://angular.dev/api/forms/Validators" target="_blank">doc</a>!</li>
+			</ul>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+// Formulaire de contact
+contactForm = this._fb.group({
+  email: new FormControl("", [Validators.required, Validators.email]),
+  firstName: this._fb.control("", [Validators.required, Validators.minLength(2)]),
+  lastName: ["", [Validators.required, Validators.minLength(2)]],
+});
+			</textarea
+			>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Validation de champs</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Il est toujours préférable de donné un retour à l'utlisateur directement après qu'il ait finit d'écrire dans un champ que
+				d'attendre la fin du formulaire pour savoir si quelque chose est mal remplit.
+			</p>
+			<p>
+				Pour cela, nous allons utiliser la propriété <code>touched</code> et <code>valid</code> de notre <code>FormControl</code>.
+				Cette propriété indique si l'utilisateur a interagi avec le champ ou non. Si l'utilisateur a interagi avec le champ et que
+				le champ est invalide, nous pouvons afficher un message d'erreur.
+			</p>
+			<p>A la suite de chacun des champs, nous allons ajouter cette validation, voici un exemple pour le champ email:</p>
+			<textarea highlight-js [options]="{}" [lang]="'html'">
+<div>
+  <label for="email">Email</label>
+  <input id="email" type="text" formControlName="email" placeholder="Email" />
+  @if (contactForm.get("email")?.touched && !contactForm.get("email")?.valid) {
+    <p class="error">The email is required!</p>
+  }
+</div>
+			</textarea
+			>
+			<p>
+				Si le champ a été <code>touched</code> (donc si on a au moins cliqué dessus) et si le champ est invalide, on affiche le
+				message d'erreur.
+			</p>
+			<p>
+				🔎 Note: pour savoir l'état du champs nous devons utiliser
+				<code>contactForm.get("nomDeLaProprieteDuFormGroup")</code> pour récupérer le <code>FormControl</code> et ensuite avoir
+				accès à son état. <i>Il existe d'autres manières de faire mais c'est à vous de les creusés!</i>
+			</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Validation du formulaire</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Tout comme les champs (<code>FormControl</code>), le <code>FormGroup</code> possède des états pour savoir si le formulaire
+				est valide (ou invalide).
+			</p>
+			<p>Rien de compliqué à utiliser :<code>contactForm.valid</code> ou <code>contactForm.invalid</code></p>
+			<p>
+				Par exemple dans l'HTML on peut désactiver le bouton "Send" tant que le formulaire n'est pas valide:
+				<textarea highlight-js [options]="{}" [lang]="'html'">
+<button type="submit" [disabled]="contactForm.invalid">Send</button>
+				</textarea
+				>
+			</p>
+			<i
+				>🔎 le <code>FormGroup</code> possède d'autres
+				<a href="https://angular.dev/api/forms/FormGroup" target="_blank"> informations intéressante 🚀</a></i
+			>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Récupération des données</h2>
+		</div>
+		<div class="card-body">
+			<p>Une fois que le formulaire est validé, nous pouvons soumettre les données via un Event Binding :</p>
+			<p>Pour récupérer les données, utilisez la propriété value du FormGroup :</p>
+			<p>Dans le fichier TS on va préparer une méthode qui se lancera quand l'évenement <code>submit</code> sera déclencher:</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+onSubmit() {
+  if (this.contactForm.valid) {
+    console.log("Form Submitted!", this.contactForm.value);
+  } else {
+    console.log("Form is invalid");
+  }
+}
+			</textarea
+			>
+			<p>
+				Dansle fichier HTML, nous allié notre méthode à l'évenement <code>ngSubmit</code>:
+				<textarea highlight-js [options]="{}" [lang]="'html'">
+				<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+			</textarea
+				>
+			</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Validator custom</h2>
+		</div>
+		<div class="card-body">
+			<p>Todo</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>FormGroup avancé</h2>
+		</div>
+		<div class="card-body">
+			<p>Todo</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Form Array</h2>
+		</div>
+		<div class="card-body">
+			<p>Todo</p>
+		</div>
+	</article>
+</section>

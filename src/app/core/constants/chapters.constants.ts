@@ -90,10 +90,6 @@ export class Courses {
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 		{
-			name: ChapterName.Signal,
-			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
-		},
-		{
 			name: ChapterName.Formulaire,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
@@ -123,6 +119,10 @@ export class Courses {
 		},
 		{
 			name: ChapterName.Interceptor,
+			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
+		},
+		{
+			name: ChapterName.Signal,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 		{
