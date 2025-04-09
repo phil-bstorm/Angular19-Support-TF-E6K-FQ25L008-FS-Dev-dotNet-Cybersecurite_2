@@ -66,7 +66,7 @@ export class DemoFormulaireComponent {
 
 	<article class="card">
 		<div class="card-header">
-			<h2>FormGroup (base)</h2>
+			<h2>FormGroup</h2>
 		</div>
 		<div class="card-body">
 			<p>
@@ -270,28 +270,10 @@ onSubmit() {
 			<p>
 				Dansle fichier HTML, nous allié notre méthode à l'évenement <code>ngSubmit</code>:
 				<textarea highlight-js [options]="{}" [lang]="'html'">
-				<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-			</textarea
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+				</textarea
 				>
 			</p>
-		</div>
-	</article>
-
-	<article class="card">
-		<div class="card-header">
-			<h2>Validator custom</h2>
-		</div>
-		<div class="card-body">
-			<p>Todo</p>
-		</div>
-	</article>
-
-	<article class="card">
-		<div class="card-header">
-			<h2>FormGroup avancé</h2>
-		</div>
-		<div class="card-body">
-			<p>Todo</p>
 		</div>
 	</article>
 
@@ -300,7 +282,127 @@ onSubmit() {
 			<h2>Form Array</h2>
 		</div>
 		<div class="card-body">
-			<p>Todo</p>
+			<p>
+				Le type <code>FormArray</code> représente une collection de FormControl et permet de gérer dynamiquement des contrôles de
+				formulaire. Vous pouvez l'utiliser si vous ne connaissez pas à l'avance le nombre de contrôles.
+			</p>
+
+			<h3>Mise en place dans le fichier TS</h3>
+			<ol>
+				<li>
+					<p>
+						<strong>Préparation du FormArray</strong>: on va commencer par instantier le <code>FormArray</code> et l'assigner au
+						formulaire
+					</p>
+					<textarea highlight-js [options]="{}" [lang]="'typescript'">
+// addreses du formulaire de contact
+addresses = this._fb.array([ // 1. instantion du FormArray
+  this._fb.group({
+    street: ["", [Validators.required]],
+    city: ["", [Validators.required]],
+  }),
+]);
+
+contactForm = this._fb.group({
+  email: new FormControl("", [Validators.required, Validators.email]),
+  firstName: this._fb.control("", [
+    Validators.required,
+    Validators.minLength(2),
+  ]),
+  lastName: ["", [Validators.required, Validators.minLength(2)]],
+  addresses: this.addresses, // 2. ajout du FormArray au FormGroup
+});
+					</textarea
+					>
+				</li>
+				<li>
+					<p>
+						<strong>Ajout d'un FormGroup</strong>: on va créer une méthode qui va nous permettre d'ajouter un
+						<code>FormGroup</code> dans le <code>FormArray</code>
+					</p>
+					<textarea highlight-js [options]="{}" [lang]="'typescript'">
+addAddress() {
+  this.addresses.push(
+    this._fb.group({
+      street: ["", [Validators.required]],
+      city: ["", [Validators.required]],
+    }),
+  );
+}
+					</textarea
+					>
+				</li>
+
+				<li>
+					<p>
+						<strong>Suppression d'un FormGroup</strong>: on va créer une méthode qui va nous permettre de supprimer un
+						<code>FormGroup</code> dans le <code>FormArray</code>
+					</p>
+					<textarea highlight-js [options]="{}" [lang]="'typescript'">
+removeAddress(index: number) {
+  if (index > 0) {
+    this.addresses.removeAt(index);
+  }
+}
+					</textarea
+					>
+				</li>
+
+				<li>
+					<p><strong>Utilisation du FormArray dans l'HTML</strong>: en rajoutant dans la balise <code>form</code> existante:</p>
+					<textarea highlight-js [options]="{}" [lang]="'html'">
+  @for (address of addresses.controls; track $index) {
+    <div [formGroup]="address">
+      <div>
+        <label for="street">Street:</label>
+        <input id="street" type="text" formControlName="street" placeholder="Street" />
+        @if (address.get("street")?.touched && !address.get("street")?.valid) {
+          <p class="error">The street is required!</p>
+        }
+      </div>
+      <div>
+        <label for="city">City:</label>
+        <input id="city" type="text" formControlName="city" placeholder="City" />
+        @if (address.get("city")?.touched && !address.get("city")?.valid) {
+          <p class="error">The city is required!</p>
+        }
+      </div>
+      @if ($index > 0) {
+        <button type="button" (click)="removeAddress($index)">Remove</button>
+      }
+    </div>
+  }
+<button type="button" (click)="addAddress()">Add Address</button>
+  					</textarea
+					>
+					<p>🔎Analyse du code:</p>
+					<ul>
+						<li>
+							On va faire une boucle sur les controleur de la variable <code>addresses</code> qui est un
+							<code>FormArray</code>.
+						</li>
+						<li>
+							Étant donné que <code>addresses</code> est un tableau de <code>FormGroup</code>, on va utiliser
+							<code>formGroup</code> pour lier chaque <code>FormGroup</code> à un <code>div</code>.
+						</li>
+						<li>
+							On va ajouter chaque <code>input</code> pour chacune des propriétés du <code>FormGroup</code> (comme si c'était
+							un champ normal)
+						</li>
+						<li>On va rajouter un bouton pour supprimer le <code>FormGroup</code> en question</li>
+						<li>On va rajouter un bouton pour ajouter un nouveau <code>FormGroup</code> à la fin du tableau</li>
+					</ul>
+				</li>
+			</ol>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Validator custom</h2>
+		</div>
+		<div class="card-body">
+			<p>TODO</p>
 		</div>
 	</article>
 </section>

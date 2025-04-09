@@ -23,6 +23,30 @@
 				<p class="error">The lastName is required!</p>
 			}
 		</div>
+
+		@for (address of addresses.controls; track $index) {
+			<div [formGroup]="address">
+				<div>
+					<label for="street">Street:</label>
+					<input id="street" type="text" formControlName="street" placeholder="Street" />
+					@if (address.get("street")?.touched && !address.get("street")?.valid) {
+						<p class="error">The street is required!</p>
+					}
+				</div>
+				<div>
+					<label for="city">City:</label>
+					<input id="city" type="text" formControlName="city" placeholder="City" />
+					@if (address.get("city")?.touched && !address.get("city")?.valid) {
+						<p class="error">The city is required!</p>
+					}
+				</div>
+				@if ($index > 0) {
+					<button type="button" (click)="removeAddress($index)">Remove</button>
+				}
+			</div>
+		}
+		<button type="button" (click)="addAddress()">Add Address</button>
+		<br />
 		<button type="submit" [disabled]="contactForm.invalid">Send</button>
 	</form>
 </div>
