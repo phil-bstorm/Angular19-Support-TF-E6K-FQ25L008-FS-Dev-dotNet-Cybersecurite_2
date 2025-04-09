@@ -6,6 +6,7 @@ import {
 	Validators,
 } from "@angular/forms";
 import {DemoHeaderComponent} from "@app/features/demo/components/layout/demo-header/demo-header.component";
+import {insultsValidator} from "@app/features/demo/pages/demo-formulaire/validator-custom/insults.validator";
 
 @Component({
 	selector: "demo-formulaire",
@@ -24,12 +25,21 @@ export class DemoFormulaireComponent {
 		}),
 	]);
 
+	private tableauInsultes = [
+		"insulte1",
+		"insulte2",
+		"insulte3",
+		"insulte4",
+		"insulte5",
+	];
+
 	// formulaire de contact
 	contactForm = this._fb.group({
 		email: new FormControl("", [Validators.required, Validators.email]),
 		firstName: this._fb.control("", [
 			Validators.required,
 			Validators.minLength(2),
+			insultsValidator(this.tableauInsultes),
 		]),
 		lastName: ["", [Validators.required, Validators.minLength(2)]],
 		addresses: this.addresses,

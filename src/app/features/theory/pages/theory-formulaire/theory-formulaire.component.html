@@ -402,7 +402,72 @@ removeAddress(index: number) {
 			<h2>Validator custom</h2>
 		</div>
 		<div class="card-body">
-			<p>TODO</p>
+			<p>
+				Un validateur personnalisé est une fonction qui permet de valider un champ de formulaire en fonction de règles spécifiques.
+				Il peut être utilisé pour valider des champs de formulaire en fonction de critères personnalisés.
+			</p>
+			<p>
+				Pour créer un validateur personnalisé, nous devons créer une fonction qui retourne un objet contenant les erreurs de
+				validations. Si le champ est valide, la fonction doit retourner <code>null</code>.
+			</p>
+			<h3>Création du fichier</h3>
+			<p>
+				Il n'existe pas de commande pour créer directement un validateur personnalisé, on va donc devoir créer le fichier à la main.
+				<br />
+				<i>
+					Dans cet exemple, je vais créer un validateur pour vérifier la chaine de caractere entrée n'est pas une insulte. <br />
+					<i> Je crée un fichier <code>insults.validator.ts</code> dans le dossier <code>validators</code> </i>
+				</i>
+			</p>
+			<h3>Implémentation</h3>
+			<p>Voici un exemple de validateur personnalisé qui vérifie si la valeur d'un champ de formulaire est une insulte:</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+				import {ValidatorFn} from "@angular/forms";
+
+/**
+ * Validator function to check if the input value is in the list of insults.
+ * @param tableauInsultes - Array of insults to check against.
+ * @returns A validator function that checks if the input value is in the list of insults.
+ */
+export function insultsValidator(tableauInsultes: string[]): ValidatorFn {
+  // vérification de l'entrée
+  return control => {
+    const value = control.value;
+    if (value && tableauInsultes.includes(value)) {
+      return {insulte: true};
+    }
+    return null;
+  };
+}
+			</textarea
+			>
+			<h3>Usage</h3>
+			<p>
+				Pour utiliser le validateur personnalisé, nous devons l'importer dans notre composant et l'ajouter au
+				<code>FormControl</code> ou au <code>FormGroup</code>.
+			</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+private tableauInsultes = [ // instanciation de la liste d'insulte
+  "insulte1",
+  "insulte2",
+  "insulte3",
+  "insulte4",
+  "insulte5",
+];
+
+// formulaire de contact
+contactForm = this._fb.group({
+  firstName: this._fb.control("", [
+    Validators.required,
+    Validators.minLength(2),
+    // ajout du validateur (sans oublié son import plus haut dans le fichier)
+    insultsValidator(this.tableauInsultes),
+  ]),
+
+  // autre champs...
+});
+			</textarea
+			>
 		</div>
 	</article>
 </section>
