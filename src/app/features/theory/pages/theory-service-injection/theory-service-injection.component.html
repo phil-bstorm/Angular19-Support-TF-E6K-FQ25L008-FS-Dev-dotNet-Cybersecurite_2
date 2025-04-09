@@ -87,18 +87,81 @@ private readonly _userService = inject(UserService);
 				cette classe peut être injectée dans d'autres classes.
 			</p>
 			<textarea highlight-js [options]="{}" [lang]="'ts'">
-import { Injectable } from '@angular/core';
+import {Injectable, signal} from "@angular/core";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class UserService {
-  constructor() { }
+  constructor() {}
+
+  isConnected = signal(false);
 }
 			</textarea
 			>
 
 			<h3>Analyse</h3>
+			<ul>
+				<li><code>&#64;Injectable()</code> : Indique qu'Angular peut injecter ce service dans d'autres classes.</li>
+				<li>
+					<code>providedIn: 'root'</code> : Indique qu'Angular doit créer une instance unique de ce service pour toute
+					l'application. Cela signifie que le service est disponible dans toute l'application sans avoir besoin de l'ajouter
+					explicitement. (comme on le verra plus tard) <br />
+					<i>🔎 avoir la même instance pour toute l'application s'appel aussi un <code>singleton</code></i>
+				</li>
+				<li>
+					<code>constructor()</code> : Le constructeur est vide, car il n'y a pas de logique d'initialisation nécessaire pour ce
+					service.
+				</li>
+				<li>
+					<code>isConnected</code> : C'est une propriété de type <code>signal</code>, qui est initialisée à <code>false</code>.
+					Cette propriété peut être utilisée pour suivre l'état de connexion d'un utilisateur. <br />
+					<i>🔎 un signal est une variable améliorée, c'est expliqué un peu plus bas!</i>
+				</li>
+			</ul>
+
+			<h3>Injecter un service dans un composant</h3>
+			<p>Comme vu précédement, il y a 2 manières de faire de l'injection de dépendance:</p>
+			<ul>
+				<li>
+					<p>Via constructeur:</p>
+					<textarea highlight-js [options]="{}" [lang]="'ts'">
+constructor(private _userService: UserService) {}
+					</textarea
+					>
+					<ul>
+						<li><code>private</code>, car on ne souhaite pas que puisse être utiliser en dehors de la classe</li>
+						<li>
+							<code>_</code>, la variable commence avec un <code>_</code>, car c'est une convention de commencer les variables
+							privées avec un <code>_</code>
+						</li>
+						<li>
+							<code>: UserService</code>, on précise le type de la variable, ici <code>UserService</code>
+							pour indiquer quel service on souhaite injecter
+						</li>
+					</ul>
+				</li>
+				<li>
+					<p>Depuis la version 14 d'Angular, avec inject <i>(sans oublié l'import de celui-ci)</i></p>
+					<textarea highlight-js [options]="{}" [lang]="'ts'">
+private readonly _userService = inject(UserService);
+					</textarea
+					>
+					<ul>
+						<li><code>private</code>, car on ne souhaite pas que puisse être utiliser en dehors de la classe</li>
+						<li><code>readonly</code> pour indiquer que la variable ne peut pas être modifiée après son initialisation</li>
+						<li>
+							<code>_</code>, la variable commence avec un <code>_</code>, car c'est une convention de commencer les variables
+							privées avec un <code>_</code>
+						</li>
+						<li><code>inject</code> permet d'injecter le service sans passer par le constructeur</li>
+						<li>
+							<code>UserService</code>, on précise le type de la variable, ici <code>UserService</code>
+							pour indiquer quel service on souhaite injecter
+						</li>
+					</ul>
+				</li>
+			</ul>
 		</div>
 	</article>
 </section>
