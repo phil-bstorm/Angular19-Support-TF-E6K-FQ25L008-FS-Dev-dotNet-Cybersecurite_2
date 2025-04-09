@@ -1,1 +1,11 @@
 <demo-header chapterName="Service et Injection de dépendance" />
+<section class="card-body">
+	@if (isUserConnected()) {
+		<p>🟢 mon user est connecté!</p>
+	} @else {
+		<p>🔴 mon user n'est pas connecté...</p>
+	}
+	<button class="btn" [ngClass]="{'btn-primary': !isUserConnected(), 'btn-warning': isUserConnected()}" (click)="updateIsconencted()">
+		{{ isUserConnected() ? "Déconnexion" : "Connexion" }}
+	</button>
+</section>

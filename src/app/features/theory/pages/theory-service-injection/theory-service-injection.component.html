@@ -164,4 +164,101 @@ private readonly _userService = inject(UserService);
 			</ul>
 		</div>
 	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Introduction <code>Signal</code></h2>
+		</div>
+		<div>
+			<div class="card-body">
+				<p>
+					Un <strong>signal</strong> est une variable améliorée qui permet de suivre les changements d'état. Il est utilisé pour
+					réagir aux modifications de données et mettre à jour l'interface utilisateur en conséquence.
+				</p>
+				<p>
+					Un signal est créé avec la fonction <code>signal()</code>, et il peut être utilisé pour stocker des valeurs dynamiques.
+					Lorsqu'un signal change, Angular met automatiquement à jour les composants qui l'utilisent.
+				</p>
+				<p>
+					Par exemple, si vous avez un signal <code>isConnected</code>, vous pouvez l'utiliser pour afficher ou masquer des
+					boutons en fonction de l'état de connexion de l'utilisateur.
+				</p>
+				<p>
+					Pour placer une valeur lors de son instanciation:
+					<textarea highlight-js [options]="{}" [lang]="'ts'">
+isConnected = signal(false);
+				</textarea
+					>
+				</p>
+
+				<p>
+					Pour modifier sa valeur:
+					<textarea highlight-js [options]="{}" [lang]="'ts'">
+isConnected.set(true);
+				</textarea
+					>
+				</p>
+
+				<p>
+					Pour utiliser sa valeur, on va rajotuer des parenthèses à notre signal:
+					<textarea highlight-js [options]="{}" [lang]="'ts'">
+if( isConnected() ){
+  console.log("L'utilisateur est connecté!"
+}
+				</textarea
+					>
+				</p>
+
+				<i>🔎 il est possible de faire encore bien plus de chose avec des signals mais on verra ça plus tard!</i>
+			</div>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Les différents types d'injection</h2>
+		</div>
+		<div class="card-body">
+			<p>Il existe 3 types d'injections:</p>
+			<ul>
+				<li>
+					<strong>Singleton</strong>: <i>Tout le monde partage la même instance</i>, pour créer un service singleton, on va
+					rajouter <code>providedIn: "root"</code> dans le décorateur <code>&#64;Injectable()</code>.
+					<textarea highlight-js [options]="{}" [lang]="'ts'">
+@Injectable({
+  providedIn: "root",
+})
+				</textarea
+					>
+				</li>
+				<li>
+					<strong>Composant</strong>: <i>Chaque composant a sa propre instance</i>, pour créer un service de composant, on va le
+					rajouter dans les <code>prodviders</code> du composant.
+					<textarea highlight-js [options]="{}" [lang]="'ts'">
+@Component({
+  selector: 'hero-list',
+  template: '...',
+  providers: [HeroService]
+})
+					</textarea
+					>
+				</li>
+				<li>
+					<strong>Route</strong>: <i>Chaque route a sa propre instance</i>, pour créer un service de route, on va le rajouter dans
+					les <code>prodviders</code> de la route.
+					<textarea highlight-js [options]="{}" [lang]="'ts'">
+{
+  path: "/book",
+  providers: [BookService]
+  loadComponent: () =>
+    import(
+    "@app/features/book/pages/book-index/book-index.component"
+    ).then(c => c.BookIndexComponent),
+},
+					</textarea
+					>
+				</li>
+			</ul>
+		</div>
+	</article>
 </section>
