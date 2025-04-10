@@ -7,7 +7,7 @@
 				'btn-secondary': previousChapter() == null,
 				disabled: previousChapter() == null,
 			}"
-			[routerLink]="['/', currentCategory(), previousChapter()]"
+			[routerLink]="['/', NAV_THEORY, previousChapter()]"
 		>
 			{{ previousChapter() != null ? previousChapterName() : "⛔" }}⬅️
 		</a>
@@ -64,7 +64,7 @@
 				'btn-secondary': nextChapter() == null,
 				disabled: nextChapter() == null,
 			}"
-			[routerLink]="['/', currentCategory(), nextChapter()]"
+			[routerLink]="['/', NAV_THEORY, nextChapter()]"
 		>
 			{{ nextChapter() != null ? nextChapterName() : "⛔" }}➡️
 		</a>

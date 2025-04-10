@@ -61,62 +61,32 @@ export class ChapterNavigationService {
 	}
 
 	private checkPreviousChapter(): {chap: Chapter; index: number} | null {
-		const currCategory = this.currentCategory();
 		const currIndex = this.currentIndex();
 
-		// if we don't have a current category or index, we can't determine if there is a previous chapter
-		if (currCategory == null || currIndex == null) {
+		if (!currIndex) {
 			return null;
-		}
-
-		// if we are at the first chapter, there is no previous chapter
-		let found: Chapter | null = null;
-		let foundIndex: number | null = null;
-		for (let i = currIndex - 1; i >= 0 && found == null; i--) {
-			if (CoursesInstance.chapterOrder[i].has.includes(currCategory)) {
-				found = CoursesInstance.chapterOrder[i];
-				foundIndex = i;
-			}
-		}
-
-		if (found !== null && foundIndex !== null) {
+		} else if (currIndex <= 0) {
+			return null;
+		} else {
 			return {
-				chap: found,
-				index: foundIndex,
+				chap: CoursesInstance.chapterOrder[currIndex - 1],
+				index: currIndex - 1,
 			};
 		}
-		return null;
 	}
 
 	private checkNextChapter(): {chap: Chapter; index: number} | null {
-		const currCategory = this.currentCategory();
 		const currIndex = this.currentIndex();
 
-		// if we don't have a current category or index, we can't determine if there is a next chapter
-		if (currCategory == null || currIndex == null) {
+		if (currIndex == null) {
 			return null;
-		}
-
-		// if we are at the last chapter, there is no next chapter
-		let found: Chapter | null = null;
-		let foundIndex: number | null = null;
-		for (
-			let i = currIndex + 1;
-			i < CoursesInstance.chapterOrder.length && found == null;
-			i++
-		) {
-			if (CoursesInstance.chapterOrder[i].has.includes(currCategory)) {
-				found = CoursesInstance.chapterOrder[i];
-				foundIndex = i;
-			}
-		}
-
-		if (found !== null && foundIndex !== null) {
+		} else if (currIndex >= CoursesInstance.chapterOrder.length - 1) {
+			return null;
+		} else {
 			return {
-				chap: found,
-				index: foundIndex,
+				chap: CoursesInstance.chapterOrder[currIndex + 1],
+				index: currIndex + 1,
 			};
 		}
-		return null;
 	}
 }
