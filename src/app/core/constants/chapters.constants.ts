@@ -102,15 +102,15 @@ export class Courses {
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 		{
-			name: ChapterName.Storage,
-			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
-		},
-		{
 			name: ChapterName.Observable,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 		{
 			name: ChapterName.HttpClient,
+			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
+		},
+		{
+			name: ChapterName.Storage,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 		{
