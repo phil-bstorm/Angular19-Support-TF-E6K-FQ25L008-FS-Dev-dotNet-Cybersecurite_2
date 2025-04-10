@@ -5,8 +5,9 @@
 	</div>
 	<hr />
 	<div>
-		<p>Redirection avec paramètre dans la route:</p>
-		<button (click)="onButtonClick('banana')">Banana</button>
-		<button (click)="onButtonClick('')">default</button>
+		<p>Redirection avec paramètre dans la route: {{ valueFromRoute }}</p>
+		<button (click)="onButtonNavigationParam('banana')">Navigation param: Banana</button>
+		<button (click)="onButtonQueryParam()">Query param</button>
+		<button (click)="onButtonNavigationParam('')">default</button>
 	</div>
 </div>

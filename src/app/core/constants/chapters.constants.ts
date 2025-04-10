@@ -95,7 +95,7 @@ export class Courses {
 		},
 		{
 			name: ChapterName.Navigation,
-			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
+			has: [ChapterTDE.theory, ChapterTDE.demo],
 		},
 		{
 			name: ChapterName.Guard,

@@ -46,23 +46,28 @@
 			<h3>Composant</h3>
 			<p>Pour récupérer le paramètre, nous utilisons le serivce <code>ActivatedRoute</code>:</p>
 			<textarea highlight-js [options]="{}" [lang]="'typescript'">
-import {Component, inject} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, inject} from "@angular/core";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'app-book-detail',
-  templateUrl: './book-detail.component.html',
-  styleUrl: './book-detail.component.scss',
+  selector: "app-book-detail",
+  templateUrl: "./book-detail.component.html",
+  styleUrl: "./book-detail.component.scss",
 })
 export class BookDetailComponent {
   private readonly _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 
-  constructor() {
-    let id = this._activatedRoute.snapshot.params['id']; // params['id'] doit correspondre au nom du paramètre dans la route
-    console.log("Id du livre: ", id);
+  valueFromRoute: string | null = null;
+
+  ngOnInit() {
+    this._activatedRoute.params.subscribe({
+      next: params => {
+        this.valueFromRoute = params["id"];
+      },
+    });
   }
 }
-			</textarea
+  			</textarea
 			>
 		</div>
 	</article>
@@ -73,9 +78,48 @@ export class BookDetailComponent {
 		</div>
 		<div class="card-body">
 			<p>
-				Si nous souhaitons obtenir des informations sur la route actuelle, nous pouvons utiliser le service
-				<code>ActivatedRoute</code>.
+				Il est aussi possible de passer des paramètres dans l'url, par exemple:
+				<code>http://localhost:4200/demo/14?author=J.%20K.%20Rowling&hello=world</code>.
 			</p>
+			<p>Ce qui permet de stocker un objet <code>&#123;"author":"J. K. Rowling","hello":"world"&#125;</code></p>
+			<h3>Pour stocker des informations dans l'URL</h3>
+			<p>Lors de la redirection, nous rajoutons un objet après le tableau du <code>path</code>:</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+this._router.navigate(["/", "demo", "14"],
+{ // options supplémentaires pour la redirection
+  queryParams: {author: "J. K. Rowling", hello: "world"}, // parametre dans l'URL
+});
+			</textarea
+			>
+			<h3>Récupérer les informations</h3>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Component, inject} from "@angular/core";
+import {ActivatedRoute} from "@angular/router";
+
+@Component({
+  selector: "app-book-detail",
+  templateUrl: "./book-detail.component.html",
+  styleUrl: "./book-detail.component.scss",
+})
+export class BookDetailComponent {
+  private readonly _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+
+  valueFromRoute: string | null = null;
+
+  ngOnInit() {
+    this._activatedRoute.queryParams.subscribe({
+      next: params => {
+        const str = JSON.stringify(params);
+        if (str.length > 2) {
+          // plus grand que 2 car "{}" est le minimum
+          this.valueFromRoute = JSON.stringify(params);
+        }
+      },
+    });
+  }
+}
+			</textarea
+			>
 		</div>
 	</article>
 
@@ -84,23 +128,29 @@ export class BookDetailComponent {
 			<h2>Évenements</h2>
 		</div>
 		<div class="card-body">
-			<!--
-NavigationStart
-RoutesRecognized
-GuardsCheckStart
-ChildActivationStart
-ActivationStart
-GuardsCheckEnd
-ResolveStart
-ResolveEnd
-ActivationEnd
-ChildActivationEnd
-ActivationEnd
-ChildActivationEnd
-NavigationEnd
-Scroll
--->
-			<p>TODO</p>
+			<p>Lorsqu'on navigue dans l'application et qu'on passe d'un composant à l'autre, nous traversons une série d'évenements:</p>
+			<ul>
+				<li><code>NavigationStart</code>: l'utilisateur a cliqué sur un lien et la navigation commence.</li>
+				<li><code>RoutesRecognized</code>: les routes ont été reconnues et le composant correspondant a été trouvé.</li>
+				<li><code>GuardsCheckStart</code>: les gardes de route commencent à être vérifiés.</li>
+				<li><code>ChildActivationStart</code>: le composant enfant commence à être activé.</li>
+				<li><code>ActivationStart</code>: le composant commence à être activé.</li>
+				<li><code>GuardsCheckEnd</code>: les gardes de route ont été vérifiés avec succès.</li>
+				<li><code>ResolveStart</code>: la résolution des données commence.</li>
+				<li><code>ResolveEnd</code>: la résolution des données est terminée.</li>
+				<li><code>ActivationEnd</code>: le composant est activé avec succès.</li>
+				<li><code>ChildActivationEnd</code>: le composant enfant est activé avec succès.</li>
+				<li><code>NavigationEnd</code>: la navigation est terminée avec succès.</li>
+			</ul>
+			<p>Nous pouvons écouter ces évenements en utilisant le service <code>Router</code>:</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+this._router.events.subscribe({
+  next: event => {
+    console.log(event);
+  },
+});
+			</textarea
+			>
 		</div>
 	</article>
 </section>

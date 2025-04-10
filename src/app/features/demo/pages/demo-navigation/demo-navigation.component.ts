@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from "@angular/core";
+import {Component, inject, OnDestroy, OnInit} from "@angular/core";
 import {DemoHeaderComponent} from "@app/features/demo/components/layout/demo-header/demo-header.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs";
@@ -9,36 +9,64 @@ import {Subscription} from "rxjs";
 	templateUrl: "./demo-navigation.component.html",
 	styleUrl: "./demo-navigation.component.scss",
 })
-export class DemoNavigationComponent implements OnInit {
+export class DemoNavigationComponent implements OnInit, OnDestroy {
 	private readonly _router = inject(Router);
-	private readonly activatedRoute = inject(ActivatedRoute);
+	private readonly _activatedRoute = inject(ActivatedRoute);
 
-	constructor() {
-		console.log("DemoNavigationComponent constructor");
-	}
+	valueFromRoute: string | null = null;
 
-	sub: Subscription | null = null;
+	subscriptions: Subscription[] = [];
 
 	ngOnInit() {
-		console.log("DemoNavigationComponent ngOnInit");
-		// Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
-		this.sub = this._router.events.subscribe({
-			next: event => {
-				console.log(event);
-			},
-		});
+		this.subscriptions.push(
+			this._activatedRoute.params.subscribe({
+				next: params => {
+					this.valueFromRoute = params["text"];
+				},
+			}),
+		);
+
+		this.subscriptions.push(
+			this._activatedRoute.queryParams.subscribe({
+				next: params => {
+					const str = JSON.stringify(params);
+					if (str.length > 2) {
+						// plus grand que 2 car "{}" est le minimum
+						this.valueFromRoute = JSON.stringify(params);
+					}
+				},
+			}),
+		);
+
+		this.subscriptions.push(
+			this._router.events.subscribe({
+				next: event => {
+					console.log(event);
+				},
+			}),
+		);
 	}
 
 	ngOnDestroy() {
-		console.log("DemoNavigationComponent ngOnDestroy");
-		this.sub?.unsubscribe();
+		this.subscriptions.forEach(sub => sub.unsubscribe());
 	}
 
 	onRedirectToTheory() {
 		this._router.navigate(["/", "theory", "14"]);
 	}
 
-	onButtonClick(text: string) {
-		this._router.navigate(["/", "demo", "14", text]);
+	onButtonNavigationParam(text: string) {
+		const path = ["/", "demo", "14"];
+		if (text) {
+			path.push(text);
+		}
+
+		this._router.navigate(path);
+	}
+
+	onButtonQueryParam() {
+		this._router.navigate(["/", "demo", "14"], {
+			queryParams: {author: "J. K. Rowling", hello: "world"},
+		});
 	}
 }

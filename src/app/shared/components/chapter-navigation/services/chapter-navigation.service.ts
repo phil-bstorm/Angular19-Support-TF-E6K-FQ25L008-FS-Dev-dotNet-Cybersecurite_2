@@ -36,6 +36,9 @@ export class ChapterNavigationService {
 			this.currentCategory.set(
 				ChapterTDE[category as keyof typeof ChapterTDE],
 			);
+
+			url[2] = url[2].split("?")[0]; // remove query params
+
 			const currIndex = Number(url[2]);
 			this.currentIndex.set(currIndex);
 
