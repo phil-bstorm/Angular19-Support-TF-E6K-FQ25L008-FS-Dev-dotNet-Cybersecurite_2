@@ -1,5 +1,6 @@
-import {Component} from "@angular/core";
+import {Component, inject} from "@angular/core";
 import {DemoHeaderComponent} from "@app/features/demo/components/layout/demo-header/demo-header.component";
+import {UserService} from "@app/features/demo/pages/demo-service-injection/services/user.service";
 
 @Component({
 	selector: "demo-guard",

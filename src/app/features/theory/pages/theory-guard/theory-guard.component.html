@@ -1,1 +1,171 @@
 <theory-header chapterName="Guard" />
+<section class="card-body">
+	<article class="card">
+		<div class="card-header">
+			<h2>Qu'est ce qu'un <code>Guards</code>?</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Un <code>Guard</code> est une fonction qui permet de protéger une route. Il permet de savoir si oui ou non, on peut accéder
+				à un composant. Il est utilisé pour protéger les routes et les composants d'une application Angular.
+			</p>
+		</div>
+	</article>
+	<article class="card">
+		<div class="card-header">
+			<h2>Can Activate</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Le <code>CanActivate</code> guard est utilisé pour protéger les routes. Il permet de déterminer si une route peut être
+				activée ou non en fonction de certaines conditions. Par exemple, vous pouvez utiliser le <code>CanActivate</code> guard pour
+				vérifier si un utilisateur est authentifié avant de lui permettre d'accéder à une page protégée.
+			</p>
+			<i
+				>🔎Note: il existe aussi <code>CanActivateChild</code> qui permet de savoir si on accès au sous-route charger par un
+				<code>LoadChildren</code></i
+			>
+			<p><a href="https://angular.dev/api/router/CanActivateFn" target="_blank">Doc 🔎</a></p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Can Deactivate</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Le <code>CanDeactivate</code> guard est utilisé pour protéger les routes. Il permet de déterminer si une route peut être
+				désactivée ou non en fonction de certaines conditions. Par exemple, vous pouvez utiliser le <code>CanDeactivate</code> guard
+				pour vérifier si un utilisateur a enregistré ses modifications avant de lui permettre de quitter une page.
+			</p>
+			<p><a href="https://angular.dev/api/router/CanDeactivateFn" target="_blank">Doc 🔎</a></p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Can Match</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Le <code>CanMatch</code> guard est utilisé pour protéger les routes. Il permet de déterminer si une route peut être activée
+				ou non en fonction de certaines conditions. Par exemple, vous pouvez utiliser le <code>CanMatch</code> guard pour vérifier
+				si un utilisateur a accès à une page en fonction de son rôle.
+			</p>
+			<p><a href="https://angular.dev/api/router/CanMatchFn" target="_blank">Doc 🔎</a></p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Création d'un <code>Guard</code></h2>
+		</div>
+		<div class="card-body">
+			<ol>
+				<li>
+					<strong>Génération du fichier</strong>: Pour créer un guard, il faut utiliser la commande: <br />
+					<code>ng g g /mon/chemin</code> <br />
+					ou <code>ng generate guard</code>
+				</li>
+				<li>
+					<strong>Choix du type de <code>Guard</code></strong
+					>: Un menu va apparaitre pour vous demander quel type de guard vous souhaitez créer:
+					<textarea highlight-js [options]="{}" [lang]="'bash'">
+>> ng g g .\features\demo\pages\demo-guard\guards\IsConnected
+
+? Which type of guard would you like to create? (Press <space> to select, <a> to toggle all, <i> to invert selection, and <enter> to proceed)
+❯◯ CanActivate
+ ◯ CanActivateChild
+ ◯ CanDeactivate
+ ◯ CanMatch
+					</textarea
+					>
+					Sélectionnes le type de guard avec les flèches <kbd>⬆️</kbd> et <kbd>⬇️</kbd>, utilises <kbd>espace</kbd> pour
+					sélectionner et appuyes sur <kbd>entrée</kbd> pour valider
+				</li>
+				<li>
+					<strong>Analyse du fichier</strong>:
+					<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {CanActivateFn} from "@angular/router";
+
+export const isConnectedGuard: CanActivateFn = (route, state) => {
+  return true;
+};
+					</textarea
+					>
+					<ul>
+						<li>
+							<code>import &#123;CanActivateFn&#125; from "&#64;angular/router";</code>
+							<ul>
+								<li>Importation de la fonction <code>CanActivateFn</code></li>
+							</ul>
+						</li>
+						<li>
+							<code>export const isConnectedGuard: CanActivateFn = (route, state) => &#123;&#125;</code>
+							<ul>
+								<li>Création de la fonction <code>isConnectedGuard</code></li>
+								<li>Cette fonction est de type <code>CanActivateFn</code></li>
+								<li>Elle prend en paramètre <code>route</code> et <code>state</code></li>
+								<li>Elle retourne un boolean (qui indique si oui ou non, on peut accèder au composant)</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					<strong>Implémentation du guard</strong>: Injection du <code>UserService</code> de la démo sur les injections de
+					dépendance pour savoir si notre user est connecté et s'il n'est pas connecté, on le redirige vers la page de connexion
+					(ici la page de connection n'existe pas donc on le redirige vers la démo pour l'instant)
+					<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {CanActivateFn, Router} from "@angular/router";
+import {inject} from "@angular/core";
+import {UserService} from "@app/features/demo/pages/demo-service-injection/services/user.service";
+import {ChapterName, CoursesInstance} from "@core/constants/chapters.constants";
+
+export const isConnectedGuard: CanActivateFn = (route, state) => {
+  const userService = inject(UserService);
+  const router = inject(Router);
+
+  if (userService.isConnected()) {
+    return true; // l'utilisateur est connecté, on autorise l'accès
+  } else {
+    // l'utilisateur n'est pas connecté, on redirige vers la page de connexion
+    router.navigate([
+      // (ce projet n'a pas depage de connection donc on le redirige vers la démo pour l'instant)
+      "/",
+      "demo",
+      CoursesInstance.getChapterId(ChapterName.ServiceInjection),
+    ]);
+    return false; // on bloque l'accès
+  }
+};
+				</textarea
+					>
+				</li>
+				<li>
+					<strong>Ajout du guard dans le routing</strong>: Il faut ajouter le guard dans le routing de la page que l'on veut
+					protéger <br />
+					<i><abbr title="src/app/features/demo/pages/demo-guard/demo-guard.routes.ts">(Fichier démo)</abbr></i>
+					<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Routes} from "@angular/router";
+import {isConnectedGuard} from "@app/features/demo/pages/demo-guard/guards/is-connected.guard";
+
+export const routes: Routes = [
+  {
+    path: "",
+    canActivate: [isConnectedGuard], // on ajoute une propriété avec le type du guard et on lui donne la valeur du guard
+    loadComponent: () =>
+      import(
+        "@app/features/demo/pages/demo-guard/demo-guard.component"
+      ).then(c => c.DemoGuardComponent),
+  },
+];
+					</textarea
+					>
+				</li>
+				<li>Va dans la démo pour tester le guard!</li>
+			</ol>
+		</div>
+	</article>
+</section>

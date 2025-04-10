@@ -108,10 +108,10 @@ export const routes: Routes = [
 	},
 	{
 		path: CoursesInstance.getChapterId(ChapterName.Guard).toString(),
-		loadComponent: () =>
+		loadChildren: () =>
 			import(
-				"@app/features/demo/pages/demo-guard/demo-guard.component"
-			).then(c => c.DemoGuardComponent),
+				"@app/features/demo/pages/demo-guard/demo-guard.routes"
+			).then(r => r.routes),
 	},
 	{
 		path: CoursesInstance.getChapterId(ChapterName.Storage).toString(),
