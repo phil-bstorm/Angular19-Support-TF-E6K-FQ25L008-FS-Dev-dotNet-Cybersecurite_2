@@ -1,1 +1,52 @@
 <exercise-header chapterName="Guard" />
+<section class="card-body">
+	<p><strong>Objectif</strong>: créer un petit formulaire, un guard et 2 pages</p>
+	<article class="card">
+		<div class="card-header">
+			<h2>Mot de passe?</h2>
+		</div>
+		<div class="card-body">
+			<img id="imgRepresentation" [src]="imgUrlRepresentation" alt="Image de la représentation" />
+			<p>
+				Crée un formulaire avec un seul champ (mot de passe). Si le mot de passe donner par le formulaire correspond à celui dans le
+				guard, vous pourrez accéder à la page sinon vous serez rediriger vers l'autre page.
+			</p>
+
+			<p>
+				Le composant de accueillant le formulaire est déja créer,
+				<abbr title="src/app/features/exercise/pages/exercise-guard/pages/entree/">ici</abbr> et est déjà appeler plus bas dans ce
+				code.
+			</p>
+
+			<p>
+				Resultat :
+				<spoil><img id="imgResultat" [src]="imgUrlResult" alt="Resultat" /></spoil>
+			</p>
+
+			<h3>Indices:</h3>
+			<ul>
+				<li>
+					Indice 1:
+					<spoil
+						><p>
+							N'oublie pas de faire le routing dans le fichier
+							<code>src/app/features/exercise/pages/exercise-guard/exercise-guard.routes.ts</code>
+						</p></spoil
+					>
+				</li>
+				<li>
+					Indice 2:
+					<spoil><p>Passe par un service pour stocker les informations du formulaire et les récupéres dans le guard</p></spoil>
+				</li>
+
+				<li>
+					Incide 3 (structure du projet):
+					<spoil><img [src]="imgUrlStructure" alt="Structure de fichiers" /></spoil>
+				</li>
+			</ul>
+		</div>
+	</article>
+
+	<h3>Résultat</h3>
+	<entree />
+</section>
