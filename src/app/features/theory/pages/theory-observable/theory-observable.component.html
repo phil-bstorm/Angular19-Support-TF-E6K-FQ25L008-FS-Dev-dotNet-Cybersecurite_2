@@ -1,1 +1,226 @@
 <theory-header chapterName="Observable" />
+<section class="card-body">
+	<article class="card">
+		<div class="card-header">
+			<h2>Introduction</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Les <code>Observable</code> sont des objets qui permettent de gérer des flux de données asynchrones. Ils sont au cœur de la
+				programmation réactive et sont utilisés pour gérer des événements, des requêtes HTTP, des timers, etc.
+				<br />
+				Un <code>Observable</code> peut émettre plusieurs valeurs au fil du temps, contrairement à une <code>Promise</code>
+				qui ne peut en émettre qu'une seule.
+			</p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Qu'est-ce que le pattern Observer ?</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Les <code>Observables</code> suivent le pattern Observer. Dans ce pattern, un Observable (la source) émet des notifications,
+				et un ou plusieurs Observers (les observateurs) "souscrivent" pour écouter et réagir à ces notifications.
+			</p>
+			<hr />
+			<p>Concepts clés:</p>
+			<ul>
+				<li><strong>Observable</strong>: La source des données, qui émet des notifications.</li>
+				<li><strong>Observer</strong>: L'entité qui écoute et réagit aux données émises par l'Observable.</li>
+				<li><strong>Subscription</strong>: L'acte de s'abonner à un Observable pour recevoir ses notifications.</li>
+			</ul>
+			<hr />
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Création d'un Observable</h2>
+		</div>
+		<div class="card-body">
+			<p>Exemple d'un service qui envoie un événement chaque seconde:</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Injectable} from "@angular/core";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
+
+@Injectable({
+  providedIn: "root",
+})
+export class ClockService {
+  getClock(): Observable<Date> {
+    return new Observable<Date>(observer => {
+      const intervalId = setInterval(() => {
+        observer.next(new Date());
+      }, 1000);
+
+      // Nettoyage en cas de désabonnement
+      return () => clearInterval(intervalId);
+    });
+  }
+}
+			</textarea
+			>
+			<ul>
+				<li><code>new Observable()</code>: Crée un nouvel Observable.</li>
+				<li><code>observer.next()</code>: Émet une nouvelle valeur.</li>
+				<li>
+					<code>return () => clearInterval(intervalId)</code>: Fonction de nettoyage pour arrêter l'intervalle lorsque
+					l'Observable est désabonné.
+				</li>
+			</ul>
+		</div>
+		<div class="card-header">
+			<h2>Usage</h2>
+		</div>
+		<div class="card-body">
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Component, inject, OnDestroy, OnInit} from "@angular/core";
+import {DemoHeaderComponent} from "@app/features/demo/components/layout/demo-header/demo-header.component";
+import {ClockService} from "@app/features/demo/pages/demo-observable/services/clock.service";
+import {DatePipe} from "@angular/common";
+import {Subscription} from "rxjs";
+
+@Component({
+  selector: "demo-observable",
+  imports: [DemoHeaderComponent, DatePipe],
+  templateUrl: "./demo-observable.component.html",
+  styleUrl: "./demo-observable.component.scss",
+})
+export class DemoObservableComponent implements OnInit, OnDestroy {
+  private readonly _clockService = inject(ClockService);
+
+  clockSubscription: Subscription | null = null;
+  currentDate = new Date();
+
+  ngOnInit(): void {
+    this.clockSubscription = this._clockService.getClock().subscribe({
+      next: (date: Date) => {
+        console.log("Valeur reçue :", date);
+        this.currentDate = date;
+      },
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.clockSubscription) {
+      this.clockSubscription.unsubscribe();
+    }
+  }
+}
+			</textarea
+			>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Le rôle de l'Observer</h2>
+		</div>
+		<div class="card-body">
+			<p class="color-red">Lorsqu'un Observable est créé, il ne commence à émettre des valeurs que lorsqu'un Observer s'y abonne.</p>
+			<hr />
+
+			<p>L'Observer a trois méthodes principales :</p>
+			<ul>
+				<li><code>next(value)</code>: Exécute/Réagit aux nouvelles valeurs émises par l'Observable.</li>
+				<li><code>error(err)</code> : Exécute/Réagit aux erreurs éventuelles rencontrées.</li>
+				<li><code>complete()</code>: Exécute/Réagit lorsque l'Observable a terminé d'émettre des valeurs.</li>
+			</ul>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Les opérateurs d'Observables (<code>pipe</code>)</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Les <strong>opérateurs</strong> sont des fonctions qui permettent de transformer, filtrer, ou combiner les données d'un
+				Observable. Ils sont un aspect essentiel de la manipulation des flux de données en RxJS.
+			</p>
+			<p>Quelques opérateurs courants :</p>
+			<ul>
+				<li><code>map()</code> : Transforme chaque valeur émise par l'Observable.</li>
+				<li><code>filter()</code> : Ne laisse passer que les valeurs qui répondent à une condition.</li>
+				<li><code>take()</code> : Limite le nombre de valeurs émises.</li>
+				<li><code>tap()</code> : Permet d'exécuter une fonction sur chaque valeur émise sans la modifier.</li>
+				<li><code>catchError()</code>: Gère les erreurs émises par l'Observable.</li>
+			</ul>
+		</div>
+
+		<div class="card-header">
+			<h2>Exemple:</h2>
+		</div>
+		<div class="card-body">
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+observable.pipe(
+  filter(value => value % 2 === 0), // filtre pour ne garde que les valeurs paires
+  map(value => value * 2), // multiplie chaque valeur par 2
+  take(3) // ne garde que les 3 premières valeurs
+);
+			</textarea
+			>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Observable vs Promise</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Les <strong>Promises</strong> et les <strong>Observables</strong> sont tous deux utilisés pour gérer des opérations
+				asynchrones, mais ils ont des différences clés :
+			</p>
+			<ul>
+				<li><strong>Promise</strong> : Renvoie une seule valeur ou une erreur.</li>
+				<li><strong>Observable</strong> : Peut émettre plusieurs valeurs (ou aucune) sur une période donnée.</li>
+				<li>
+					Un Observable est <strong>paresseux</strong> (lazy), il ne démarre que lorsqu'un Observer s'y abonne, tandis qu'une
+					Promise démarre immédiatement.
+				</li>
+			</ul>
+			<hr />
+			<p>Quand utiliser un Observable ou une Promise ?</p>
+			<ul>
+				<li>
+					Utilisez une <strong>Promise</strong> pour des opérations asynchrones simples qui n'ont qu'une seule réponse (comme une
+					requête HTTP unique).
+				</li>
+				<li>
+					Utilisez un <strong>Observable</strong> pour des flux de données continus ou lorsque plusieurs valeurs doivent être
+					émises (comme des événements utilisateur ou des WebSockets).
+				</li>
+			</ul>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Subject & BehaviorSubject</h2>
+			<i>Maintenant, il est préférable d'utiliser <code>signal</code>.</i>
+		</div>
+		<div class="card-body">
+			<p>
+				Un <code>Subject</code> est un type spécial d'Observable qui permet à plusieurs Observers de s'abonner et de recevoir les
+				mêmes notifications. Il agit à la fois comme un Observable et un Observer.
+			</p>
+			<p>
+				Un <code>BehaviorSubject</code> est un type de Subject qui nécessite une valeur initiale et émet la valeur actuelle à tous
+				les nouveaux abonnés.
+			</p>
+
+			<p>Exemple d'utilisation :</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+// instanciation de la variable
+numberSubject$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
+// émet la valeur 42
+this.numberSubject$.next(42);
+			</textarea
+			>
+		</div>
+	</article>
+</section>
