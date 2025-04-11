@@ -1,1 +1,201 @@
 <theory-header chapterName="Http Client" />
+<section class="card-body">
+	<article class="card">
+		<div class="card-header">
+			<h2>HttpClient : Gérer les requêtes HTTP</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				<strong>HttpClient</strong> est un service intégré d'Angular utilisé pour effectuer des requêtes HTTP vers un serveur, comme
+				des requêtes <strong>GET, POST, PUT, DELETE, etc</strong>. Il est basé sur les Observables, ce qui permet de gérer de
+				manière asynchrone les réponses du serveur.
+			</p>
+			<hr />
+			<p>Les principales fonctionnalités de <code>HttpClient</code> incluent :</p>
+			<ul>
+				<li>Envoyer des requêtes HTTP.</li>
+
+				<li>Intercepter les requêtes et réponses.</li>
+
+				<li>Gérer les erreurs de manière centralisée.</li>
+
+				<li>Configurer des en-têtes et d'autres options HTTP.</li>
+			</ul>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Mise en place</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Avant de pouvoir utiliser l'<code>HTTPClient</code>, il faut d'abord le configuré dans le fichier
+				<code>src/app/app.config.ts</code>.
+			</p>
+			<p class="color-red">
+				Attention, il a déja mit en place dans ce projet mais n'oublié pas de le mettre en place dans votre prochain projet! C'est
+				en générale une des premières choses que l'on fait lorsque l'on commence un projet.
+			</p>
+			<p>Dans le fichier <code>src/app/app.config.ts</code>:</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {ApplicationConfig, provideZoneChangeDetection} from "@angular/core";
+import {
+  provideRouter,
+} from "@angular/router";
+import {provideHttpClient} from "@angular/common/http"; // 1. Importer
+
+import {routes} from "./app.routes";
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideZoneChangeDetection({eventCoalescing: true}),
+    provideHttpClient(), // 2. Ajouter au tableau des providers
+  ],
+};
+			</textarea
+			>
+			<i>
+				🔎 Pour le moment, la configuration par défaut nous convient mais dans les chapitres suivant, nous reviendrons sur cette
+				configuration.
+			</i>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>UtiLisation</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Pour effectuer des requêtes HTTP, nous allons prendre la bonne habitude de passer par un service. Cela nous permettra de
+				garder notre code propre et de ne pas mélanger la logique d'affichage avec les appels HTTP.
+			</p>
+			<p>
+				En résumer, un composant appelle le service qui fait la requête HTTP et le composant attend la réponse de la requête (via un
+				observable).
+			</p>
+		</div>
+
+		<div class="card-header">
+			<h2>Requêtes HTTP GET avec HttpClient</h2>
+		</div>
+		<div class="card-body">
+			<h3>Service</h3>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {inject, Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http"; // 1. Importer HttpClient
+import {PokemonModel} from "@app/features/demo/pages/demo-http-client/models/pokemon.model";
+
+@Injectable({
+  providedIn: "root",
+})
+export class PokemonApiV1Service {
+  private readonly _httpClient = inject(HttpClient); // 2. Injecter HttpClient
+
+  getPokeId(id: number) {
+    return this._httpClient.get<PokemonModel>( // 3. Utiliser la méthode get en précisant le type de réponse
+      "https://pokeapi.co/api/v2/pokemon/" + id,
+    );
+  }
+}
+			</textarea
+			>
+			<ul>
+				<li>Nous avons injecté le service <code>HttpClient</code> dans notre service <code>PokemonApiServiceV1Service</code>.</li>
+				<li>
+					Nous avons créé une méthode <code>getPokeId</code> qui prend un identifiant de Pokemon en paramètre et effectue une
+					requête GET vers pokeapi.co.
+				</li>
+				<li>
+					Nous avons utilisé la méthode <code>get</code> de <code>HttpClient</code> pour effectuer la requête. Nous avons
+					également spécifié le type de réponse attendu en utilisant le modèle <code>PokemonModel</code> entre <code><></code>.
+				</li>
+				<li>
+					La méthode <code>get</code> retourne un observable que nous pouvons souscrire dans notre composant pour obtenir la
+					réponse.
+				</li>
+			</ul>
+
+			<h3>Composant</h3>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Component, inject, OnInit} from "@angular/core";
+import {DemoHeaderComponent} from "@app/features/demo/components/layout/demo-header/demo-header.component";
+import {PokemonModel} from "@app/features/demo/pages/demo-http-client/models/pokemon.model";
+// 1. Importer le modèle PokemonApiService
+import {PokemonApiServiceV1Service} from "@app/features/demo/pages/demo-http-client/services/pokemon-api-service-v1.service";
+
+@Component({
+  selector: "demo-http-client",
+  imports: [DemoHeaderComponent],
+  templateUrl: "./demo-http-client.component.html",
+  styleUrl: "./demo-http-client.component.scss",
+})
+export class DemoHttpClientComponent implements OnInit {
+  private readonly _pokemonApiService = inject(PokemonApiServiceV1Service); // 2. Injecter le service
+
+  pokemon: PokemonModel | null = null;
+
+  ngOnInit(): void {
+    this._pokemonApiService.getPokeId(162).subscribe({ // 3. Souscrire à l'observable
+      next: (response: PokemonModel) => {
+        console.log(response);
+        this.pokemon = response; // 4. Stocker la réponse dans une variable en cas de succès
+      },
+      error: error => {
+        console.error( // 5. Gérer l'erreur
+          "Erreur lors de la récupération des données :",
+          error,
+        );
+      },
+    });
+  }
+}
+			</textarea
+			>
+			<ul>
+				<li>
+					Nous avons injecté le service <code>PokemonApiServiceV1Service</code> dans notre composant
+					<code>DemoHttpClientComponent</code>.
+				</li>
+				<li>
+					Dans la méthode <code>ngOnInit</code>, nous avons souscrit à l'observable retourné par la méthode
+					<code>getPokeId</code>.
+				</li>
+				<li>Nous avons géré la réponse de la requête en utilisant les méthodes <code>next</code> et <code>error</code>.</li>
+				<li>En cas de succès, nous avons stocké la réponse dans une variable <code>pokemon</code> pour l'afficher dans l'HTML.</li>
+			</ul>
+		</div>
+
+		<div class="card-header">
+			<h2>Requêtes HTTP POST avec HttpClient</h2>
+			<p class="color-red">
+				Lance l'API json-server qui se trouve dans ce projet avec :<br />
+				<code>npm run fakeApi</code>
+			</p>
+		</div>
+		<div class="card-body">
+			<h3>Service</h3>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {inject, Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {CarV1Model} from "@app/features/demo/pages/demo-http-client/models/car-v1.model";
+
+@Injectable({
+  providedIn: "root",
+})
+export class CarApiV1Service {
+  private readonly _httpClient = inject(HttpClient);
+
+  create(car: CarV1Model) {
+    return this._httpClient.post<CarV1Model>(
+      "http://localhost:3000/cars",
+      car,
+    );
+  }
+}
+			</textarea
+			>
+		</div>
+	</article>
+</section>
