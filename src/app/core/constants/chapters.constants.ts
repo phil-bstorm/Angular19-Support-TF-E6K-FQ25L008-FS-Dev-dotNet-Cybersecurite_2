@@ -31,7 +31,7 @@ export enum ChapterName {
 	Storage = "Storage",
 	Observable = "Observable",
 	HttpClient = "HttpClient",
-	Interceptor = "Interceptor",
+	HttpInterceptor = "HttpInterceptor",
 	Signal = "Signal",
 }
 
@@ -114,8 +114,8 @@ export class Courses {
 			has: [ChapterTDE.theory, ChapterTDE.demo],
 		},
 		{
-			name: ChapterName.Interceptor,
-			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
+			name: ChapterName.HttpInterceptor,
+			has: [ChapterTDE.theory, ChapterTDE.exercise],
 		},
 		{
 			name: ChapterName.Signal,

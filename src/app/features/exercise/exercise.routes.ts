@@ -119,11 +119,13 @@ export const routes: Routes = [
 			).then(c => c.ExerciseHttpClientComponent),
 	},
 	{
-		path: CoursesInstance.getChapterId(ChapterName.Interceptor).toString(),
+		path: CoursesInstance.getChapterId(
+			ChapterName.HttpInterceptor,
+		).toString(),
 		loadComponent: () =>
 			import(
-				"@app/features/exercise/pages/exercise-interceptor/exercise-interceptor.component"
-			).then(c => c.ExerciseInterceptorComponent),
+				"@app/features/exercise/pages/exercise-http-interceptor/exercise-http-interceptor.component"
+			).then(c => c.ExerciseHttpInterceptorComponent),
 	},
 	{
 		path: CoursesInstance.getChapterId(ChapterName.Resolver).toString(),

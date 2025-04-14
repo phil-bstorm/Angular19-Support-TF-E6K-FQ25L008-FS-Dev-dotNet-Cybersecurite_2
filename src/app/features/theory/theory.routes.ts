@@ -149,11 +149,13 @@ export const routes: Routes = [
 			).then(c => c.TheoryHttpClientComponent),
 	},
 	{
-		path: CoursesInstance.getChapterId(ChapterName.Interceptor).toString(),
+		path: CoursesInstance.getChapterId(
+			ChapterName.HttpInterceptor,
+		).toString(),
 		loadComponent: () =>
 			import(
-				"@app/features/theory/pages/theory-interceptor/theory-interceptor.component"
-			).then(c => c.TheoryInterceptorComponent),
+				"@app/features/theory/pages/theory-http-interceptor/theory-http-interceptor.component"
+			).then(c => c.TheoryHttpInterceptorComponent),
 	},
 	{
 		path: CoursesInstance.getChapterId(ChapterName.Resolver).toString(),

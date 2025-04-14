@@ -135,11 +135,13 @@ export const routes: Routes = [
 			).then(c => c.DemoHttpClientComponent),
 	},
 	{
-		path: CoursesInstance.getChapterId(ChapterName.Interceptor).toString(),
+		path: CoursesInstance.getChapterId(
+			ChapterName.HttpInterceptor,
+		).toString(),
 		loadComponent: () =>
 			import(
-				"@app/features/demo/pages/demo-interceptor/demo-interceptor.component"
-			).then(c => c.DemoInterceptorComponent),
+				"@app/features/demo/pages/demo-http-interceptor/demo-http-interceptor.component"
+			).then(c => c.DemoHttpInterceptorComponent),
 	},
 	{
 		path: CoursesInstance.getChapterId(ChapterName.Resolver).toString(),

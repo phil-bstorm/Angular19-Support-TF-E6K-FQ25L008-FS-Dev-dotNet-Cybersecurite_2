@@ -1,0 +1,163 @@
+<theory-header chapterName="Interceptor" />
+<section class="card-body">
+	<article class="card">
+		<div class="card-header">
+			<h2>Http Interceptors</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Les <strong>Http Interceptors</strong> sont des classes qui interceptent chaque requête HTTP sortante et la réponse
+				entrante. Ils sont souvent utilisés pour ajouter des en-têtes comme les jetons d'authentification ou pour gérer les erreurs
+				de manière globale.
+			</p>
+			<p>Pour créer un intercepteur, on peut utiliser la commande : <code>ng g interceptor chemin/de/mon/intercepteur</code></p>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Exemple de Token Interceptor</h2>
+		</div>
+		<div class="card-body">
+			<p>Le <code>TokenInterceptor</code> est un intercepteur qui ajoute un jeton d'authentification à chaque requête sortante.</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {HttpInterceptorFn} from '@angular/common/http';
+import {AuthService} from '../services/auth.service';
+import {inject} from '@angular/core';
+
+export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
+  // injecter le service AuthService
+  const authService: AuthService = inject(AuthService);
+
+  // récupérer le user du service AuthService
+  const user = authService.currentUser();
+
+  // vérifier si le user existe
+  if (user) {
+    // rajouter le access token du user dans la requête
+    const token = user.accessToken;
+
+    // ajouter Authorization dans les headers
+    const requestClone = req.clone({
+      headers: req.headers.append('Authorization', 'Bearer ' + token),
+    });
+
+    // retourner la requête clonée
+    return next(requestClone);
+  }
+
+  return next(req);
+};
+			</textarea
+			>
+			<p>🔎 Analyse:</p>
+			<ul>
+				<li>
+					Le service <code>AuthService</code> est injecté dans l'intercepteur pour récupérer le jeton d'accès de l'utilisateur
+					autorisée.
+				</li>
+				<li>
+					La méthode <code>currentUser()</code> du service <code>AuthService</code> est utilisée pour obtenir l'utilisateur
+					connecté.
+				</li>
+				<li>
+					Si l'utilisateur est connecté, le jeton d'accès est extrait et ajouté à l'en-tête de la requête HTTP en utilisant la
+					méthode <code>clone()</code> de l'objet <code>HttpRequest</code>.
+				</li>
+				<li>La méthode <code>next()</code> est appelée avec la requête clonée pour continuer le traitement de la requête.</li>
+			</ul>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Exemple de Error Interceptor</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Le <code>ErrorInterceptor</code> est un intercepteur qui gère les erreurs HTTP et redirige le user vers les pages
+				appropriées si nécessaire (page pour l'erreur 500, login...)
+			</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import { HttpInterceptorFn } from '@angular/common/http';
+import {catchError, throwError} from 'rxjs';
+import {Router} from '@angular/router';
+import {inject} from '@angular/core';
+import {AuthService} from '../services/auth.service';
+
+export const errorInterceptor: HttpInterceptorFn = (req, next) => {
+  const router:Router = inject(Router);
+  const authService: AuthService = inject(AuthService);
+
+  return next(req).pipe(
+    catchError(error => {
+      console.log(error);
+
+      if(error.status === 401){
+        // redirection vers auth/login
+        authService.logout();
+        router.navigate(['/auth/login']);
+        return throwError(() => null);
+      }
+      /* si on avait une page d'erreur pour les problèmes serveur:
+    else if(error.status === 500){
+      router.navigate(['/error/server-error']);
+      return throwError(() => null);
+    }
+     */
+
+      /*
+      switch (error.status){
+        case 401:
+          authService.logout();
+          router.navigate(['/auth/login']);
+          return throwError(() => null);
+        case 500:
+          router.navigate(['/error/server-error']);
+          return throwError(() => null);
+      }
+      */
+
+      return throwError(() => error);
+    })
+  );
+};
+			</textarea
+			>
+			<p>🔎 Analyse:</p>
+			<ul>
+				<li>Le service <code>Router</code> est injecté dans l'intercepteur pour gérer la redirection en cas d'erreur.</li>
+				<li>La méthode <code>catchError()</code> est utilisée pour intercepter les erreurs de la requête HTTP.</li>
+				<li>
+					Si une erreur 401 (non autorisée) est rencontrée, l'utilisateur est redirigé vers la page de connexion et le service
+					<code>AuthService</code> est utilisé pour se déconnecter.
+				</li>
+				<li>
+					Si une erreur 500 (erreur serveur) est rencontrée, l'utilisateur est redirigé vers une page d'erreur spécifique. (Non
+					implémenté dans cet exemple)
+				</li>
+				<li>
+					La méthode <code>throwError()</code> est utilisée pour renvoyer l'erreur au flux d'observation, permettant ainsi de
+					gérer l'erreur dans le composant appelant.
+				</li>
+			</ul>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Mise en place des interceptors</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Pour mettre en place les interceptors, il faut les déclarer dans le <code>app.config.ts</code> et modifier l'appel de
+				<code>provideHttpClient</code>. En rajoutant <code>withInterceptors()</code> et en lui passant un tableau d'intercepteurs
+				(préalablement coder).
+			</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+provideHttpClient( withInterceptors( [ jwtInterceptor, errorInterceptor ] ) )
+			</textarea
+			>
+		</div>
+	</article>
+</section>
