@@ -20,14 +20,22 @@
 			</i>
 		</div>
 		<div class="card-body">
-			<p>Crée une mini gestion de livre dans le composant spécifié ci-dessus.</p>
+			<p>
+				Crée une mini gestion de livre dans le composant spécifié ci-dessus en utilisant les concepts vues dans ce chapitre et les
+				chapitres précédents et en utilisant <code>json-server</code> comme API fictive.
+			</p>
+			<i>
+				⚠️ La collection <code>books</code> existe déjà dans le <abbr title="json-server/fakeApi.json">json-server</abbr>, regarde
+				le fichier avant de commencer!
+			</i>
 			<p>Un livre devra possèder les informations suivantes:</p>
 			<ul>
-				<li>un id (auto-générer)</li>
-				<li>un nom</li>
-				<li>une description</li>
-				<li>un auteur</li>
-				<li>une date de publication</li>
+				<li>un id (<code>id</code> auto-générer et incrémenter)</li>
+				<li>un isbn (<code>isbn</code>)</li>
+				<li>un titre (<code>title</code>)</li>
+				<li>un auteur (<code>author</code>)</li>
+				<li>une description (<code>description</code>)</li>
+				<li>une date de publication (<code>releaseDate</code>)</li>
 			</ul>
 			<p>Fonctionnalités:</p>
 			<ul>
@@ -39,8 +47,8 @@
 
 			<p>Contraintes:</p>
 			<ul>
-				<li>Travaillé avec <code>ReactiveForms</code> pour les formulaires</li>
-				<li>Travaillé avec plusieurs composants (composant de listing, composant d'ajout...)</li>
+				<li>Travailles avec <code>ReactiveForms</code> pour les formulaires</li>
+				<li>Travailles avec plusieurs composants (composant de listing, composant d'ajout...)</li>
 			</ul>
 			<p>Bonus:</p>
 			<ul>
