@@ -1,0 +1,20 @@
+<p>C'est information provienne de <code>pokeapi.co</code> : (id: {{ pokemonId }})</p>
+@if (pokemon) {
+	<img [src]="pokemon.sprites.front_default" alt="Pokemon {{ pokemon.name }}" />
+	<ul>
+		<li>
+			Nom: <strong>{{ pokemon.name }}</strong>
+		</li>
+		<li>
+			Hauteur: <strong>{{ pokemon.height / 10 }}m</strong>
+		</li>
+		<li>
+			Poids: <strong>{{ pokemon.weight / 10 }} Kg</strong>
+		</li>
+	</ul>
+}
+@if (pokemonError) {
+	<p>Une erreur s'est produite lors du chargement du Pokemon...</p>
+} @else {
+	<p>En attente de la réponse de la requête http...</p>
+}

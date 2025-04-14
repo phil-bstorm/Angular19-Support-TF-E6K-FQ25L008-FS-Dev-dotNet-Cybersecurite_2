@@ -81,5 +81,13 @@
 			"description": "A guide to building reliable, scalable microservice applications.",
 			"releaseDate": "2018-09-01"
 		}
+	],
+	"cars": [
+		{
+			"id": 1,
+			"brand": "Mazda",
+			"model": "MX-5",
+			"year": 2025
+		}
 	]
 }

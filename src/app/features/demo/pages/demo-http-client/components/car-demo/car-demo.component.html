@@ -1,0 +1,26 @@
+<form [formGroup]="carForm" (ngSubmit)="onSubmit()">
+	<div>
+		<label for="carBande">Car brand:</label>
+		<input type="text" id="carBande" formControlName="brand" />
+	</div>
+	<div>
+		<label for="carModel">Car model:</label>
+		<input type="text" id="carModel" formControlName="model" />
+	</div>
+	<div>
+		<label for="carYear">Car year:</label>
+		<input type="number" id="carYear" formControlName="year" />
+	</div>
+	@if (!isCreating) {
+		<button type="submit" [disabled]="carForm.invalid">Submit</button>
+	}
+</form>
+
+@if (creatingSuccess) {
+	<div class="alert alert-success">
+		<p>Car created successfully!</p>
+		<p>Regardes dans le fichier de json-server apres les donnés que tu as entré! : <code>json-server/fakeApi.json</code></p>
+	</div>
+} @else if (creatingError) {
+	<p class="color-red">{{ creatingError }}</p>
+}

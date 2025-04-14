@@ -1,5 +1,5 @@
 export interface CarV1Model {
-	id: number;
+	id: number | null | undefined;
 	brand: string;
 	model: string;
 	year: number;

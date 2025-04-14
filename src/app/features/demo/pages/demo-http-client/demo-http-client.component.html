@@ -1,20 +1,21 @@
 <demo-header chapterName="Http Client" />
-<div class="card-body">
-	<p>C'est information provienne de <code>pokeapi.co</code> : (id: {{ pokemonId }})</p>
-	@if (pokemon) {
-		<img [src]="pokemon.sprites.front_default" alt="Pokemon {{ pokemon.name }}" />
-		<ul>
-			<li>
-				Nom: <strong>{{ pokemon.name }}</strong>
-			</li>
-			<li>
-				Hauteur: <strong>{{ pokemon.height / 10 }}m</strong>
-			</li>
-			<li>
-				Poids: <strong>{{ pokemon.weight / 10 }} Kg</strong>
-			</li>
-		</ul>
-	} @else {
-		<p>En attente de la réponse de la requête http...</p>
-	}
-</div>
+<section class="card-body">
+	<article class="card">
+		<div class="card-header">
+			<h2>Pokemon démo</h2>
+			<i> Fichiers: <code>src/app/features/demo/pages/demo-http-client/components/pokemon-demo</code> </i>
+		</div>
+		<div class="card-body">
+			<pokemon-demo />
+		</div>
+	</article>
+	<article class="card">
+		<div class="card-header">
+			<h2>Car démo</h2>
+			<i> Fichiers: <code>src/app/features/demo/pages/demo-http-client/components/car-demo</code> </i>
+		</div>
+		<div class="card-body">
+			<car-demo />
+		</div>
+	</article>
+</section>
