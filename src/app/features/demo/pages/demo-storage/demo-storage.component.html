@@ -1,1 +1,8 @@
 <demo-header chapterName="Stockage" />
+<div class="card-body">
+	<div><label for="username">Username:</label> <input type="text" id="username" [(ngModel)]="username" /></div>
+	<button class="btn btn-primary" (click)="saveLocalStorageUsername()">LocalStorage save</button>
+	<button class="btn btn-primary" (click)="saveSessionStorageUsername()">SessionStorage save</button>
+	<p>LocalStorage value: {{ usernameLS }}</p>
+	<p>SessionStorage value: {{ usernameSS }}</p>
+</div>
