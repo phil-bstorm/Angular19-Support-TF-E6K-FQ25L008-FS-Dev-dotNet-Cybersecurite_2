@@ -16,8 +16,6 @@ export class ExerciseBaseRoutingNavigationComponent {
 	);
 	currentIndex = this._chapterNavService.currentIndex;
 
-	labyrintheUrl: string = `/exercise/${this.currentIndex()}/labyrinthe`;
-
 	imgUrlLabyrinthe: string =
 		"assets/exercise/routing-navigation/labyrinthe.png";
 	imgUrlFolderStructure: string =
