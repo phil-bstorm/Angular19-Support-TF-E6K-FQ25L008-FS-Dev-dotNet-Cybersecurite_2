@@ -74,10 +74,6 @@ export class Courses {
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
 		{
-			name: ChapterName.NgTemplate,
-			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
-		},
-		{
 			name: ChapterName.InputOutput,
 			has: [ChapterTDE.theory, ChapterTDE.demo, ChapterTDE.exercise],
 		},
