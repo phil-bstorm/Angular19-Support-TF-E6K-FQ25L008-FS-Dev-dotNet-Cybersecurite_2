@@ -1,1 +1,12 @@
 <demo-header chapterName="Signal" />
+<p>La valeur de la variable <code>count</code> est de: {{ count() }}</p>
+<p><button (click)="increment()">incrémenter</button></p>
+
+<hr />
+<p>La valeur calculée via <code>computed</code> : {{ doubleCount() }}</p>
+
+<hr />
+<p><button (click)="showCount.set(!showCount())">afficher?</button> {{ conditionalCount() }}</p>
+
+<hr />
+<p>Regarde la console pour voir l'<code>Effect</code>!</p>

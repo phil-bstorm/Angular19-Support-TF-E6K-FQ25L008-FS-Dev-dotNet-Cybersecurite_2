@@ -1,1 +1,315 @@
 <theory-header chapterName="Signal" />
+<section class="card-body">
+	<article class="card">
+		<div class="card-header">
+			<h2>Qu'est-ce que <code>Signal</code>?</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				En Angular, un <strong>signal</strong> est un objet qui encapsule une valeur et permet de notifier automatiquement toutes
+				les parties de l'application qui utilisent cette valeur lorsqu'elle change. Grâce aux signaux, il devient beaucoup plus
+				simple de réagir aux modifications d'état.
+			</p>
+
+			<p>
+				Un signal peut contenir <strong>n'importe quel type de donnée</strong> : un nombre, une chaîne de caractères, un objet, un
+				tableau, etc.
+			</p>
+
+			<p>
+				Pour accéder à la valeur d'un signal, il suffit d'appeler sa fonction d'accès (getter). Cette méthode permet à Angular de
+				<strong>savoir automatiquement où la valeur est utilisée</strong>, afin de mettre à jour uniquement les parties concernées
+				de l'interface utilisateur.
+			</p>
+
+			<p>Il existe deux types de signaux :</p>
+
+			<ul>
+				<li><strong>Les signaux modifiables (writable)</strong> : vous pouvez modifier leur valeur directement.</li>
+				<li>
+					<strong>Les signaux en lecture seule (read-only)</strong> : ils exposent uniquement la lecture de leur valeur, sans
+					possibilité de modification directe.
+				</li>
+			</ul>
+		</div>
+	</article>
+	<article class="card">
+		<div class="card-header">
+			<h2>Writable signals</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Un <strong>signal modifiable</strong> est un type de signal dont la valeur peut être
+				<strong>mise à jour directement</strong> grâce à une API simple fournie par Angular.
+			</p>
+			<p>
+				Pour créer un signal modifiable, il suffit d'utiliser la fonction <code>signal()</code> en lui passant une
+				<strong>valeur initiale</strong>. Cette valeur représente l'état de départ que le signal va contenir.
+			</p>
+
+			<p>
+				Une fois le signal créé, vous pouvez <strong>modifier sa valeur</strong> en utilisant la méthode <code>set()</code>. Cette
+				méthode prend en paramètre la nouvelle valeur que vous souhaitez attribuer au signal. <br />
+				Ou en utilisant <code>.update()</code> pour calculer la nouvelle valeur à partir de l'ancienne.
+			</p>
+
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+import {Component, OnInit, signal} from "@angular/core";
+import {DemoHeaderComponent} from "@app/features/demo/components/layout/demo-header/demo-header.component";
+
+@Component({
+  selector: "demo-signal",
+  imports: [DemoHeaderComponent],
+  templateUrl: "./demo-signal.component.html",
+  styleUrl: "./demo-signal.component.scss",
+})
+export class DemoSignalComponent implements OnInit {
+  count = signal(0); // Création d'un signal modifiable avec une valeur initiale de 0
+
+  ngOnInit() {
+    this.count.set(5); // Mise à jour de la valeur du signal
+
+    count.update((prev) => prev + 1); // Incrémente la valeur du signal de 1
+  }
+}
+			</textarea
+			>
+
+			<p>Pour afficher la valeur du signal dans l'HTML:</p>
+			<textarea highlight-js [options]="{}" [lang]="'html'">
+<p>La valeur de la variable <code>count</code> est de: &#123;&#123; count() &#125;&#125;</p>
+			</textarea
+			>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Computed Signals</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Un <strong>computed signal</strong> (signal calculé) est un <strong>signal en lecture seule</strong> dont la valeur est
+				dérivée d'autres signaux.<br />
+				On définit un signal calculé à l'aide de la fonction computed(), en précisant une fonction qui décrit comment obtenir la
+				valeur dérivée.
+			</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+count = signal(2); // Création d'un signal modifiable avec une valeur initiale de 2
+
+// Création d'un signal calculé qui double la valeur du signal count
+doubleCount: Signal<number> = computed(() => this.count() * 2);
+		</textarea
+			>
+			<p>Dans cet exemple:</p>
+			<ul>
+				<li><code>doubleCount</code> dépend de <code>count</code>.</li>
+				<li>
+					À chaque fois que <code>count</code> est mis à jour, Angular sait automatiquement que <code>doubleCount</code>
+					doit aussi être recalculé.
+				</li>
+			</ul>
+
+			<hr />
+
+			<p>Les computed signals sont évalués <strong>paresseusement</strong> et <strong>mémorisés</strong></p>
+			<ul>
+				<li>
+					<strong>Paresseux (lazy)</strong> : La fonction de dérivation (<code>count() * 2</code>) ne s'exécute que lors de la
+					première lecture de <code>doubleCount</code>.
+				</li>
+				<li>
+					<strong>Mémorisés (memoized)</strong> : Après le premier calcul, la valeur est mise en cache. Tant que
+					<code>count</code> ne change pas, toute nouvelle lecture de <code>doubleCount</code> retourne simplement la valeur en
+					cache, <strong>sans recalcul</strong>.
+				</li>
+			</ul>
+
+			<p>
+				Dès que <code>count</code> est modifié, Angular invalide la valeur en cache de <code>doubleCount</code>, et le prochain
+				accès recalculera la bonne valeur.
+				<i
+					>🔎 Cela permet de réaliser des calculs coûteux (par exemple, des tris ou filtres sur de gros tableaux) de manière
+					efficace avec des computed().
+				</i>
+			</p>
+
+			<hr />
+			<p><strong>Les dépendances d'un computed signal sont dynamiques</strong></p>
+			<p>
+				Angular <strong>piste uniquement</strong> les signaux effectivement <strong>lus</strong> pendant l'exécution de la fonction
+				de dérivation. Exemple plus avancé : typescript Copier Modifier
+			</p>
+
+			<p>Exemple plus avancé:</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+const showCount = signal(false);
+const count = signal(0);
+
+const conditionalCount = computed(() => {
+  if (showCount()) {
+    return `Le compteur est à ${count()}.`;
+  } else {
+    return 'Rien à afficher !';
+  }
+});
+			</textarea
+			>
+			<p>Que se passe-t-il ici ?</p>
+			<ul>
+				<li>Si <code>showCount</code> vaut <code>false</code>, la fonction ne lit pas <code>count</code>().</li>
+				<li>Donc, modifier <code>count</code> <strong>ne déclenchera pas</strong> de recalcul de <code>conditionalCount</code>.</li>
+				<li>
+					Si <code>showCount</code> passe à <code>true</code> et que vous lisez <code>conditionalCount</code>, alors cette fois
+					<code>count</code> <strong>devient une dépendance</strong>.
+				</li>
+				<li>
+					Plus tard, si <code>showCount</code> repasse à <code>false</code>, <code>count</code> <strong>sera retiré</strong> des
+					dépendances.
+				</li>
+			</ul>
+			<i>🔎 Angular ajuste donc automatiquement la liste des dépendances à chaque exécution du computed().</i>
+		</div>
+	</article>
+
+	<article class="card">
+		<div class="card-header">
+			<h2>Effects</h2>
+		</div>
+		<div class="card-body">
+			<p>
+				Les <strong>signals</strong> sont puissants parce qu'ils notifient automatiquement les parties intéressées lorsqu'ils
+				changent. Un <strong>effect</strong> (effet) est une opération qui <strong>s'exécute automatiquement</strong> dès qu'une ou
+				plusieurs valeurs de signaux changent.
+			</p>
+			<p>Pour créer un effet, on va utiliser la fonction <code>effect()</code></p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+effect(() => {
+  console.log(`Le compteur actuel est : ${count()}`);
+});
+			</textarea
+			>
+			<p>🔎 À retenir:</p>
+			<ul>
+				<li>Un effect <strong>s'exécute toujours au moins une fois</strong> dès sa création.</li>
+				<li>Lors de son exécution, Angular <strong>piste</strong> tous les signaux utilisés dans le callback.</li>
+				<li>Si l'un de ces signaux change, l'effect sera <strong>rejoué automatiquement</strong>.</li>
+				<li>
+					Comme pour les <code>computed()</code>, les <strong>dépendances sont dynamiques</strong> : seuls les signaux lus à la
+					dernière exécution sont suivis.
+				</li>
+			</ul>
+			<p>
+				🔎 <strong>Particularité importante : </strong>Les effects s'exécutent <strong>asynchrone</strong>
+				pendant le
+				<strong>cycle de détection des changements</strong> d'Angular.
+			</p>
+			<hr />
+
+			<h3>Quand utiliser un <code>Effect</code>?</h3>
+			<p>
+				Les effects sont raresment nécessaires dans du code d'application classique, mais ils sont très utiles dans certains cas
+				particuliers, notamment :
+			</p>
+			<ul>
+				<li>🔎 Faire du logging (journaliser) des données affichées et suivre leurs changements pour du debug ou de l'analyse.</li>
+				<li>🔄 Synchroniser des données avec window.localStorage.</li>
+				<li>
+					🛠️ Ajouter des comportements DOM personnalisés qui ne peuvent pas être exprimés avec la syntaxe du template Angular.
+				</li>
+				<li>
+					📈 Effectuer des rendus personnalisés sur un <code> &#60;canvas&#62; </code>, un <strong>graphe</strong>, ou une
+					<strong>librairie graphique tierce</strong>.
+				</li>
+			</ul>
+
+			<hr />
+
+			<h3>Quand <strong>ne pas</strong> utiliser un <code>Effect</code>?</h3>
+			<p><strong>❗ Ne pas utiliser</strong> d'effet pour <strong>propager des changements d'état</strong> entre signaux.</p>
+			<p>Cela peut provoquer:</p>
+			<ul>
+				<li>Des erreurs du type <code>ExpressionChangedAfterItHasBeenChecked</code></li>
+				<li>Des <strong>boucles infinies</strong></li>
+				<li>Des <strong>performances dégradées</strong></li>
+			</ul>
+			<p>👉 Utilisez plutôt des <code>computed()</code> pour modéliser des états dépendants les uns des autres.</p>
+
+			<hr />
+			<h3>Contexte d'injection (Injection Context)</h3>
+			<p>
+				Par défaut, vous ne pouvez appeler <code>effect()</code>
+				<strong>que dans un contexte d'injection Angular</strong> (c’est-à-dire là où inject() est disponible).
+			</p>
+			<p>
+				Le plus simple est donc d'utiliser <code>effect()</code> directement dans le <strong>constructeur d'un composant</strong>,
+				d'une <strong>directive</strong> ou d'un <strong>service</strong> :
+			</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+@Component({...})
+export class EffectiveCounterComponent {
+  readonly count = signal(0);
+
+  constructor() {
+    effect(() => {
+      console.log(`Le compteur est : ${this.count()}`);
+    });
+  }
+}
+			</textarea
+			>
+			<p>Vous pouvez aussi assigner l'effect à un champ privé pour lui donner un nom descriptif :</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+@Component({...})
+export class EffectiveCounterComponent {
+  readonly count = signal(0);
+
+  private loggingEffect = effect(() => {
+    console.log(`Le compteur est : ${this.count()}`);
+  });
+}
+			</textarea
+			>
+			<p>Si vous devez créer un effect <strong>hors du constructeur</strong>, vous pouvez lui passer un <code>Injector</code>:</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+@Component({...})
+export class EffectiveCounterComponent {
+  readonly count = signal(0);
+  private injector = inject(Injector);
+
+  initializeLogging(): void {
+    effect(() => {
+      console.log(`Le compteur est : ${this.count()}`);
+    }, { injector: this.injector });
+  }
+}
+			</textarea
+			>
+
+			<hr />
+			<h3>Destruction d'un Effect</h3>
+			<p>
+				✅ Quand vous créez un effect, il est automatiquement <strong>détruit</strong> en même temps que son contexte (par exemple à
+				la destruction du composant).
+			</p>
+			<p>Vous pouvez aussi détruire manuellement un effect :</p>
+			<p>
+				Chaque appel à <code>effect()</code> retourne un <code>EffectRef</code>, qui possède une méthode <code>.destroy()</code> :
+			</p>
+			<textarea highlight-js [options]="{}" [lang]="'typescript'">
+const myEffect = effect(() => {
+  // ...
+});
+
+myEffect.destroy(); // Détruire l'effet manuellement
+			</textarea
+			>
+			<p>
+				Dans certains cas spécifiques, vous pouvez aussi utiliser l'option manualCleanup pour contrôler manuellement la durée de vie
+				d'un effect. <br />
+				<strong> ⚠️️ Attention</strong> : il faut absolument <strong>nettoyer</strong> les effects manuels pour éviter des
+				<strong>fuites mémoire</strong> !
+			</p>
+		</div>
+	</article>
+</section>
