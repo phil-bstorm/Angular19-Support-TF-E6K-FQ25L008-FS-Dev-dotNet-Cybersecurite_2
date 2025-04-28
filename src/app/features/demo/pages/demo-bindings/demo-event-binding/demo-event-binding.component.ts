@@ -14,7 +14,7 @@ export class DemoEventBindingComponent {
 	}
 
 	// exemple mouse over
-	btnOverState: "info" | "warning" = "info";
+	btnOverState: "info" | "warning" = "info"; // Note: "info" et "warning" sont des classes CSS de Bootstrap
 
 	handleMouseOver() {
 		this.btnOverState = "warning";
