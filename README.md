@@ -9,7 +9,7 @@
 ### Installation d'Angular
 
 - Installation du CLI Angular : `npm install -g @angular/cli@19`
-- Créez un nouveau projet : `ng new nom-du-projet (--skip-tests`
+- Créez un nouveau projet : `ng new nom-du-projet --skip-tests`
 
 ### Installation du projet
 
