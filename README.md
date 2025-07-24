@@ -13,8 +13,8 @@
 
 ### Installation du projet
 
-- Clone du projet : `git clone https://github.com/phil-bstorm/Angular-cours-Standalone.git`
-- Accédez au répertoire du projet : `cd Angular-cours-Standalone`
+- Clone du projet : `git clone https://github.com/phil-bstorm/Angular19-cours-Standalone.git`
+- Accédez au répertoire du projet : `cd Angular19-cours-Standalone`
 - Installez les dépendances : `npm install`
 
 ## Démarrage
