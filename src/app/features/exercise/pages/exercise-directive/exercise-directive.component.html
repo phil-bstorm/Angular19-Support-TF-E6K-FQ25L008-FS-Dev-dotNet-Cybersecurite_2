@@ -20,7 +20,7 @@
 				<li>photo</li>
 				<li>prix</li>
 				<li>prixPromo</li>
-				<li>moenPro</li>
+				<li>nouveauPrix</li>
 				<li>qttRestante</li>
 			</ul>
 		</div>
@@ -40,7 +40,47 @@
 			<h2>Résultat:</h2>
 		</div>
 		<div class="card-body">
-			<!-- PLACER VOTRE CODE ICI!	-->
+			<table>
+				<thead>
+					<th>Nom</th>
+					<th>photo</th>
+					<th>prix</th>
+					<th>Promo?</th>
+					<th>Quantité</th>
+				</thead>
+
+				@for (product of products; track $index) {
+					<tr>
+						<td>{{ product.nom }}</td>
+						<td><img [src]="product.photo" [alt]="product.nom" /></td>
+						<td>
+							@if (product.prixPromo) {
+								<s>{{ product.prix }}</s>
+								<span class="text-danger">{{ product.nouveauPrix }}</span>
+							} @else {
+								{{ product.prix }}
+							}
+						</td>
+						<td>
+							<!-- Une ternaire -->
+							{{ product.prixPromo ? "oui" : "non" }} --
+							<!-- Ou alors avec @if -->
+							@if (product.prixPromo) {
+								<span>Oui</span>
+							} @else {
+								<span>Non</span>
+							}
+						</td>
+						<td>
+							@if (product.qttRestante > 0) {
+								{{ product.qttRestante }}
+							} @else {
+								<span>Vide...</span>
+							}
+						</td>
+					</tr>
+				}
+			</table>
 		</div>
 	</article>
 </section>
