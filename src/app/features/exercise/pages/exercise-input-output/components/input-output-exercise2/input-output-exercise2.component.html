@@ -29,6 +29,7 @@
 		<h2>Résultat:</h2>
 	</div>
 	<div class="card-body">
-		<!--	Place ton color picker ici!	-->
+		<todo-list-form (newTask)="onNewTask($event)" />
+		<todo-list-listing [todos]="listOfTodo" />
 	</div>
 </article>

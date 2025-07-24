@@ -1,0 +1,7 @@
+<ul>
+	@for (t of todos(); track $index) {
+		<li>{{ t }}</li>
+	} @empty {
+		<li>Rien à signaler!</li>
+	}
+</ul>
