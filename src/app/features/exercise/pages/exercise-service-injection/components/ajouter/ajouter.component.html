@@ -1,0 +1,14 @@
+<fieldset>
+    <legend>Ajouter un article</legend>
+    <div>
+        <label for="articleName">Nom de l'article</label>
+        <input id="articleName" type="text" [(ngModel)]="articleName">
+    </div>
+    <div>
+        <label for="articleQuantity">Quantité</label>
+        <input id="articleQuantity" type="number" min="1" step="1" [(ngModel)]="articleQuantity">
+    </div>
+    <div>
+        <button (click)="onAjouter()">Ajouter</button>
+    </div>
+</fieldset>

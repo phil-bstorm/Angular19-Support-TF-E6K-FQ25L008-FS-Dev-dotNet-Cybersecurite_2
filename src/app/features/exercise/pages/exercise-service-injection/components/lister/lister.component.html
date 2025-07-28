@@ -1,0 +1,14 @@
+@if(articles.length > 0){
+    <ul>
+        @for(article of articles; track $index){
+            <li>
+                <span [style]="{color:(article.quantity >5)?'red':'black'}">{{article.name}}</span> X{{article.quantity}} 
+                <button (click)="onClickMinus(article.name)">-</button>
+                <button (click)="onClickPlus(article.name)">+</button>
+            </li>
+        }
+    </ul>
+}
+@else{
+    <p>Il n'y a pas d'article dans votre liste...</p>
+}
