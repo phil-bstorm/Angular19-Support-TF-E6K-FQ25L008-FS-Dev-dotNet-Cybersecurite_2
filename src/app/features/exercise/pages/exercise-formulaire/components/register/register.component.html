@@ -1,0 +1,117 @@
+<h1>Exercice Formulaire</h1>
+<h2>Formulaire d'inscription</h2>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="email">Email : </label>
+        <input type="email" id="email" name="email" formControlName="email">
+        @if(registerForm.get("email")?.touched && !registerForm.get("email")?.valid){
+            <div>
+                @if(registerForm.get("email")?.hasError('required')){
+                    <p>L'adresse e-mail est obligatoire.</p>
+                }
+                @if(registerForm.get('email')?.hasError('email')){
+                    <p>Votre adresse e-mail ne correspond pas à un format valide.</p>
+                }
+            </div>
+        }
+    </div>
+    <div>
+        <label for="password">Mot de passe : </label>
+        <input type="password" id="password" name="password" formControlName="password">
+        @if(registerForm.get("password")?.touched && !registerForm.get("password")?.valid){
+        <div>
+            @if(registerForm.get('password')?.hasError('required')){
+                <p>Le mot de passe est obligatoire.</p>
+            }
+            @if(registerForm.get('password')?.hasError('minlenght')){
+                <p>Le mot de passe doit contenir au minimum 8 caractères.</p>
+            }
+            @if(registerForm.get('password')?.hasError('maxlenght')){
+                <p>Le mot de passe doit contenir au maximum 100 caractères.</p>
+            }
+            @if(registerForm.get('password')?.hasError('pattern')){
+                <p>Votre mot de passe ne correspond pas à un format valide.</p>
+            }
+        </div>
+    }
+    </div>
+    <div>
+        <label for="birthdate">Date de naissance : </label>
+        <input type="date" id="birthdate" name="birthdate" formControlName="birthdate">
+        @if(registerForm.get("birthdate")?.touched && !registerForm.get("birthdate")?.valid){
+        <div>
+            @if(registerForm.get('birthdate')?.hasError('required')){
+                <p>La date de naissance est obligatoire.</p>
+            }
+            @if(registerForm.get('birthdate')?.hasError('checkbirthdate')){
+                <p>Vous ne pouvez pas avoir 115 ans ou plus.</p>
+            }
+        </div>
+    }
+    </div>
+    <fieldset>
+        <legend>Vos adresses : </legend>
+        <p>Vous avez actuellement 1 adresse.</p>
+        <button type="button" (click)="onAddAddress()">En ajouter une ?</button>
+        @for(address of addresses.controls; track $index){
+            <fieldset [formGroup]="address">
+            <!-- 
+                ideal pour un FormArray Vide non fortement typé
+                <fieldset [formGroupName]="$index"> 
+                    -->
+                <legend>Adresse {{$index + 1}} : </legend>
+                <div>
+                    <label for="address-{{$index}}-street">Rue : </label>
+                    <input type="text" id="address-{{$index}}-street" name="address-{{$index}}-street" formControlName="street">
+                    @if(address.get("street")?.touched && !address.get("street")?.valid){
+                        <div>
+                            <p>La rue est obligatoire.</p>
+                        </div>
+                    }
+                </div>
+                <div>
+                    <label for="address-{{$index}}-number">Numéro : </label>
+                    <input type="text" id="address-{{$index}}-number" name="address-{{$index}}-number" formControlName="number">
+                    @if(address.get("number")?.touched && !address.get("number")?.valid){
+                    <div>
+                        <p>Le numéro est obligatoire.</p>
+                    </div>
+                }
+                </div>
+                <div>
+                    <label for="address-{{$index}}-city">Ville : </label>
+                    <input type="text" id="address-{{$index}}-city" name="address-{{$index}}-city" formControlName="city">
+                    @if(address.get("city")?.touched && !address.get("city")?.valid){
+                        <div>
+                            <p>La ville est obligatoire.</p>
+                        </div>
+                    }
+                </div>
+                <div>
+                    <label for="address-{{$index}}-zipCode">Code postal : </label>
+                    <input type="text" id="address-{{$index}}-zipCode" name="address-{{$index}}-zipCode" formControlName="zipCode">
+                    @if(address.get("zipCode")?.touched && !address.get("zipCode")?.valid){
+                        <div>
+                            <p>Le code postal est obligatoire.</p>
+                        </div>
+                    }
+                </div>
+                <div>
+                    <label for="address-{{$index}}-country">Pays : </label>
+                    <input type="text" id="address-{{$index}}-country" name="address-{{$index}}-country" formControlName="country">
+                    @if(address.get("country")?.touched && !address.get("country")?.valid){
+                        <div>
+                            <p>Le pays est obligatoire.</p>
+                        </div>
+                    }
+                </div>
+                @if($index > 0){
+                    <button type="button" (click)="onRemoveAddress($index)">Supprimer l'adresse</button>
+                }
+            </fieldset>
+        }
+    </fieldset>
+    <div>
+        <button type="submit" [disabled]="registerForm.invalid">Enregistrer</button>
+    </div>
+</form>
