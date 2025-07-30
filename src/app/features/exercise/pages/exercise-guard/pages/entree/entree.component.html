@@ -1,1 +1,5 @@
-<p>Entree works!</p>
+<div>
+    <label for="mdp">Mot de passe ? </label>
+    <input type="password" id="mdp" [(ngModel)]="mdp">
+</div>
+<button (click)="onValidate()">Essayer d'entrer</button>
