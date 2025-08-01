@@ -1,5 +1,11 @@
 {
-  "users": [],
+  "users": [
+    {
+      "email": "samuel@user",
+      "password": "$2a$10$Jx3CCNysnASIg5av.8PeveDRXqAmr1OkFcBYG2BmEgE1s.3us/UoW",
+      "id": 1
+    }
+  ],
   "books": [
     {
       "id": 1,

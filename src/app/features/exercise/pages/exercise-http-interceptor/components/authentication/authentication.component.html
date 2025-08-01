@@ -1,1 +1,30 @@
-<p>authentication works!</p>
+<h1>User interceptor</h1>
+@if(token() == null){
+    <div class="form-check form-switch">
+        <input [(ngModel)]="forRegister" type="checkbox" class="form-check-input" role="switch" id="changeForm">
+        <label for="changeForm" class="form-check-label">{{(forRegister)? 'S\'enregistrer' : 'Se connecter'}}</label>
+    </div>
+    
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="email">Adresse mail :</label>
+            <input type="email" id="email" name="email" formControlName="email">
+        </div>
+        <div>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" formControlName="password">
+        </div>
+        <button type="submit">{{(forRegister)? 'S\'enregistrer' : 'Se connecter'}}</button>
+    </form>
+}
+@else {
+    <p>Vos informations : </p>
+    @if(user){
+        <dl>
+            <dt>Email</dt>
+            <dd>{{user?.email}}</dd>
+            <dt>Password</dt>
+            <dd>{{user?.password}}</dd>
+        </dl>
+    }
+}

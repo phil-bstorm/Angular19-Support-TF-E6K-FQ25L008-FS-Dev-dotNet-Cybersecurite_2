@@ -1,8 +1,10 @@
 import {ApplicationConfig, provideZoneChangeDetection} from "@angular/core";
 import {provideRouter, withInMemoryScrolling} from "@angular/router";
-import {provideHttpClient} from "@angular/common/http";
+import {provideHttpClient, withInterceptors} from "@angular/common/http";
 
 import {routes} from "./app.routes";
+import { tokenInterceptor } from "./features/exercise/pages/exercise-http-interceptor/interceptors/token.interceptor";
+import { errorInterceptor } from "./features/exercise/pages/exercise-http-interceptor/interceptors/error.interceptor";
 
 export const appConfig: ApplicationConfig = {
 	providers: [
@@ -13,6 +15,6 @@ export const appConfig: ApplicationConfig = {
 				scrollPositionRestoration: "enabled",
 			}),
 		),
-		provideHttpClient(),
+		provideHttpClient(withInterceptors([tokenInterceptor, errorInterceptor])),
 	],
 };
