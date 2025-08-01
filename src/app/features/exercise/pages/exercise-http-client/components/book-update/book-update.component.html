@@ -1,0 +1,28 @@
+<h1>Modifier votre livre</h1>
+@if(editForm){
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="title">Titre : </label>
+            <input type="text" id="title" name="title" formControlName="title">
+        </div>
+        <div>
+            <label for="author">Auteur : </label>
+            <input type="text" id="author" name="author" formControlName="author">
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <textarea name="descripton" id="description" formControlName="description"></textarea>
+        </div>
+        <div>
+            <label for="releaseDate">Date de parution : </label>
+            <input type="date" id="releaseDate" name="releaseDate" formControlName="releaseDate">
+        </div>
+        <div>
+            <label for="isbn">ISBN : </label>
+            <input type="text" id="isbn" name="isbn" formControlName="isbn">
+        </div>
+        <div>
+            <button type="submit" [disabled]="editForm.invalid">Enregistrer</button>
+        </div>
+    </form>
+}

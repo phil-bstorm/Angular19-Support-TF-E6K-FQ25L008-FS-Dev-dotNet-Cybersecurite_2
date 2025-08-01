@@ -110,6 +110,8 @@ export const routes: Routes = [
 			import(
 				"@app/features/exercise/pages/exercise-http-client/exercise-http-client.component"
 			).then(c => c.ExerciseHttpClientComponent),
+		loadChildren : () =>
+			import('./pages/exercise-http-client/components/book.routes').then(r => r.routes)
 	},
 	{
 		path: CoursesInstance.getChapterId(

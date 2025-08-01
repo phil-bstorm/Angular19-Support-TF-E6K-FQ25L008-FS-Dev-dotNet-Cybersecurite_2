@@ -1,0 +1,56 @@
+<a routerLink="../create">Ajouter un livre</a>
+@if(!books || books.length < 0){
+    <p>Aucun livres...</p>
+}
+@else {
+    <table>
+        <thead>
+            <th>
+                Id
+            </th>
+            <th>
+                ISBN
+            </th>
+            <th>
+                Titre
+            </th>
+            <th>
+                Auteur
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Date de parution
+            </th>
+            <th>
+                Actions
+            </th>
+        </thead>
+        <tbody>
+            @for(book of getBooksPagination(); track $index){
+                <tr>
+                    <td>{{book.id}}</td>
+                    <td>{{book.isbn}}</td>
+                    <td>{{book.title}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.description}}</td>
+                    <td>{{book.releaseDate}}</td>
+                    <td>
+                        <a class="btn btn-primary" [routerLink]="`../update/${book.id}`">Éditer</a>
+                        <button class="btn btn-danger" (click)="onDeleteBook(book.id)">Supprimer</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        @if(page > 1){
+            <a routerLink="." [queryParams]="{page : (page-1)}">←</a>
+        }
+        {{page}}
+        @if(books.length > page*nbBook){
+            <a routerLink="." [queryParams]="{page : (page+1)}">→</a>
+        }
+    </div>
+}
